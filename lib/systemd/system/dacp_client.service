@@ -1,0 +1,13 @@
+# chmod 644 /lib/systemd/system/dacp_client.service
+
+[Unit]
+Description=Dacp Client
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dacp_client
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

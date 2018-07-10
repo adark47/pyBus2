@@ -1,0 +1,4 @@
+defaults.bluealsa.interface "hci0"
+defaults.bluealsa.device "B8:27:EB:09:AD:9A"
+defaults.bluealsa.profile "a2dp"
+defaults.bluealsa.delay 10000

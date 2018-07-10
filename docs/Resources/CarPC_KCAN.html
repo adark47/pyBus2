@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.loopybunny.co.uk/CarPC/k_can.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>CarPC Install</title>
+<style type="text/css">
+html, body { height: 100%; margin: 0; padding: 0; }
+li.ft {font-size:9.0pt;font-family:"Arial";}
+p.ft {font-size:8.0pt;font-family:"Arial";}
+</style></head>
+
+
+
+<body bgcolor="Black" text="#c0c0c0" link="Yellow" alink="Red" vlink="violet">
+
+
+
+	<a href="http://www.loopybunny.co.uk/CarPC/software.html">
+	</a>
+
+<table border="0" cellspacing="0" cellpadding="0" rules="groups" width="100%">
+
+
+    <tbody>
+
+	<tr border="“0”">
+		<td height="40" width="15" bgcolor="#202020">&nbsp;</td>	
+		<td width="15">&nbsp;</td>
+		<td width="15" bgcolor="#202020">&nbsp;</td>
+		<td width="25">&nbsp;</td>
+		<td width="800"><a href="http://www.loopybunny.co.uk/CarPC/CarPC.html"><img border="0" src="./CarPC_KCAN_files/info.png" width="125"></a> <a href="http://www.loopybunny.co.uk/CarPC/schematic.html"><img border="0" src="./CarPC_KCAN_files/schematic.png" width="125"></a> <a href="http://www.loopybunny.co.uk/CarPC/hardware.html"><img border="0" src="./CarPC_KCAN_files/hardware.png" width="125"></a> <a href="http://www.loopybunny.co.uk/CarPC/software.html"><img border="0" src="./CarPC_KCAN_files/software.png" width="125"></a> <a href="http://www.loopybunny.co.uk/CarPC/Webcam.html"><img border="0" src="./CarPC_KCAN_files/webcam.png" width="125"></a> <a href="http://www.loopybunny.co.uk/index.htm"><img border="0" src="./CarPC_KCAN_files/loopybunny.png" width="125"></a></td>
+
+
+	</tr><tr border="“0”">
+		<td height="90" width="15" bgcolor="#202020">&nbsp;</td>	
+		<td width="15">&nbsp;</td>
+		<td width="15" bgcolor="#202020">&nbsp;</td>
+		<td width="25">&nbsp;</td>
+		<td width="800" valign="top"><font face="Arial" size="+2">BMW X1 (E84) Can-bus Codes</font></td>
+
+
+	</tr><tr border="“0”">
+		<td height="12" bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp;</td>
+		
+		
+   
+		<td>The following information is derived from the K-CAN interface of a BMW X1 (E84). <br>
+		Other BMW models (and BMW Mini's) have a similar data packet arrangement but with different CAN-ID's.<br>
+		<br>
+		The K-CAN 1 is a 100KHz interface bus that links the radio and user controls (E6x, E8x and E9x BMW's). It also contains<br>
+		some information that is found on the 500Khz PT-CAN (The bus that is connected to the OBD-II connector).<br>
+		The K-CAN 2 is the updated interface bus as used on 'F' Series BMW's, this now runs at a speed of 500KHz<br>
+<br>
+		The information below is gained from passively snooping the Canbus and listening to the standard 'chatter'<br>
+		of the BMW communication network. This differs from many ODB-II tools that actively request debug data.<br>
+    For more information on the interface board click <a href="http://www.loopybunny.co.uk/CarPC/interface.html">here</a>.<br>
+<br>
+For examples of how this data can be used please click on the links below. These demonstrate real-time<br>
+streaming to an Android device and a Windows Phone. Wired USB translation can be seen on my CarPC pages<br>
+<a href="http://www.loopybunny.co.uk/CarPC/android.html">Realtime streaming to an Android Device</a><br>
+<a href="http://www.loopybunny.co.uk/CarPC/phone.html">Realtime streaming to a Windows Phone</a><br>
+
+<br><br>
+Filter for :- 	
+ <select id="mod_filt">
+  <option value="flag_KCAN1">K-Can 1 (E8x) only</option>
+  <option value="flag_KCAN2">K-Can 2 (Fxx) only</option>
+  <option value="Kombi">Instrument Cluster IDs only (Kombi)</option>
+  <option value="SZL">Steering column switch cluster (SZL)</option>
+  <option value="JBE">Junction Box Electronics (JBE)</option>
+  <option value="CAS">Car Access System (CAS)</option>
+  <option value="CON">iDrive Controller (CON)</option>
+  <option value="&gt;CIC&lt;">iDrive unit (CIC)</option>
+  <option value="DSC">Dynamic Stability Control (DSC)</option>
+  <option value="Radio">Radio</option>
+</select> 
+<button type="button" onclick="window.open(&#39;http://www.loopybunny.co.uk/CarPC/filter.php?filter=&#39;+(document.getElementsByTagName(&#39;option&#39;)[document.getElementById(&#39;mod_filt&#39;).selectedIndex].value),&#39;_self&#39;)">Filter</button>
+
+
+<br><br>
+
+<font face="Arial" size="+2" color="RED">Please do not use this information for commercial gain. Or at least credit me if you do...</font><br>
+<br><br>
+Click on the Can-ID for more information on that register.<br><br></td>
+	
+	
+	<!--Start of IDs-->
+	</tr><tr border="“0”">
+ 		<td height="150" bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp; </td>
+		<td valign="top">
+
+ <table border="0" cellspacing="0" cellpadding="1" rules="groups" bgcolor="#111111" bordercolor="WHITE">
+		<tbody><tr>
+		<td width="70"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="68">Can-ID</th></tr></tbody></table></td>
+		<td width="60"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="58">Length</th></tr></tbody></table></td>
+		<td width="220"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="218">DATA Packet HEX</th></tr></tbody></table></td>
+		<td width="240"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="238">DATA Packet DECIMAL</th></tr></tbody></table></td>
+		<td width="300"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="298">Register Description</th></tr></tbody></table></td>
+		<td width="37"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="35">Reg</th></tr></tbody></table></td>
+		<td width="37"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="35">Mini</th></tr></tbody></table></td>
+		<td width="57"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="55">Kcan1</th></tr></tbody></table></td>
+		<td width="57"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="55">KCan2</th></tr></tbody></table></td>
+		<td width="77"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="75">Source</th></tr></tbody></table></td>
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0A5.html">0A5</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">CD D5 EC <font color="RED">C7 7E</font><font color="GREEN"> 34 0C</font> F1</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">205 213 236 <font color="RED">199 126</font><font color="GREEN"> 052 012</font> 241</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Throttle</font> and <font color="GREEN">RPM</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0A8.html">0A8</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">54 <font color="BLUE">D7 2B </font><font color="CYAN">D0 2B</font><font color="RED"> F0</font> 0F<font color="GREEN"> 02</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">084<font color="BLUE"> 215 043</font><font color="CYAN"> 208 043</font><font color="RED"> 240</font> 015<font color="GREEN"> 002</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="BLUE">Torque, </font><font color="RED">Clutch</font> and <font color="GREEN">Brake</font> status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0AA.html">0AA</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">5F 59 <font color="GREEN">FF 00</font>  <font color="RED">34 0D</font> 80 99</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">095 089 <font color="GREEN">255 000 </font> <font color="RED">052 013</font> 128 153</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Engine RPM</font> and <font color="GREEN">throttle position</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0C0.html">0C0</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">F4</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">244</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">ABS / Brake counter</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">0C4</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">7</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">83<font color="RED"> FD FC</font><font color="ORANGE"> 00 00</font> FF F1</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">131<font color="RED"> 253 252</font><font color="ORANGE"> 000 000</font> 255 241</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Steering Wheel position</font> (See 0C8)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0C8.html">0C8</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">DD 07</font> FC<font color="ORANGE"> 00 00</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">221 007</font> 252<font color="ORANGE"> 000 000</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Steering Wheel position</font> (Sent 2x often 0C4)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">SZL</td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0CE.html">0CE</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">DA 02</font> DC 02<font color="RED"> DC 02</font> D9 02</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">218 002</font> 220 002<font color="RED"> 220 002</font> 217 002</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Individual Wheel Speeds (4x Pairs)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0D7.html">0D7</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">C3</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">195</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Counter (Airbag / Seatbelt Related)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/doors.html">0E2</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">81 </font>FF E7 <font color="GREEN">FC </font>FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">129 </font>255 231 <font color="GREEN">252 </font>255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Passenger door status <font color="RED">Unlocked</font>, <font color="GREEN">Open</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/doors.html">0E6</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">81 </font>FF E7 <font color="GREEN">FC </font>FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">129 </font>255 231 <font color="GREEN">252 </font>255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Rear Passenger door status <font color="RED">Unlocked</font>, <font color="GREEN">Open</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/doors.html">0EA</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">81 </font>FF E7 <font color="GREEN">FC </font>FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">129 </font>255 231 <font color="GREEN">252 </font>255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Driver door status <font color="RED">Unlocked</font>, <font color="GREEN">Open</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/doors.html">0EE</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">81 </font>FF E7 <font color="GREEN">FC </font>FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">129 </font>255 231 <font color="GREEN">252 </font>255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Rear Driver door status <font color="RED">Unlocked</font>, <font color="GREEN">Open</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0F2.html">0F2</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">F1 </font>FF <font color="BLUE">87 </font><font color="GREEN">C0 </font>FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">241 </font>255<font color="BLUE"> 135</font> <font color="GREEN">192 </font>255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Boot status <font color="RED">Unlocked</font>, <font color="BLUE">release button</font>, <font color="GREEN">Open</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0FA.html">0FA</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">C0 00</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">192 000</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Electric Window controls (Driver controls)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/0FB.html">0FB</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">C7</font> FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">199 </font>255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Electric Window controls (Front Passenger)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">W</td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/130.html">130</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">5</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">45 40 21 8F FE </font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">069 064 033 143 254</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Ignition and Key status (Term 15 / R ON?) </font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">CAS</font></td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/193.html">193</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="GREEN">27 </font><font color="RED">FE F1 </font>00 F8 <font color="RED">50 00</font> 00</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="GREEN">039 </font><font color="RED">254 241 </font>000 <font color="RED">248 080</font> 000 000</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="GREEN">Timer </font>&amp; <font color="RED">Cruise control status</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/19E.html">19E</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">00 E0<font color="RED"> B3 </font>FC F0 <font color="RED"> 43 00</font> 65</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">000 224 <font color="RED">179 </font>252 240 <font color="RED">067 000 </font> 101</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">ABS / Braking force</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">DSC</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1A1.html">1A1</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">5</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">BE DE <font color="RED">12 04 </font>91</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">190 222 <font color="RED">018 004 </font>145</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Speed</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1A6.html">1A6</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">13 4D 46 4D 33 4D </font>D0 FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">019 077 070 077 051 077 </font>208 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Speed, as used by the instrument cluster</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1B4.html">1B4</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 D0 </font>E0 F8 00 <font color="GREEN">32 </font>FE 91</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000 208 </font>224 248 000 <font color="GREEN">050 </font>254 145</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Speed </font>[MPH] <font color="GREEN">Handbrake </font>status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1C2.html">1C2</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">8D 72 5B 5A </font><font color="GREEN">FF FF FF FF</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">141 114 091 090 </font><font color="GREEN">255 255 255 255</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">PDC <font color="RED">(Reverse) </font>/ <font color="GREEN">(Front) </font>Sensor data</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1D0.html">1D0</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">4C</font> FF 63 CD 5D 37<font color="GREEN"> CD</font><font color="ORANGE"> A8</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">076</font> 255 099 208 093 055 <font color="GREEN">205</font><font color="ORANGE"> 168</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Engine temp</font>, <font color="ORANGE">Pressure sensor</font> &amp; <font color="GREEN">Handbrake</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1D6.html">1D6</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">C0 0C</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">192 012</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">MFL (Steering Wheel) Buttons</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">SZL</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1E1.html">1E1</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">D4 F1 </font><font color="GREEN">00</font> FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">212 241</font> <font color="GREEN">000</font> 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Counter</font> and <font color="GREEN">Door</font> Status (200mS intervals)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1E3.html">1E3</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">F1</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">141</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Interior Light Switch</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">W</td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1EE.html">1EE</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000 </font>255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Indicator Stalk position</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/1F6.html">1F6</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">80 </font>F0</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">128 </font>240</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Indicator Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">W*</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/202.html">202</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">54</font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">084</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Lights (Dimmer Status)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/21A.html">21A</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">05 12 </font>F7</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">005 018 </font>247</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Lighting Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/23A.html">23A</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">4</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">00 <font color="RED">30 00</font> 60</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">000 <font color="RED">048 000</font> 096</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Remote Control Keyfob Actions</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/246.html">246</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">5</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">3F </font> F3 00 FC FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">063 </font> 243 000 252 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Air Con, Demister Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/24A.html">24A</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">06 </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">006</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Reverse Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">24B</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">00 F8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">000 248 </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Door status, similar to 2FC</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/252.html">252</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">CE </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">206</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Windscreen Wiper Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/264.html">264</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">E1 FD <font color="RED"> 21 A2 </font>7F 1E</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">225 253 <font color="RED"> 033 162 </font> 127 030</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">iDrive  </font>Controller (Rotary Control)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">CON</td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/267.html">267</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">E1 FD CC<font color="RED"> 01 </font>DE<font color="RED"> 01</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">225 253 204<font color="RED"> 001 </font>222<font color="RED"> 001</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">iDrive  </font>Controller (Direction / Buttons)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">CON</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr> 	
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/26E.html">26E</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 40 7F </font>50 FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000 064 127 </font>080 255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Ignition Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">CAS</font></td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/273.html">273</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">1D E1 00 F0 FF 7F DE<font color="RED"> 04</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">029 225 000 240 255 127 222<font color="RED"> 004</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">CCC / CIC </font>Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">CIC</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/277.html">277</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">E1 9D <font color="RED">04 </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">225 157 <font color="RED">004 </font>255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">iDrive </font>controller reply to 0x273</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">CON</td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/286.html">286</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Rear View Mirror, Light sensor</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2A6.html">2A6</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 </font>F9</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000</font> 249</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Windscreen Wiper Controls</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">SZL</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2B4.html">2B4</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">00 <font color="RED">F2</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">000 <font color="RED">242</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Door locking (Via Remote Control)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2B8.html">2B8</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">31 00 F0 00 00 <font color="RED">E3</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">049 000 240 000 000 <font color="RED">227</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Reset</font> Av Fuel  / Speed</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Radio</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2BA.html">2BA</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">5</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">00 00 00 00 <font color="RED">10</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">000 000 000 000 <font color="RED">16</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Counter (Toggle / Heartbeat)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2CA.html">2CA</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">61 </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">097</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Outside temperature</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">TBC</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2D6.html">2D6</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">FF <font color="RED">FC </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">255 <font color="RED">252 </font>255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Air Conditioning Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2E6.html">2E6</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">64 00 00 FF 00<font color="RED"> 01</font> 3F <font color="GREEN">34</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">100 000 000 255 000 <font color="RED">001</font> 063<font color="GREEN"> 052</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Climate control status (<font color="RED">Fan</font> and<font color="GREEN"> Temp</font> speed)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2EA.html">2EA</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">FF FF FF FF FF FF FF <font color="RED">34</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">255 255 255 255 255 255 255 <font color="RED">52</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Climate control status (Passenger)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2F8.html">2F8</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">13 2E 1E</font><font color="GREEN"> 01</font><font color="ORANGE"> 4</font>F<font color="BLUE"> DC 07 </font>FD</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">019 046 030</font><font color="GREEN"> 001</font> 079 <font color="BLUE">220 007</font> 253</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Report Time and Date</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/2FC.html">2FC</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">7</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">81 <font color="RED">01 00</font> FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">129 <font color="RED">001 000</font> 255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Door Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">CAS</font></td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/328.html">328</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">6</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">16 83 A2 04</font> <font color="ORANGE">DE</font> 11</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">022 126 244 003</font> <font color="ORANGE"> 222</font> 017 </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">1 Second count from battery removal / reset</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/32E.html">32E</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="BLUE">00 </font>FF 8F <font color="RED">63</font><font color="ORANGE"> 6A</font> 00<font color="GREEN"> 2E 0F</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="BLUE">00 </font>255 143 <font color="RED">099</font><font color="ORANGE"> 106</font> 000 <font color="GREEN">046 015</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Internal Temp</font>, <font color="BLUE">Light</font> and <font color="ORANGE">solar </font>sensors</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/330.html">330</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">7A 5A 00</font><font color="ORANGE">  2D</font> 29 2F <font color="GREEN">9C 34</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">122 090 000</font><font color="ORANGE"> 045 </font>041 047 <font color="GREEN">156 052</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Odometer, </font> <font color="ORANGE">Av Fuel, </font> and <font color="GREEN">Range</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td> <!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/349.html">349</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">5</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">76 0F</font><font color="GREEN"> BE 1A</font> 00</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">118 015</font><font color="GREEN"> 190 026</font> 000</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Fuel Level sensors</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 flag_KCAN2 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/34F.html">34F</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">FE </font> FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">254</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Handbrake status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/362.html">362</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">7</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">AE </font><font color="GREEN">F</font><font color="red">3 </font><font color="GREEN">1E </font>FF FF FF EA</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">174 241 030 255 255 255 234</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Average MPH</font> &amp; <font color="GREEN">Average MPG</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/366.html">366</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">4</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">78 </font><font color="GREEN"> 50 14</font> FC</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">120  </font><font color="GREEN"> 080 020</font> 252</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Ext Temp</font> &amp; <font color="GREEN">Range</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">Kombi</td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/380.html">380</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">7</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">56 xx 35 32 38 37 xx</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">086 xxx 053 050 056 055 xxx</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">VIN Number</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">CAS</font></td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/394.html">394</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="Green">48 0F </font><font color="Red">10 6B</font> 00 88 58 01</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="Green">072 015 </font><font color="Red">016 107</font> 000 136 088 001</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Hours / Distance since last service.</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/39E.html">39E</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">0B 10 00</font><font color="GREEN"> 0D</font><font color="ORANGE"> 1</font>F<font color="BLUE"> DF 07 </font>F2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">011 016 000</font><font color="GREEN"> 013</font> 031 <font color="BLUE">223 007</font> 242</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Set Time and Date</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/3B0.html">3B0</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">2</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">FD </font>FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">253</font> 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Reverse Status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/3B4.html">3B4</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">A6 F3 </font><font color="GREEN">00 </font>FC FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">165 243 </font><font color="GREEN">000 </font> 252 255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Battery Voltage</font> &amp; <font color="GREEN">Charge status</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/window.html">3B6</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 FC F0</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000 252 240</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Passenger Front Window status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="RED">N</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/window.html">3B7</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">41 F5</font> F8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">065 245</font> 248</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Driver Rear Window status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/window.html">3B8</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">00 FC F0</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">000 252 240</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Driver Front Window status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/window.html">3B9</a></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218"><font color="RED">41 F5</font> F8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238"><font color="RED">065 245</font> 248</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Passenger Rear Window status</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">JBE</font></td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68"><a href="http://www.loopybunny.co.uk/CarPC/can/581.html">581</a> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">40 4D 00 <font color="RED">28</font> FF FF FF FF</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">064 077 000 <font color="RED">040 </font> 255 255 255 255</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298"><font color="RED">Seatbelt Status</font> </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center">&nbsp; </td></tr></tbody></table></td> <!-- flag_KCAN1 -->
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">7C3</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">xx xx xx xx xx xx xx xx</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">xxx xxx xxx xxx xxx xxx xxx xxx</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">Keyfob (security, comfort and CBS data)</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center"><font color="GREEN">Y</font></td></tr></tbody></table></td> 
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="55" align="center">&nbsp; </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="75" align="center"><font color="GREY">CAS</font></td></tr></tbody></table></td><!-- flag_KCAN1 -->
+		</tr>
+		</tbody></table>
+		<!--END_of_IDs-->
+Reg = Register type, W = Writeable (the ID can be emulated by an external Can controller, whilst in the car with no adverse affects)<br>
+Mini = Tested on a 2013 John Cooper Mini and the register is found to be the same. <br>
+<br>
+Source Information<br>
+Kombi = Instrument Cluster. <br>
+Multi = Multiple sources.<br>
+JBE = Junction Box Electronic Module<br>
+CAS = Car Access System<br>
+SZL = Steering column switch cluster (The SZL is on the 500KHz F-CAN bus. Data is passed onto the K-can via gateway module.)<br>
+CON = idrive Controller<br>
+DSC = Dynamic Stability Control<br>
+<br>
+Physical Modules:-<br>
+ <table border="0" cellspacing="0" cellpadding="1" rules="groups" bgcolor="#111111" bordercolor="WHITE">
+		<tbody><tr>
+		<td width="70"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="68">Can-ID</th></tr></tbody></table></td>
+		<td width="60"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="58">Length</th></tr></tbody></table></td>
+		<td width="220"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="218">DATA Packet HEX</th></tr></tbody></table></td>
+		<td width="240"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="238">DATA Packet DECIMAL</th></tr></tbody></table></td>
+		<td width="300"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="298">Register Description</th></tr></tbody></table></td>
+		<td width="37"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="35">Reg</th></tr></tbody></table></td>
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">600</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 09</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 009</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">JBBF, Junction Box Module</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">601</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 09</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 009</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">MRS, Airbag  </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">640</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">CAS. CAS ELV. car access sytem </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+				<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">641</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">DWA, AntiTheft Alarm System. </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">650</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">SINE, Siren And Tilt Sensor.</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">656</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">FZD, functional roof sensor</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">660</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">KOMBI, Intrument Cluster, </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">664</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">PDC, Rear Parking Sensors</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">672</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">FRM, Footwell module</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">678</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 06</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 006</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">KLIMA, Climate control.</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+</tbody></table><br>
+<font face="Arial" size="+1">For More information of communicating with physical modules click here.(In Progress)</font><br><br><br>
+		PT-CAN ONLY (500KHz Canbus)<br>
+		<br>
+		
+<table border="0" cellspacing="0" cellpadding="1" rules="groups" bgcolor="#111111" bordercolor="WHITE">
+		<tbody><tr>
+		<td width="70"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="68">Can-ID</th></tr></tbody></table></td>
+		<td width="60"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="58">Length</th></tr></tbody></table></td>
+		<td width="220"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="218">DATA Packet HEX</th></tr></tbody></table></td>
+		<td width="240"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="238">DATA Packet DECIMAL</th></tr></tbody></table></td>
+		<td width="300"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="298">Register Description</th></tr></tbody></table></td>
+		<td width="37"><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><th width="35">Reg</th></tr></tbody></table></td>
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">612</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 3C 5A 80 00 00 08</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 060 090 128 000 000 008</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">DDE 6.0 N47 module</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">617</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 09</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 009</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">EKP, </td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+		<tr>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="68">629</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="58" align="center">8</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="218">F1 10 1F 5A 80 00 00 09</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="238">241 016 031 090 128 000 000 009</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="298">ABS, DSC</td></tr></tbody></table></td>
+		<td><table border="1" bordercolor="#202020" cellpadding="1"><tbody><tr><td width="35" align="center">&nbsp; </td></tr></tbody></table></td>		
+
+		</tr>
+</tbody></table>
+<br><br><br>
+
+<br>
+<br>
+Last Updated:- 20th Feb 2015<br>
+Added ID 0x1A1, K-Can 2 (only) Speed. .<br>
+
+<br>
+Updated:- 3rd Feb 2015<br>
+Updated idrive controller ID 0x264.<br>
+Added ID 0x263, CCC status / iDrive wake-up command.<br>
+Added ID 0x2B8, Reset Av MPG / Speed.<br>
+<br>
+Updated:- 2nd Feb 2015<br>
+Added idrive controller ID's 0x264 &amp; 0x267<br>
+<br>
+Updated:- 15th Jan 2015<br>
+0x39E:- Time and Date (global ID that Set's the time and date across all modules).<br>
+0x330:- Updated to add Average Fuel level.<br>
+0x1A6:- Speed signal, as used by the Instrument Cluster (Kombi). (Big update to this ID).<br>
+0x0D7:- Updated information about this counter (Specified it's function is Airbag / Seatbelt related).<br>
+0x19E:- Updated, Brake counter and braking level.<br>
+0x0C0:- Updated, Brake counte.r<br>
+0x328:- This is a 1 second counter from last battery removal or Kombi removal.<br>
+0x246:- Added, Air con, demister status.<br>
+0x2EA:- Added Climate control temperature (Passenger side).<br>
+0x366:- Added Range and External temperature.<br>
+<br>
+Added Source Information. (This is the source / generator of the Canbus ID).<br>
+<br>
+Update:- 22nd April 2014 <br>
+0x300:- Odometer uses 3x bytes, not just 2.<br>
+0x0A8:- Bytes 1 &amp; 2 and 3 &amp; 4 are Torque.<br>
+0x328:- This is a 1 second counter from last battery removal / reset (not from car production date as previously thought).<br>
+Added extra column to indicate BMW mini similarities.(Still work in progress).<br>
+
+<br><br>
+
+	</td></tr><tr>
+ 		<td height="15" bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td bgcolor="#202020"><img border="0" src="./CarPC_KCAN_files/Banner.jpg" width="550" height="110" align="right"></td>
+
+	</tr><tr>
+ 		<td height="15" bgcolor="#202020">&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+
+		<td>&nbsp;</td>
+
+	</tr><tr>
+ 		<td height="15" bgcolor="#202020">&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+		<td bgcolor="#202020">&nbsp;</td>
+
+		<td bgcolor="#202020">&nbsp;</td>
+
+	</tr><tr align="center">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>Created by <a href="mailto:Trevor@loopybunny.co.uk">Trevor Cook</a> 2015</td>
+  </tr></tbody>
+
+</table>
+<br>
+
+
+</body></html>

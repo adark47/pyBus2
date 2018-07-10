@@ -1,0 +1,25 @@
+http://www.bmwgm5.com/e46_k-bus.htm
+http://www.bmwgm5.com/k-bus_troubleshooting.htm
+
+
+
+
+
+61131387150 Comb type connector
+http://www.ecstuning.com/Search/61131387150/ES164786/
+
+
+61131387140 Flat contact, fan connector	0.35-0.5 mm2
+K-bus Wiring is 0.35 mm2
+Pack of 10: http://www.ecstuning.com/Search/SiteSearch/61131387140/ES2580367/ 
+Singles: http://www.turnermotorsport.com/p-140086-61131387140-genuine-bmw-part.aspx
+
+
+
+GitHub
+https://github.com/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller
+https://github.com/t3ddftw/DroidIBus
+https://github.com/jemmicat/HK_Enabler_Plus
+https://github.com/kryczech/iBusRadioArduino
+https://github.com/kryczech/iBusRadioService
+https://github.com/kryczech/arduino_ibus_serial_debug

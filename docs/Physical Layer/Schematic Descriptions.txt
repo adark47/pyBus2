@@ -1,0 +1,78 @@
+...:::::: K-BUS to TH3122 to ARDUINO ::::::...
+
+K-Bus Line Input to TH3122
+The BMW K-Bus wire passes through an RC filter and then connects to pin 6 (BUS) on TH3122.
+The RC filter minimizes EMI on the BUS line, and is recommended per TH3122 datasheet.
+The RC filter is a 10 ohm resistor and a 100pF non-polarized capacitor.
+
+Voltage Supply to TH3122
++12V supply voltage passes through a diode (D1), and connects to pins 1 (VS) and 2 (EN).
+Pin 1 (VS) powers the TH3122. Pin 2 (EN) enables the +5 Voltage regulator feature, on pin 16 (VCC).
+The circuit also has a 47uF capacitor on the +12V line to reduce short time voltage drops.
+
+Regulated Voltage from TH3122
+VCC provides the arduino with +5V; It is also connected to a 1uF capacitor (C5) to reduce short time voltage drops. 
+Capacitor C5 is suggested to be above 2uF in the TH3122 datasheet. I stuck with 1uF for flexibility (smaller variety of parts), and due to the MAX232 datasheet specifying 1uF - for the RS232 project.
+
+K-Bus Data Output from TH3122
+Pin 11 (TX) is connected to the Arduino's transmit pin.
+Pin 10 (RX) is connected to the Arduino's receive pin.
+Pin 9 (SEN/STA) is connected to the Arduino's digital input pin 2.
+The SEN/STA signal stays High while there is data/activity on the K-Bus, and goes Low when there is no
+activity. This is used in the Arduino programming to tell when it's safe to send data onto the K-Bus.
+
+Misc
+Pin 3 (VTR) is connected to VCC; It sets reset timing (See TH3122 Datasheet).
+Pins 7 (SO) and 8 (SI) on the TH3122 can be used as a universal comparator.
+We do not need this feature, so we ground pin 8 (SI), the comparator input.
+Pins 14 (RESET) and 15 (SENSE) are not used for this project.
+Pins 4, 5, 12, and 13 are all Grounds.
+
+
+
+...:::::: K-BUS to TH3122 to RS232 ::::::...
+
+K-Bus Line Input to TH3122
+The BMW K-Bus wire passes through an RC filter and then connects to pin 6 (BUS) on TH3122.
+The RC filter minimizes EMI on the BUS line, and is recommended per TH3122 datasheet.
+The RC filter is a 10 ohm resistor and a 100pF non-polarized capacitor.
+
+Voltage Supply to TH3122
++12V supply voltage passes through a diode (D1), and connects to pins 1 (VS) and 2 (EN).
+Pin 1 (VS) powers the TH3122. Pin 2 (EN) enables the +5 Voltage regulator feature, on pin 16 (VCC).
+The circuit also has a 47uF capacitor on the +12V line to reduce short time voltage drops.
+
+Regulated Voltage from TH3122
+VCC provides +5V to the MAX232 chip pin 16 (VCC) and pin 2 (V+); 
+It is also connected to a 1uF capacitor (C5) to reduce short time voltage drops. 
+Capacitor C5 is suggested to be above 2uF in the TH3122 datasheet. I stuck with 1uF for flexibility (smaller variety of parts), and due to the MAX232 datasheet specifying 1uF.
+
+K-Bus Data Output from TH3122
+Pin 11 (TX) is connected to MAX232 pin 12 (R1OUT).
+Pin 10 (RX) is connected to MAX232 pin 11 (T1IN).
+Pin 9 (SEN/STA) is connected to MAX232 pin 10 (T2IN).
+The SEN/STA signal stays High while there is data/activity on the K-Bus, and goes Low when there is no
+activity. 
+
+Misc TH3122
+Pin 3 (VTR) is connected to VCC; It sets reset timing (See TH3122 Datasheet).
+Pins 7 (SO) and 8 (SI) on the TH3122 can be used as a universal comparator.
+We do not need this feature, so we ground pin 8 (SI), the comparator input.
+Pins 14 (RESET) and 15 (SENSE) are not used for this project.
+Pins 4, 5, 12, and 13 are all Grounds.
+
+K-Bus Data Output from MAX232
+Pin 14 (T1OUT) is connected to the RS232 connector transmit pin 2.
+Pin 13 (R1IN) is connected to the RS232 connector receive pin 3.
+Pin 7 (T2OUT) is the SEN/STA signal from the TH3122, and connects to the RS232 connector pins 6 and 7.
+This signal is used on the RS232 connector as DSR (pin 6) and RTS (pin 7) signals.
+
+Misc MAX232
+Capacitor C1 and C2 are used by the MAX232 for the voltage doubler and inverter, respectively.
+Per MAX232 datasheet, capacitors C1-C5 are to be:
+MAX232 chip: 1.0uF     MAX232A chip: 0.1uF
+Pin 6 (V-) is grounded through a polarized 1uF capacitor (C4).
+Pin 9 (R2OUT) is not used.
+Pin 8 (R2IN) is grounded.
+Pin 15 is a ground.
+ 

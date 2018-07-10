@@ -1,0 +1,10 @@
+[Unit]
+Description = Bluetooth Agent
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/python /root/pyBus/lib/bluetooth-agent.py
+
+[Install]
+WantedBy=multi-user.target
