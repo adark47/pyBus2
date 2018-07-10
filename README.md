@@ -1,4 +1,4 @@
 # pyBus2
 Forked from ezeakeal/pyBus
 
-Volumio + Bluetooth + AirPlay
+Music = (Volumio Bluetooth AirPlay) + (ibus BMW) + Python
