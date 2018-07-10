@@ -35,6 +35,7 @@ def init():
     VolumeSet()
     logging.debug('Setting the volume of Volumio player to: ', CLIENT)
 
+
 def _browseState(*args):
     global dictTrack
     dictTrack = {}
