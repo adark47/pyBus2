@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import pprint, os, sys, time, signal, logging
 from socket import error as SocketError
@@ -63,6 +64,7 @@ def getTrackInfo():
 
         return btDictTrack
     else:
+        getState()
         return dictTrack
 
 

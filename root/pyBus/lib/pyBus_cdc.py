@@ -1,6 +1,13 @@
-# !/usr/bin/python
+# !/usr/bin/python#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-import os, sys, time, signal, json, logging, traceback
+import os
+import sys
+import time
+import signal
+import json
+import logging
+import traceback
 import threading
 
 ############################################################################

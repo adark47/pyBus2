@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os
 import sys
 from subprocess import Popen, PIPE
 sys.path.append('/root/pyBus/lib')
 #from __future__ import absolute_import, print_function, unicode_literals
-
 import dbus
 import dbus.service
 import dbus.mainloop.glib

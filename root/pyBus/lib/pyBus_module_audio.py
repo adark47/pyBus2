@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # The MPD module has practically no documentation as far as I know.. so a lot of this is guess-work, albeit educated guess-work
 import pprint, os, sys, time, signal, logging

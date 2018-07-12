@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import os, sys, time, signal, json, traceback, logging
 import threading
@@ -332,32 +333,24 @@ class busWriter(threading.Thread):
 
             if TextT0 != None:
                 busWriter.writeTitleT0(self, TextT0)
-                time.sleep(1)
 
             if TextT1 != None:
                 busWriter.writeTitleT1(self, TextT1)
-                time.sleep(1)
 
             if TextT2 != None:
                 busWriter.writeTitleT2(self, TextT2)
-                time.sleep(1)
 
             if TextT3 != None:
                 busWriter.writeTitleT3(self, TextT3)
-                time.sleep(1)
 
             if TextT4 != None:
                 busWriter.writeTitleT4(self, TextT4)
-                time.sleep(1)
 
             if TextT5 != None:
                 busWriter.writeTitleT5(self, TextT5)
-                time.sleep(1)
 
             if TextT6 != None:
                 busWriter.writeTitleT6(self, TextT6)
-                time.sleep(1)
-
 
 # MK4 - Index ######################################################################
 

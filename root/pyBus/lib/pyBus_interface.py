@@ -1,4 +1,9 @@
-import serial, time, logging
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import serial
+import time
+import logging
 
 # LOCATIONS, a mapping of hex codes seen in SRC/DST parts of packets. This WILL change across models/years.
 LOCATIONS = {

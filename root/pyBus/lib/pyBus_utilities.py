@@ -1,6 +1,12 @@
 # !/usr/bin/python
 
-import os, sys, time, signal, json, logging, traceback
+import os
+import sys
+import time
+import signal
+import json
+import logging
+import traceback
 import threading
 
 # This module will read a packet, match it against the json object 'DIRECTIVES' below.
