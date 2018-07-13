@@ -16,41 +16,6 @@ import datetime
 TICK = 1  # sleep interval in seconds used after displaying a string from DISPLAY_QUE
 WRITER = None  # Writer thread
 
-MENU_LEVEL = False
-
-textT0 = None
-textT1 = None
-textT2 = None
-textT3 = None
-textT4 = None
-textT5 = None
-textT6 = None
-
-indexF0 = None
-indexF1 = None
-indexF2 = None
-indexF3 = None
-indexF4 = None
-indexF5 = None
-indexF6 = None
-indexF7 = None
-indexF8 = None
-indexF9 = None
-
-############################################################################
-#
-############################################################################
-
-def init(IBUS):
-    global WRITER
-    WRITER = busWriter(IBUS)
-    WRITER.start()
-
-
-def end():
-    if WRITER:
-        WRITER.stop()
-
 ############################################################################
 # FUNCTIONS
 ############################################################################
@@ -68,137 +33,12 @@ def _hexText(string, dataPacket ,max_stringlen):
     return dataPacket
 
 ############################################################################
-# Scroll text
+# TEXT DISPLAY
 ############################################################################
 
-class TextScroller:
-    'Class for scrolling text'
-    text = ''
-    position = 0
-    textLength = 0
-
-    def __init__(self, initialText):
-        self.text = initialText
-
-    def scroll(self):
-        doubleText = self.text + '    ' + self.text
-        scrolledText = doubleText[self.position:len(doubleText)]
-        self.position = self.position + 1
-
-        # We add five extra spaces between each complete text scroll.
-        if self.position > len(self.text) + 1:
-            self.position = 0
-
-        return scrolledText
-
-    def setNewText(self, newText):
-        self.text = newText
-        self.position = 0
-
-############################################################################
-# TEXT
-############################################################################
-
-def immediateText(string):
-    WRITER.immediate(string)
-
-def immediateTextClear(string):
-    WRITER.immediateClear()
-
-# MK4 - Title ##############################################################
-
-def setNewTextT0(string):
-    global textT0
-    textT0 = string
-
-def setNewTextT1(string):
-    global textT1
-    textT1 = string
-
-def setNewTextT2(string):
-    global textT2
-    textT2 = string
-
-def setNewTextT3(string):
-    global textT3
-    textT3 = string
-
-def setNewTextT4(string):
-    global textT4
-    textT4 = string
-
-def setNewTextT5(string):
-    global textT5
-    textT5 = string
-
-def setNewTextT6(string):
-    global textT6
-    textT6 = string
-
-# MK4 - Index ##############################################################
-
-def setNewIndexF0(string):
-    global indexF0
-    indexF0 = string
-    WRITER.writeIndexF0(string)
-
-def setNewIndexF1(string):
-    global indexF1
-    indexF1 = string
-    WRITER.writeIndexF1(string)
-
-def setNewIndexF2(string):
-    global indexF2
-    indexF2 = string
-    WRITER.writeIndexF2(string)
-
-def setNewIndexF3(string):
-    global indexF3
-    indexF3 = string
-    WRITER.writeIndexF3(string)
-
-def setNewIndexF4(string):
-    global indexF4
-    indexF4 = string
-    WRITER.writeIndexF4(string)
-
-def setNewIndexF5(string):
-    global indexF5
-    indexF5 = string
-    WRITER.writeIndexF5(string)
-
-def setNewIndexF6(string):
-    global indexF6
-    indexF6 = string
-    WRITER.writeIndexF6(string)
-
-def setNewIndexF7(string):
-    global indexF7
-    indexF7 = string
-    WRITER.writeIndexF7(string)
-
-def setNewIndexF8(string):
-    global indexF8
-    indexF8 = string
-    WRITER.writeIndexF8(string)
-
-def setNewIndexF9(string):
-    global indexF9
-    indexF9 = string
-    WRITER.writeIndexF9(string)
-
-def refreshIndexMK4():
-    WRITER.refreshIndex()
-
-############################################################################
-# THREAD FOR TICKING AND WRITING
-############################################################################
-
-class busWriter(threading.Thread):
+class busWriter(object):
     def __init__(self, ibus):
         self.IBUS = ibus
-
-        threading.Thread.__init__(self)
 
 # Immediate Text ################
 
@@ -322,73 +162,6 @@ class busWriter(threading.Thread):
     def refreshIndex(self):
         self.IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00', '91'])
         logging.debug('MK4 - refresh Index')
-
-############################################################################
-
-    def run(self):
-        logging.info('Display thread initialized')
-        while True:
-
-# MK4 - Title ######################################################################
-
-            if textT0 != None:
-                busWriter.writeTitleT0(self, textT0)
-
-            if textT1 != None:
-                busWriter.writeTitleT1(self, textT1)
-
-            if textT2 != None:
-                busWriter.writeTitleT2(self, textT2)
-
-            if textT3 != None:
-                busWriter.writeTitleT3(self, textT3)
-
-            if textT4 != None:
-                busWriter.writeTitleT4(self, textT4)
-
-            if textT5 != None:
-                busWriter.writeTitleT5(self, textT5)
-
-            if textT6 != None:
-                busWriter.writeTitleT6(self, textT6)
-
-# MK4 - Index ######################################################################
-
-#            if IndexF0 != None:
-#                busWriter.writeIndexF0(self, indexF0)
-
-#            if IndexF1 != None:
-#                busWriter.writeIndexF1(self, indexF1)
-
-#            if IndexF2 != None:
-#                busWriter.writeIndexF2(self, indexF2)
-
-#            if IndexF3 != None:
-#                busWriter.writeIndexF3(self, indexF3)
-
-#            if IndexF4 != None:
-#                busWriter.writeIndexF4(self, indexF4)
-
-#            if IndexF5 != None:
-#                busWriter.writeIndexF5(self, indexF5)
-
-#            if IndexF6 != None:
-#                busWriter.writeIndexF6(self, indexF6)
-
-#            if IndexF7 != None:
-#                busWriter.writeIndexF7(self, indexF7)
-
-#            if IndexF8 != None:
-#                busWriter.writeIndexF8(self, indexF8)
-
-#            if IndexF9 != None:
-#                busWriter.writeIndexF9(self, indexF9)
-
-
-    def stop(self):
-        logging.info('Display shutdown')
-        self.IBUS = None
-        self._Thread__stop()
 
 ############################################################################
 

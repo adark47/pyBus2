@@ -17,6 +17,7 @@ import pyBus_module_display as pB_display     # Only events can manipulate the d
 import pyBus_module_audio2 as pB_audio         # Add the audio module as it will only be manipulated from here in pyBus
 import pyBus_utilities as pB_util
 import pyBus_cdc as pB_cdc
+#import pyBus_ioMK4 as io
 
 # This module will read a packet, match it against the json object 'DIRECTIVES' below.
 # The packet is checked by matching the source value in packet (i.e. where the packet came from) to a key in the object if possible
@@ -194,7 +195,7 @@ def init(writer):
     global WRITER, SESSION_DATA
     WRITER = writer
 
-    pB_display.init(WRITER)
+    #pB_display.init(WRITER)
     pB_audio.init()
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
@@ -202,8 +203,6 @@ def init(writer):
 #    WRITER.writeBusPacket('18', 'FF', ['02', '01'])
 #    logging.debug("CDC sent the status: Start")
     pB_cdc.enableFunc("announce", 10)
-
-    pB_display.setNewTextT0('BMW-MUSIC')    #Test
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
@@ -253,7 +252,7 @@ def shutDown():
     logging.debug("Quitting Audio CLIENT")
     pB_audio.quit()
     logging.debug("Stopping Display Driver")
-    pB_display.end()
+#    pB_display.end()
     logging.debug("Killing CDC")
     pB_cdc.shutDown()
     logging.debug("Killing Utilities")
@@ -297,7 +296,7 @@ def d_cdPollResponse(packet):
     #logging.debug("CDC sent the status: Alive")
     pB_cdc.disableFunc("announce")           # stop announcing
     pB_cdc.disableFunc("pollResponse")
-    pB_cdc.enableFunc("pollResponse", 30)    # defaul 30
+    pB_cdc.enableFunc("pollResponse", 10)    # defaul 30 (not worked)
 
 
 def d_cdStatusPlaying(packet):
@@ -306,22 +305,22 @@ def d_cdStatusPlaying(packet):
 
 def d_cdStop(packet):
     pB_cdc.stop('01', '01')
-    pB_display.setNewTextT0('Stop')
+
 
 
 def d_cdPlay(packet):
     pB_cdc.play('01', '01')
-    pB_display.setNewTextT0('Play')
+
 
 
 def d_cdNext(packet):
     pB_cdc.scanFWD('01', '01')
-    pB_display.setNewTextT0('Forward')
+
 
 
 def d_cdPrev(packet):
     pB_cdc.scanBWD('01', '01')
-    pB_display.setNewTextT0('Backward')
+
 
 ############################################################################
 # BUTTON DISPLAY
