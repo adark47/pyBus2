@@ -35,14 +35,14 @@ FUNC_STACK = {}
 # Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 def init(writer):
     global WRITER
-    logging.info("Initializing the iBus interface for Utilities")
+    logging.info("Initializing: the iBus util")
     WRITER = writer
 
 
 
 def shutDown():
     global WRITER
-    logging.info("Dereferencing iBus interface")
+    logging.info("End: iBus util")
     WRITER = None
 
 

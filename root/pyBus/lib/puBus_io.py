@@ -36,13 +36,15 @@ def init(writer):
 
     display = pB_display.busWriter(WRITER)
     pB_audio.init()
-    MENU = menu()
+    MENU = IO()
     MENU.start()
 
 def end():
     if MENU:
         MENU.stop()
 
+    pB_audio.end()
+    logging.debug("Quitting Audio CLIENT")
 ############################################################################
 # Scroll text
 ############################################################################
@@ -75,7 +77,7 @@ class TextScroller:
 # Scroll text
 ############################################################################
 
-class menu(threading.Thread):
+class IO(threading.Thread):
     def __init__(self, ibus):
         self.IBUS = ibus
 

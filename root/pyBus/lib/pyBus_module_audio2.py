@@ -27,6 +27,7 @@ logging.getLogger('socketIO-client').setLevel(logging.DEBUG)
 
 def init():
     global socketIO
+    logging.info('Initializing: module audio')
     socketIO = SocketIO(HOST, PORT)
     bt.init()
     setClient('vlm')
@@ -39,6 +40,7 @@ def init():
 
 def end():
     bt.end()
+    logging.info('End: module audio')
 
 
 def _browseState(*args):

@@ -13,11 +13,9 @@ from subprocess import Popen, PIPE
 sys.path.append('/root/pyBus/lib/')
 
 # Imports for the project
-import pyBus_module_display as pB_display     # Only events can manipulate the display stack
-import pyBus_module_audio2 as pB_audio         # Add the audio module as it will only be manipulated from here in pyBus
-import pyBus_utilities as pB_util
+import pyBus_util as pB_util
 import pyBus_cdc as pB_cdc
-#import pyBus_ioMK4 as io
+#import pyBus_io as pB_io
 
 # This module will read a packet, match it against the json object 'DIRECTIVES' below.
 # The packet is checked by matching the source value in packet (i.e. where the packet came from) to a key in the object if possible
@@ -195,13 +193,10 @@ def init(writer):
     global WRITER, SESSION_DATA
     WRITER = writer
 
-    #pB_display.init(WRITER)
-    pB_audio.init()
+    #pB_io.init(WRITER)
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
 
-#    WRITER.writeBusPacket('18', 'FF', ['02', '01'])
-#    logging.debug("CDC sent the status: Start")
     pB_cdc.enableFunc("announce", 10)
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
@@ -249,10 +244,9 @@ def listen():
 
 
 def shutDown():
-    logging.debug("Quitting Audio CLIENT")
-    pB_audio.quit()
-    logging.debug("Stopping Display Driver")
-#    pB_display.end()
+
+#    logging.debug("Stopping IO Driver")
+#    pB_io.end()
     logging.debug("Killing CDC")
     pB_cdc.shutDown()
     logging.debug("Killing Utilities")
@@ -292,8 +286,6 @@ def d_custom_IKE(packet):
 
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    #WRITER.writeBusPacket('18', 'FF', ['02','00'])
-    #logging.debug("CDC sent the status: Alive")
     pB_cdc.disableFunc("announce")           # stop announcing
     pB_cdc.disableFunc("pollResponse")
     pB_cdc.enableFunc("pollResponse", 10)    # defaul 30 (not worked)
@@ -307,15 +299,12 @@ def d_cdStop(packet):
     pB_cdc.stop('01', '01')
 
 
-
 def d_cdPlay(packet):
     pB_cdc.play('01', '01')
 
 
-
 def d_cdNext(packet):
     pB_cdc.scanFWD('01', '01')
-
 
 
 def d_cdPrev(packet):

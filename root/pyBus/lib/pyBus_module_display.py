@@ -13,7 +13,6 @@ import datetime
 # GLOBALS
 ############################################################################
 
-TICK = 1  # sleep interval in seconds used after displaying a string from DISPLAY_QUE
 WRITER = None  # Writer thread
 
 ############################################################################
@@ -57,43 +56,43 @@ class busWriter(object):
     # <68 xx 3B> <23 62 30> <Text in ASCII Hex>
     def writeTitleT0(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['23', '62', '30'], 11))
-        logging.debug('MK4 - write TitleT0: %s' %string)
+        logging.debug('MK4 - write TitleT0: %s' % string)
 
     # Title field T1 - 4 characters
     # <68 xx 3B> <A5 62 01> <01> <Text in ASCII Hex>
     def writeTitleT1(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '01'], 4))
-        logging.debug('MK4 - write TitleT1: %s' %string)
+        logging.debug('MK4 - write TitleT1: %s' % string)
 
     # Title field T2 - 2 characters
     # <68 xx 3B> <A5 62 01> <02> <Text in ASCII Hex>
     def writeTitleT2(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '02'], 2))
-        logging.debug('MK4 - write TitleT2: %s' %string)
+        logging.debug('MK4 - write TitleT2: %s' % string)
 
     # Title field T3 - 4 characters
     # <68 xx 3B> <A5 62 01> <03> <Text in ASCII Hex>
     def writeTitleT3(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '03'], 4))
-        logging.debug('MK4 - write TitleT3: %s' %string)
+        logging.debug('MK4 - write TitleT3: %s' % string)
 
     # Title field T4 - 2 characters
     # <68 xx 3B> <A5 62 01> <04> <Text in ASCII Hex>
     def writeTitleT4(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '04'], 2))
-        logging.debug('MK4 - write TitleT4: %s' %string)
+        logging.debug('MK4 - write TitleT4: %s' % string)
 
     # Title field T5 - 7 characters
     # <68 xx 3B> <A5 62 01> <05> <Text in ASCII Hex>
     def writeTitleT5(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '05'], 7))
-        logging.debug('MK4 - write TitleT5: %s' %string)
+        logging.debug('MK4 - write TitleT5: %s' % string)
 
     # Title field T6 - 11 characters
     # <68 xx 3B> <A5 62 01> <06> <Text in ASCII Hex>
     def writeTitleT6(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['A5', '62', '01', '06'], 11))
-        logging.debug('MK4 - write TitleT6: %s' %string)
+        logging.debug('MK4 - write TitleT6: %s' % string)
 
 # MK4 - Index ######################################################################
 
@@ -101,61 +100,61 @@ class busWriter(object):
     # <68 xx 3B> <21 60 00> <40> <Text in ASCII Hex>
     def writeIndexF0(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '40'], 23))
-        logging.debug('MK4 - write IndexF0: %s' %string)
+        logging.debug('MK4 - write IndexF0: %s' % string)
 
     # Index fields 1 - 23 characters
     # <68 xx 3B> <21 60 00> <41> <Text in ASCII Hex>
     def writeIndexF1(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '41'], 23))
-        logging.debug('MK4 - write IndexF1: %s' %string)
+        logging.debug('MK4 - write IndexF1: %s' % string)
 
     # Index fields 2 - 23 characters
     # <68 xx 3B> <21 60 00> <42> <Text in ASCII Hex>
     def writeIndexF2(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '42'], 23))
-        logging.debug('MK4 - write IndexF2: %s' %string)
+        logging.debug('MK4 - write IndexF2: %s' % string)
 
     # Index fields 3 - 23 characters
     # <68 xx 3B> <21 60 00> <43> <Text in ASCII Hex>
     def writeIndexF3(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '43'], 23))
-        logging.debug('MK4 - write IndexF3: %s' %string)
+        logging.debug('MK4 - write IndexF3: %s' % string)
 
     # Index fields 4 - 23 characters
     # <68 xx 3B> <21 60 00> <44> <Text in ASCII Hex>
     def writeIndexF4(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '44'], 23))
-        logging.debug('MK4 - write IndexF4: %s' %string)
+        logging.debug('MK4 - write IndexF4: %s' % string)
 
     # Index fields 5 - 23 characters
     # <68 xx 3B> <21 60 00> <45> <Text in ASCII Hex>
     def writeIndexF5(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '45'], 23))
-        logging.debug('MK4 - write IndexF5: %s' %string)
+        logging.debug('MK4 - write IndexF5: %s' % string)
 
     # Index fields 6 - 23 characters
     # <68 xx 3B> <21 60 00> <46> <Text in ASCII Hex>
     def writeIndexF6(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '46'], 23))
-        logging.debug('MK4 - write IndexF6: %s' %string)
+        logging.debug('MK4 - write IndexF6: %s' % string)
 
     # Index fields 7 - 23 characters
     # <68 xx 3B> <21 60 00> <47(07)>  <Text in ASCII Hex>
     def writeIndexF7(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '47'], 23))
-        logging.debug('MK4 - write IndexF7: %s' %string)
+        logging.debug('MK4 - write IndexF7: %s' % string)
 
     # Index fields 8 - 23 characters
     # <68 xx 3B> <21 60 00> <48> <Text in ASCII Hex>
     def writeIndexF8(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '48'], 23))
-        logging.debug('MK4 - write IndexF8: %s' %string)
+        logging.debug('MK4 - write IndexF8: %s' % string)
 
     # Index fields 9 - 23 characters
     # <68 xx 3B> <21 60 00> <49> <Text in ASCII Hex>
     def writeIndexF9(self, string):
         self.IBUS.writeBusPacket('18', '68', _hexText(string, ['21', '60', '00', '49'], 23))
-        logging.debug('MK4 - write IndexF9: %s' %string)
+        logging.debug('MK4 - write IndexF9: %s' % string)
 
     # To refresh the index fields
     # <68 06 3B> <A5 60 01 00 91>

@@ -54,7 +54,7 @@ def find_media_player():
 def init():
     btReadMac()
     disconnect()
-    logging.info('Bluetooth initialized')
+    logging.info('Initialized: Bluetooth ')
 
 
 
@@ -79,8 +79,9 @@ def connect():
 
 
 def end():
-    global btMacLast
+    logging.info('End: Bluetooth')
     btCtl.disconnect()
+
 
 
 def disconnect():
