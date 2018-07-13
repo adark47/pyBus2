@@ -17,11 +17,6 @@ import pyBus_util as pB_util
 import pyBus_cdc as pB_cdc
 #import pyBus_io as pB_io
 
-# This module will read a packet, match it against the json object 'DIRECTIVES' below.
-# The packet is checked by matching the source value in packet (i.e. where the packet came from) to a key in the object if possible
-# Then matching the Destination if possible
-# The joining the 'data' component of the packet and matching that if possible.
-# The resulting value will be the name of a function to pass the packet to for processing of sorts.
 
 ############################################################################
 # GLOBALS DIRECTIVES
@@ -187,7 +182,6 @@ MENU_LEVEL = None
 ############################################################################
 # FUNCTIONS
 ############################################################################
-# Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 
 def init(writer):
     global WRITER, SESSION_DATA
@@ -254,15 +248,7 @@ def shutDown():
 
 
 ############################################################################
-# FROM HERE ON ARE THE DIRECTIVES
-# DIRECTIVES ARE WHAT I CALL SMALL FUNCTIONS WHICH ARE INVOKED WHEN A
-# CERTAIN CODE IS READ FROM THE IBUS.
-#
-# SO ADD YOUR OWN IF YOU LIKE, OR MODIFY WHATS THERE.
-# USE THE BIG JSON DICTIONARY AT THE TOP
-############################################################################
-# All directives should have a d_ prefix as we are searching GLOBALLY for function names..
-# So best have unique enough names
+# IKE
 ############################################################################
 
 

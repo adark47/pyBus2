@@ -6,10 +6,6 @@ import threading
 import datetime
 
 ############################################################################
-# WARNING: Behaviour of this module is going to be rebuilt entirely, it is moving towards spaghetti code.
-############################################################################
-
-############################################################################
 # GLOBALS
 ############################################################################
 
@@ -24,7 +20,9 @@ def _hexText(string, dataPacket ,max_stringlen):
     stringLen = 0
     logging.debug("Got string for hexing: %s", string)
     while (stringLen < max_stringlen) and (len(string) > 0):
-        c = string[stringLen]  # stringLen doubles up as the index to use when retrieving characters of the string to be displayed.. apologies for how misleading this may be
+        # stringLen doubles up as the index to use when retrieving characters of
+        #  the string to be displayed.. apologies for how misleading this may be
+        c = string[stringLen]
         dataPacket.append('%02X' % (ord(c)))
         stringLen = stringLen + 1
         if (stringLen == len(string)):
@@ -39,7 +37,7 @@ class busWriter(object):
     def __init__(self, ibus):
         self.IBUS = ibus
 
-# Immediate Text ################
+# Immediate Text #######################################################################
 
     # 12 characters
     def immediate(self, string):

@@ -9,18 +9,6 @@ import logging
 import traceback
 import threading
 
-# This module will read a packet, match it against the json object 'DIRECTIVES' below.
-# The packet is checked by matching the source value in packet (i.e. where the packet came from) to a key in the object if possible
-# Then matching the Destination if possible
-# The joining the 'data' component of the packet and matching that if possible.
-# The resulting value will be the name of a function to pass the packet to for processing of sorts.
-
-# THE MAJOR DIFFRENCE BETWEEN THIS DRIVER AND EVENT DRIVER:
-# This one should manipulate the state data object and use that with
-# a ticking thread to figure out what to do. So tick every .5 sec or
-# so and perform an action depending on the state data like skipping
-# back or forward.
-
 #####################################
 # GLOBALS
 #####################################
@@ -39,7 +27,6 @@ def init(writer):
     WRITER = writer
 
 
-
 def shutDown():
     global WRITER
     logging.info("End: iBus util")
@@ -53,7 +40,8 @@ def enableFunc(funcName, interval, count=0):
     if FUNC_STACK.get(funcName) and FUNC_STACK.get(funcName).get("THREAD"):
         FUNC_STACK[funcName]["THREAD"].cancel()
 
-    # Dont worry about checking if a function is already enabled, as the thread would have died. Rather than updating the spec, just run a new thread.
+    # Dont worry about checking if a function is already enabled, as the thread would have died. Rather than updating
+    # the spec, just run a new thread.
     if getattr(sys.modules[__name__], funcName):
         FUNC_STACK[funcName] = {
             "COUNT": count,
