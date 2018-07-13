@@ -80,17 +80,24 @@ def connect():
 
 def end():
     global btMacLast
-    btCtl.disconnect(btMacLast)
+    btCtl.disconnect()
 
 
 def disconnect():
     global btMacLast
+    btReadMac()
     btCtl.disconnect(btMacLast)
     logging.debug('Disabled bluetooth device: %s' % btMacLast)
 
 
+def disconnectMac(mac):
+    btCtl.disconnect(mac)
+    logging.debug('Disabled bluetooth device: %s' % mac)
+
+
 def newConnect(mac):
     global btMacLast
+    disconnect()
     if btCtl.connect(mac) == True:
         time.sleep(1)
         btWriteMac(mac)
@@ -178,38 +185,49 @@ def getTrackInfo():
 # SERVICE MANAGEMENT BLUETOOTH-AGENT
 ############################################################################
 
-def service_Bluetooth():
+def serviceBluetoothStatus():
+    p = Popen(['ps', '-a'], stdout=PIPE)    # ps -A for TEST
+    stdout, stderr = p.communicate()
+    if 'bluetooth-agent' in str(stdout):
+        logging.info('Service bluetooth-agent started')
+        return True
+    else:
+        logging.info('Service bluetooth-agent not started')
+        return False
+
+
+def serviceBluetooth():
     service = 'bluetooth-agent'
     global BLUETOOTH
 
     if not BLUETOOTH:
-            logging.info('Starting bluetooth-agent process...')
-            p = Popen(['sudo', 'systemctl', 'start', service], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            stdout, stderr = p.communicate()
-            errcode = p.returncode
+        logging.info('Starting bluetooth-agent process...')
+        p = Popen(['sudo', 'systemctl', 'start', service], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = p.communicate()
+        errcode = p.returncode
 
-            if errcode != 0:
-                    logging.error('Error while starting bluetooth-agent')
-                    logging.error(' - stderr : %s' %stderr)
-                    logging.error(' - stdout : %s' %stdout)
+        if errcode != 0:
+            logging.error('Error while starting bluetooth-agent')
+            logging.error(' - stderr : %s' %stderr)
+            logging.error(' - stdout : %s' %stdout)
 
-            logging.info('Starting bluetooth-agent process... OK')
-            BLUETOOTH = True
-            return True
+        logging.info('Starting bluetooth-agent process... OK')
+        BLUETOOTH = True
+        return True
 
     else:
-            logging.info('Stopping bluetooth-agent process...')
-            p = Popen(['sudo', 'systemctl', 'stop', service], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            stdout, stderr = p.communicate()
-            errcode = p.returncode
+        logging.info('Stopping bluetooth-agent process...')
+        p = Popen(['sudo', 'systemctl', 'stop', service], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        stdout, stderr = p.communicate()
+        errcode = p.returncode
 
-            if errcode != 0:
-                    logging.error('Error while stopping bluetooth-agent')
-                    logging.error(' - stderr : %s' %stderr)
-                    logging.error(' - stdout : %s' %stdout)
+        if errcode != 0:
+            logging.error('Error while stopping bluetooth-agent')
+            logging.error(' - stderr : %s' %stderr)
+            logging.error(' - stdout : %s' %stdout)
 
-            logging.info('Stopping bluetooth-agent process... OK')
-            BLUETOOTH = False
-            return False
+        logging.info('Stopping bluetooth-agent process... OK')
+        BLUETOOTH = False
+        return False
 
 ############################################################################
