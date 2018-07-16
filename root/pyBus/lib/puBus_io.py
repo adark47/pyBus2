@@ -24,24 +24,25 @@ import pyBus_cdc as pB_cdc
 ############################################################################
 
 WRITER = None
-MENU = None
+menuLevel = None
+threadDisplay = None
 
 ############################################################################
 # FUNCTIONS
 ############################################################################
 
 def init(writer):
-    global WRITER, SESSION_DATA
+    global WRITER
     WRITER = writer
 
     display = pB_display.busWriter(WRITER)
     pB_audio.init()
-    MENU = IO()
-    MENU.start()
+    threadDisplay = displayIO()
+    threadDisplay.start()
 
 def end():
-    if MENU:
-        MENU.stop()
+    if threadDisplay:
+        threadDisplay.stop()
 
     pB_audio.end()
     logging.debug("Quitting Audio CLIENT")
@@ -77,11 +78,10 @@ class TextScroller:
 # Scroll text
 ############################################################################
 
-class IO(threading.Thread):
-    def __init__(self, ibus):
-        self.IBUS = ibus
-
+class displayIO(threading.Thread):
+    def __init__(self):
         threading.Thread.__init__(self)
+
 
 def test():
     pass
@@ -96,67 +96,128 @@ def test():
 
     def stop(self):
         logging.info('Display shutdown')
-        self.IBUS = None
         self._Thread__stop()
 
 
+class buttonIO(object):
+
+    def infoP(self):
+        pass
+    def infoH(self):
+        pass
+    def infoR(self):
+        pass
+
+    def button1P(self):
+        pass
+    def button1H(self):
+        pass
+    def button1R(self):
+        pass
+
+    def button2P(self):
+        pass
+    def button2H(self):
+        pass
+    def button2R(self):
+        pass
+
+    def button3P(self):
+        pass
+    def button3H(self):
+        pass
+    def button3R(self):
+        pass
+
+    def button4P(self):
+        pass
+    def button4H(self):
+        pass
+    def button4R(self):
+        pass
+
+    def button5P(self):
+        pass
+    def button5H(self):
+        pass
+    def button5R(self):
+        pass
+
+    def button6P(self):
+        pass
+    def button6H(self):
+        pass
+    def button6R(self):
+        pass
+
+    def ArrowLP(self):
+        pass
+    def ArrowLH(self):
+        pass
+    def ArrowLR(self):
+        pass
+    def ArrowRP(self):
+        pass
+    def ArrowRH(self):
+        pass
+    def ArrowRR(self):
+        pass
+
+    def ArrowP(self):
+        pass
+    def ArrowH(self):
+        pass
+    def ArrowR(self):
+        pass
+
+    def modeP(self):
+        pass
+    def modeH(self):
+        pass
+    def modeR(self):
+        pass
+
+    def slctIndexF0(self):
+        pass
+    def slctIndexF1(self):
+        pass
+    def slctIndexF2(self):
+        pass
+    def slctIndexF3(self):
+        pass
+    def slctIndexF4(self):
+        pass
+    def slctIndexF5(self):
+        pass
+    def slctIndexF6(self):
+        pass
+    def slctIndexF7(self):
+        pass
+    def slctIndexF8(self):
+        pass
+    def slctIndexF9(self):
+        pass
 
 
+    def wheelRT(self):
+        pass
+    def wheelVoiceP(self):
+        pass
+    def wheelVoiceH(self):
+        pass
+    def wheelVoiceR(self):
+        pass
 
+    def wheelArrowUP(self):
+        pass
+    def wheelArrowUH(self):
+        pass
+    def wheelArrowUR(self):
+        pass
 
-
-
-infoP
-infoH
-infoR
-
-button1P
-button1H
-button1R
-
-button2P
-button2H
-button2R
-
-button3P
-button3H
-button3R
-
-button4P
-button4H
-button4R
-
-button5P
-button5H
-button5R
-
-button6P
-button6H
-button6R
-
-ArrowLP
-ArrowLH
-ArrowLR
-ArrowRP
-ArrowRH
-ArrowRR
-
-ArrowP
-ArrowH
-ArrowR
-
-modeP
-modeH
-modeR
-
-slctIndexF0
-slctIndexF1
-slctIndexF2
-slctIndexF3
-slctIndexF4
-slctIndexF5
-slctIndexF6
-slctIndexF7
-slctIndexF8
-slctIndexF9
-
+    def wheelArrowDP(self):
+        pass
+    def wheelArrowDH(self):
+        pass
+    def wheelArrowDR(self):
+        pass
