@@ -274,7 +274,7 @@ def d_custom_IKE(packet):
 def d_cdPollResponse(packet):
     pB_cdc.disableFunc("announce")           # stop announcing
     pB_cdc.disableFunc("pollResponse")
-    pB_cdc.enableFunc("pollResponse", 10)    # defaul 30 (not worked)
+    pB_cdc.enableFunc("pollResponse", 10)    # default 30 (not worked)
 
 
 def d_cdStatusPlaying(packet):
