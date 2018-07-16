@@ -234,11 +234,10 @@ def listen():
         packet = WRITER.readBusPacket()
         if packet:
             manage(packet)
-        time.sleep(TICK) # sleep a bit
+        time.sleep(TICK)    # sleep a bit
 
 
 def shutDown():
-
 #    logging.debug("Stopping IO Driver")
 #    pB_io.end()
     logging.debug("Killing CDC")
@@ -281,20 +280,20 @@ def d_cdStatusPlaying(packet):
     pB_cdc.play('01', '01')
 
 
-def d_cdStop(packet):
-    pB_cdc.stop('01', '01')
+#def d_cdStop(packet):
+#    pB_cdc.stop('01', '01')
 
 
-def d_cdPlay(packet):
-    pB_cdc.play('01', '01')
+#def d_cdPlay(packet):
+#    pB_cdc.play('01', '01')
 
 
-def d_cdNext(packet):
-    pB_cdc.scanFWD('01', '01')
+#def d_cdNext(packet):
+#    pB_cdc.scanFWD('01', '01')
 
 
-def d_cdPrev(packet):
-    pB_cdc.scanBWD('01', '01')
+#def d_cdPrev(packet):
+#    pB_cdc.scanBWD('01', '01')
 
 
 ############################################################################
