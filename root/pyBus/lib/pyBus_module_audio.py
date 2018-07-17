@@ -80,6 +80,10 @@ def getState():
     socketIO.wait(seconds=0.1)
 
 
+def getClient():
+    return CLIENT
+
+
 def setClient(client):
     global CLIENT
 
