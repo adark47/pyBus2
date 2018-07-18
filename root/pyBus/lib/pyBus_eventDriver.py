@@ -15,7 +15,7 @@ sys.path.append('/root/pyBus/lib/')
 # Imports for the project
 import pyBus_util as pB_util
 import pyBus_cdc as pB_cdc
-#import pyBus_io as pB_io
+import pyBus_io as pB_io
 
 
 ############################################################################
@@ -88,39 +88,39 @@ DIRECTIVES = {
     },
     'F0': {                                     # MK4
         '68':{
-#            '4807': '',                         # F0 05 68 48 07 - Info press
-#            '4844': '',                         # F0 05 68 48 44 - Info hold
-#            '4887': '',                         # F0 05 68 48 87 - Info released
+#            '4807': 'infoP',                    # F0 05 68 48 07 - Info press
+#            '4844': 'infoH',                    # F0 05 68 48 44 - Info hold
+#            '4887': 'infoR',                    # F0 05 68 48 87 - Info released
             '4811': 'button1p',                 # F0 04 68 48 11 - Button 1 press
-#            '4851': '',                         # F0 04 68 48 51 - Button 1 hold
-#            '4891': '',                         # F0 05 68 48 91 - Button 1 released
+#            '4851': 'button1H',                 # F0 04 68 48 51 - Button 1 hold
+#            '4891': 'button1R',                 # F0 05 68 48 91 - Button 1 released
             '4801': 'button2p',                 # F0 04 68 48 01 - Button 2 press
-#            '4841': '',                         # F0 04 68 48 41 - Button 2 hold
-#            '4881': '',                         # F0 05 68 48 81 - Button 2 released
+#            '4841': 'button2H',                 # F0 04 68 48 41 - Button 2 hold
+#            '4881': 'button2R',                 # F0 05 68 48 81 - Button 2 released
             '4812': 'button3p',                 # F0 04 68 48 12 - Button 3 press
-#            '4852': '',                         # F0 04 68 48 52 - Button 3 hold
-#            '4892': '',                         # F0 05 68 48 92 - Button 3 released
+#            '4852': 'button3H',                 # F0 04 68 48 52 - Button 3 hold
+#            '4892': 'button3R',                 # F0 05 68 48 92 - Button 3 released
             '4802': 'button4p',                 # F0 04 68 48 02 - Button 4 press
-#            '4842': '',                         # F0 04 68 48 42 - Button 4 hold
-#            '4882': '',                         # F0 05 68 48 82 - Button 4 released
+#            '4842': 'button4H',                 # F0 04 68 48 42 - Button 4 hold
+#            '4882': 'button4R',                 # F0 05 68 48 82 - Button 4 released
             '4813': 'button5p',                 # F0 04 68 48 13 - Button 5 press
-#            '4853': '',                         # F0 04 68 48 53 - Button 5 hold
-#            '4893': '',                         # F0 05 68 48 93 - Button 5 released
+#            '4853': 'button5H',                 # F0 04 68 48 53 - Button 5 hold
+#            '4893': 'button5R',                 # F0 05 68 48 93 - Button 5 released
             '4803': 'button6p',                 # F0 04 68 48 03 - Button 6 press
-#            '4843': '',                         # F0 04 68 48 43 - Button 6 hold
-#            '4883': '',                         # F0 05 68 48 83 - Button 6 released
-#            '4810': '',                         # F0 04 68 48 10 - "<" ArrowLeft press
-#            '4850': '',                         # F0 04 68 48 50 - "<" ArrowLeft hold
-#            '4890': '',                         # F0 05 68 48 90 - "<" ArrowLeft released
-#            '4800': '',                         # F0 04 68 48 00 - ">" ArrowRight press
-#            '4840': '',                         # F0 04 68 48 40 - ">" ArrowRight hold
-#            '4880': '',                         # F0 05 68 48 80 - ">" ArrowRight released
-#            '4814': '',                         # F0 04 68 48 14 - "<>" Arrow press
-#            '4854': '',                         # F0 04 68 48 54 - "<>" Arrow hold
-#            '4894': '',                         # F0 05 68 48 94 - "<>" Arrow released
-#            '4823': '',                         # F0 04 68 48 23 - MODE press
-#            '4863': '',                         # F0 04 68 48 63 - MODE hold
-#            '48A3':''                           # F0 05 68 48 A3 - MODE released
+#            '4843': 'button6H',                 # F0 04 68 48 43 - Button 6 hold
+#            '4883': 'button6R',                 # F0 05 68 48 83 - Button 6 released
+#            '4810': 'ArrowLP',                  # F0 04 68 48 10 - "<" ArrowLeft press
+#            '4850': 'ArrowLH',                  # F0 04 68 48 50 - "<" ArrowLeft hold
+#            '4890': 'ArrowLR',                  # F0 05 68 48 90 - "<" ArrowLeft released
+#            '4800': 'ArrowRP',                  # F0 04 68 48 00 - ">" ArrowRight press
+#            '4840': 'ArrowRH',                  # F0 04 68 48 40 - ">" ArrowRight hold
+#            '4880': 'ArrowRR',                  # F0 05 68 48 80 - ">" ArrowRight released
+#            '4814': 'ArrowP',                   # F0 04 68 48 14 - "<>" Arrow press
+#            '4854': 'ArrowH',                   # F0 04 68 48 54 - "<>" Arrow hold
+#            '4894': 'ArrowR',                   # F0 05 68 48 94 - "<>" Arrow released
+#            '4823': 'modeP',                    # F0 04 68 48 23 - MODE press
+#            '4863': 'modeH',                    # F0 04 68 48 63 - MODE hold
+#            '48A3':'modeR'                      # F0 05 68 48 A3 - MODE released
 #        },
 #        '3B':{
 #            '4981': '',                         # F0 04 3B 49 81 - right nob Left turn
@@ -150,20 +150,20 @@ DIRECTIVES = {
     '50': {
         'C8': {                                 # Multifunction steering wheel phone buttons
             '01':   'd_cdPollResponse',         # This can happen via RT button or ignition
-#            '3B40': '',                         # 50 04 C8 3B 40    - R/T
-#            '3B80': '',                         # 50 04 C8 3B 80 27 - voice press
-#            '3B90': '',                         # 50 04 C8 3B 90 37 - voice hold
-#            '3BA0': ''                          # 50 04 C8 3B A0 07 - voice release
+#            '3B40': 'wheelRT',                  # 50 04 C8 3B 40    - R/T
+#            '3B80': 'wheelVoiceP',              # 50 04 C8 3B 80 27 - voice press
+#            '3B90': 'wheelVoiceH',              # 50 04 C8 3B 90 37 - voice hold
+#            '3BA0': 'wheelVoiceR'               # 50 04 C8 3B A0 07 - voice release
         },
         '68': {                                 # Multifunction steering wheel buttons
             '3211': '',                         # 50 04 68 32 11 1F - "+" press
             '3210': '',                         # 50 04 68 32 10 1E - "-" press
-            '3B01': '',                         # 50 04 68 3B 01 06 - ">" press
-            '3B11': '',                         # 50 04 68 3B 11 16 - ">" hold
-            '3B21': '',                         # 50 04 68 3B 21 26 - ">" release
-            '3B08': '',                         # 50 04 68 3B 08 0F - "<" press
-            '3B18': '',                         # 50 04 68 3B 18 1F - "<" hold
-            '3B28': ''                          # 50 04 68 3B 28 2F - "<" release
+            '3B01': 'wheelArrowUP',             # 50 04 68 3B 01 06 - ">" press
+            '3B11': 'wheelArrowUH',             # 50 04 68 3B 11 16 - ">" hold
+            '3B21': 'wheelArrowUR',             # 50 04 68 3B 21 26 - ">" release
+            '3B08': 'wheelArrowDP',             # 50 04 68 3B 08 0F - "<" press
+            '3B18': 'wheelArrowDH',             # 50 04 68 3B 18 1F - "<" hold
+            '3B28': 'wheelArrowDR'              # 50 04 68 3B 28 2F - "<" release
         }
     }
 }
@@ -176,8 +176,7 @@ WRITER = None
 SESSION_DATA = {}
 #TICK = 0.02 # sleep interval in seconds used between iBUS reads
 TICK = 0.1
-
-MENU_LEVEL = None
+buttonIO = None
 
 ############################################################################
 # FUNCTIONS
@@ -188,9 +187,9 @@ def init(writer):
     WRITER = writer
 
     #pB_io.init(WRITER)
+    buttonIO = pB_io.buttonIO()
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
-
     pB_cdc.enableFunc("announce", 10)
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
@@ -299,63 +298,273 @@ def d_cdStatusPlaying(packet):
 ############################################################################
 # BUTTON DISPLAY
 ############################################################################
+def infoP(packet):
+    logging.debug('MK4 - Info press (%s)' % packet)
+    buttonIO.infoP()
 
-def button1p(packet):
-    logging.debug('MK4 - Button 1 press (%s)' %packet)
-    pB_cdc.play('01', '01')
 
-def button2p(packet):
+def infoH(packet):
+    logging.debug('MK4 - Info hold (%s)' % packet)
+    buttonIO.infoH()
+
+
+def infoR(packet):
+    logging.debug('MK4 - Info released (%s)' % packet)
+    buttonIO.infoR()
+
+
+def button1P(packet):
+    logging.debug('MK4 - Button 1 press (%s)' % packet)
+    buttonIO.button1P()
+
+
+def button1H(packet):
+    logging.debug('MK4 - Button 1 hold (%s)' % packet)
+    buttonIO.button1H()
+
+
+def button1R(packet):
+    logging.debug('MK4 - Button 1 released (%s)' % packet)
+    buttonIO.button1R()
+
+
+def button2P(packet):
     logging.debug('MK4 - Button 2 press (%s)' % packet)
+    buttonIO.button2P()
 
-def button3p(packet):
+
+def button2H(packet):
+    logging.debug('MK4 - Button 2 hold (%s)' % packet)
+    buttonIO.button2H()
+
+
+def button2R(packet):
+    logging.debug('MK4 - Button 2 released (%s)' % packet)
+    buttonIO.button2R()
+
+
+def button3P(packet):
     logging.debug('MK4 - Button 3 press (%s)' % packet)
-    pB_cdc.stop('01', '01')
+    buttonIO.button3P()
 
-def button4p(packet):
+
+def button3H(packet):
+    logging.debug('MK4 - Button 3 hold (%s)' % packet)
+    buttonIO.button3H()
+
+
+def button3R(packet):
+    logging.debug('MK4 - Button 3 released (%s)' % packet)
+    buttonIO.button3R()
+
+
+def button4P(packet):
     logging.debug('MK4 - Button 4 press (%s)' % packet)
+    buttonIO.button4P()
 
-def button5p(packet):
+
+def button4H(packet):
+    logging.debug('MK4 - Button 4 hold (%s)' % packet)
+    buttonIO.button4H()
+
+
+def button4R(packet):
+    logging.debug('MK4 - Button 4 released (%s)' % packet)
+    buttonIO.button4R()
+
+
+def button5P(packet):
     logging.debug('MK4 - Button 5 press (%s)' % packet)
+    buttonIO.button5P()
 
-def button6p(packet):
+
+def button5H(packet):
+    logging.debug('MK4 - Button 5 hold (%s)' % packet)
+    buttonIO.button5H()
+
+
+def button5R(packet):
+    logging.debug('MK4 - Button 5 released (%s)' % packet)
+    buttonIO.button5R()
+
+
+def button6P(packet):
     logging.debug('MK4 - Button 6 press (%s)' % packet)
+    buttonIO.button6P()
 
+
+def button6H(packet):
+    logging.debug('MK4 - Button 6 hold(%s)' % packet)
+    buttonIO.button6H()
+
+
+def button6R(packet):
+    logging.debug('MK4 - Button 6 released(%s)' % packet)
+    buttonIO.button6R()
+
+
+def ArrowLP(packet):
+    logging.debug('MK4 - "<" ArrowLeft press' % packet)
+    buttonIO.ArrowLP()
+
+
+def ArrowLH(packet):
+    logging.debug('MK4 - "<" ArrowLeft hold (%s)' % packet)
+    buttonIO.ArrowLH()
+
+
+def ArrowLR(packet):
+    logging.debug('MK4 - "<" ArrowLeft released (%s)' % packet)
+    buttonIO.ArrowLR()
+
+
+def ArrowRP(packet):
+    logging.debug('MK4 - ">" ArrowRight press (%s)' % packet)
+    buttonIO.ArrowRP()
+
+
+def ArrowRH(packet):
+    logging.debug('MK4 - ">" ArrowRight hold (%s)' % packet)
+    buttonIO.ArrowRH()
+
+
+def ArrowRR(packet):
+    logging.debug('MK4 - ">" ArrowRight released' % packet)
+    buttonIO.ArrowRR()
+
+
+def ArrowP(packet):
+    logging.debug('MK4 - "<>" Arrow press (%s)' % packet)
+    buttonIO.ArrowP()
+
+
+def ArrowH(packet):
+    logging.debug('MK4 - "<>" Arrow hold' % packet)
+    buttonIO.ArrowH()
+
+
+def ArrowR(packet):
+    logging.debug('MK4 - "<>" Arrow released' % packet)
+    buttonIO.ArrowR()
+
+
+def modeP(packet):
+    logging.debug('MK4 -  MODE press (%s)' % packet)
+    buttonIO.modeP()
+
+
+def modeH(packet):
+    logging.debug('MK4 - MODE hold (%s)' % packet)
+    buttonIO.modeH()
+
+
+def modeR(packet):
+    logging.debug('MK4 - MODE released (%s)' % packet)
+    buttonIO.modeR()
 
 
 def slctIndexF0(packet):
-    logging.debug('MK4 - selected Index fields 0 (%s)' % packet)
+    logging.debug('MK4 - Index fields 0 (%s)' % packet)
+    buttonIO.slctIndexF0()
+
 
 def slctIndexF1(packet):
-    logging.debug('MK4 - selected Index fields 1 (%s)' % packet)
+    logging.debug('MK4 - Index fields 1 (%s)' % packet)
+    buttonIO.slctIndexF1()
+
 
 def slctIndexF2(packet):
-    logging.debug('MK4 - selected Index fields 2 (%s)' % packet)
+    logging.debug('MK4 - Index fields 2 (%s)' % packet)
+    buttonIO.slctIndexF2()
+
 
 def slctIndexF3(packet):
-    logging.debug('MK4 - selected Index fields 3 (%s)' % packet)
+    logging.debug('MK4 - Index fields 3 (%s)' % packet)
+    buttonIO.slctIndexF3()
+
 
 def slctIndexF4(packet):
-    logging.debug('MK4 - selected Index fields 4 (%s)' % packet)
+    logging.debug('MK4 - Index fields 4 (%s)' % packet)
+    buttonIO.slctIndexF4()
+
 
 def slctIndexF5(packet):
-    logging.debug('MK4 - selected Index fields 5 (%s)' % packet)
+    logging.debug('MK4 - Index fields 5 (%s)' % packet)
+    buttonIO.slctIndexF5()
+
 
 def slctIndexF6(packet):
-    logging.debug('MK4 - selected Index fields 6 (%s)' % packet)
+    logging.debug('MK4 - Index fields 6 (%s)' % packet)
+    buttonIO.slctIndexF6()
+
 
 def slctIndexF7(packet):
-    logging.debug('MK4 - selected Index fields 7 (%s)' % packet)
+    logging.debug('MK4 - Index fields 7 (%s)' % packet)
+    buttonIO.slctIndexF7()
+
 
 def slctIndexF8(packet):
-    logging.debug('MK4 - selected Index fields 8 (%s)' % packet)
+    logging.debug('MK4 - Index fields 8 (%s)' % packet)
+    buttonIO.slctIndexF8()
+
 
 def slctIndexF9(packet):
-    logging.debug('MK4 - selected Index fields 9 (%s)' % packet)
+    logging.debug('MK4 - Index fields 9 (%s)' % packet)
+    buttonIO.slctIndexF9()
+
+
+def wheelRT(packet):
+    logging.debug('Multifunction steering wheel - R/T (%s)' % packet)
+    buttonIO.wheelRT()
+
+
+def wheelVoiceP(packet):
+    logging.debug('Multifunction steering wheel - voice press (%s)' % packet)
+    buttonIO.wheelVoiceP()
+
+
+def wheelVoiceH(packet):
+    logging.debug('Multifunction steering wheel - voice hold (%s)' % packet)
+    buttonIO.wheelVoiceH()
+
+
+def wheelVoiceR(packet):
+    logging.debug('Multifunction steering wheel - voice release (%s)' % packet)
+    buttonIO.wheelVoiceR()
+
+
+def wheelArrowUP(packet):
+    logging.debug('Multifunction steering wheel - ">" press (%s)' % packet)
+    buttonIO.wheelArrowUP()
+
+
+def wheelArrowUH(packet):
+    logging.debug('Multifunction steering wheel - ">" hold (%s)' % packet)
+    buttonIO.wheelArrowUH()
+
+
+def wheelArrowUR(packet):
+    logging.debug('Multifunction steering wheel - ">" release (%s)' % packet)
+    buttonIO.wheelArrowUR()
+
+
+def wheelArrowDP(packet):
+    logging.debug('Multifunction steering wheel (%s) - "<" press' % packet)
+    buttonIO.wheelArrowDP()
+
+
+def wheelArrowDR(packet):
+    logging.debug('Multifunction steering wheel - "<" hold (%s)' % packet)
+    buttonIO.wheelArrowDR()
+
+
+def wheelArrowDR(packet):
+    logging.debug('Multifunction steering wheel - "<" release (%s)' % packet)
+    buttonIO.wheelArrowDR()
 
 
 ############################################################################
-# MENU DISPLAY
-############################################################################
+
 
 
 

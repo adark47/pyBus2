@@ -322,7 +322,7 @@ class displayIO(threading.Thread):
 # BUTTON CLASS
 ############################################################################
 
-class buttonIO(object):
+class buttonIO():
     def infoP(self):
         pass
 
