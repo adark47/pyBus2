@@ -187,7 +187,7 @@ def getTrackInfo():
 ############################################################################
 
 def serviceBluetoothStatus():
-    p = Popen(['ps', '-a'], stdout=PIPE)    # ps -A for TEST
+    p = Popen(['ps', '-A'], stdout=PIPE)    # ps -A for TEST
     stdout, stderr = p.communicate()
     if 'bluetooth-agent' in str(stdout):
         logging.info('Service bluetooth-agent started')
