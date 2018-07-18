@@ -66,7 +66,7 @@ def getTrackInfo():
 #        btDictTrack.setdefault('service', []).append(bt.getTrackInfo().get('Name'))
         btDictTrack.setdefault('uri', []).append(str(bt.getTrackInfo().get('Device')))
         btDictTrack.setdefault('numberOfTracks', []).append(str(bt.getTrackInfo().get('NumberOfTracks')))
-        btDictTrack.setdefault('trackNumber', []).append(str(bt.getTrackInfo().get('TrackNumber')))
+        btDictTrack.setdefault('position', []).append(str(bt.getTrackInfo().get('TrackNumber')))
 
         return btDictTrack
     else:
@@ -372,7 +372,9 @@ def VolumeDown():
 
 def Reboot():
     socketIO.emit('reboot')
+    logging.info('Reboot command sent')
 
 
 def Shutdown():
     socketIO.emit('shutdown')
+    logging.info('Shutdown command sent')

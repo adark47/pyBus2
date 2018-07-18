@@ -11,6 +11,7 @@ import logging
 import traceback
 import threading
 from subprocess import Popen, PIPE
+
 sys.path.append('/root/pyBus/lib/')
 
 # Imports for the project
@@ -59,6 +60,7 @@ def end():
 def error(errorID):
     global ERROR
     ERROR = errorID
+
 
 ############################################################################
 # Scroll text
@@ -159,8 +161,8 @@ class displayIO(threading.Thread):
 
 
             elif menuLevel == 'btMain':  # Bluetooth Main
-                display.writeTitleT0(
-                    '%s - %s' % (pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')))
+                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
+                                                  pB_audio.getTrackInfo().get('title')))
                 time.sleep(TICK)
                 display.writeTitleT1(' ')
                 time.sleep(TICK)
@@ -184,11 +186,11 @@ class displayIO(threading.Thread):
                 if updateIndex is True:
                     display.refreshIndex()
                     time.sleep(TICK)
-                    display.writeIndexF0('Select device')
+                    display.writeIndexF0('<-- Back --')
                     time.sleep(TICK)
-                    display.writeIndexF1('Add a new device')
+                    display.writeIndexF1('Select device')
                     time.sleep(TICK)
-                    display.writeIndexF2('')
+                    display.writeIndexF2('Add a new device')
                     time.sleep(TICK)
                     display.writeIndexF3('')
                     time.sleep(TICK)
@@ -216,10 +218,100 @@ class displayIO(threading.Thread):
                 pass
 
             elif menuLevel == 'vlmMain':  # Volumio Main
-                pass
+                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
+                                                  pB_audio.getTrackInfo().get('title')))
+                time.sleep(TICK)
+                display.writeTitleT1(' ')
+                time.sleep(TICK)
+                display.writeTitleT3(' ')
+                time.sleep(TICK)
+                display.writeTitleT4(' ')
+                time.sleep(TICK)
+                display.writeTitleT6('Volumio')
+                time.sleep(TICK)
+                if ERROR is None:
+                    display.writeTitleT5('%s' % pB_audio.getTrackInfo().get('status'))
+                    time.sleep(TICK)
+                    display.writeTitleT2(' ')
+                    time.sleep(TICK)
+                else:
+                    display.writeTitleT5('Error:')
+                    time.sleep(TICK)
+                    display.writeTitleT2(ERROR)
+                    time.sleep(TICK)
+
+                if updateIndex is True:
+                    display.refreshIndex()
+                    time.sleep(TICK)
+                    display.writeIndexF0('')
+                    time.sleep(TICK)
+                    display.writeIndexF1('')
+                    time.sleep(TICK)
+                    display.writeIndexF2('')
+                    time.sleep(TICK)
+                    display.writeIndexF3('')
+                    time.sleep(TICK)
+                    display.writeIndexF4('')
+                    time.sleep(TICK)
+                    display.writeIndexF5('')
+                    time.sleep(TICK)
+                    display.writeIndexF6('')
+                    time.sleep(TICK)
+                    display.writeIndexF7('')
+                    time.sleep(TICK)
+                    display.writeIndexF8(' ')
+                    time.sleep(TICK)
+                    display.writeIndexF9('')
+                    time.sleep(TICK)
+                    updateIndex = False
 
             elif menuLevel == 'apMain':  # AirPlay Main
-                pass
+                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
+                                                  pB_audio.getTrackInfo().get('title')))
+                time.sleep(TICK)
+                display.writeTitleT1(' ')
+                time.sleep(TICK)
+                display.writeTitleT3(' ')
+                time.sleep(TICK)
+                display.writeTitleT4(' ')
+                time.sleep(TICK)
+                display.writeTitleT6('AirPlay')
+                time.sleep(TICK)
+                if ERROR is None:
+                    display.writeTitleT5('%s' % pB_audio.getTrackInfo().get('status'))
+                    time.sleep(TICK)
+                    display.writeTitleT2(' ')
+                    time.sleep(TICK)
+                else:
+                    display.writeTitleT5('Error:')
+                    time.sleep(TICK)
+                    display.writeTitleT2(ERROR)
+                    time.sleep(TICK)
+
+                if updateIndex is True:
+                    display.refreshIndex()
+                    time.sleep(TICK)
+                    display.writeIndexF0('')
+                    time.sleep(TICK)
+                    display.writeIndexF1('')
+                    time.sleep(TICK)
+                    display.writeIndexF2('')
+                    time.sleep(TICK)
+                    display.writeIndexF3('')
+                    time.sleep(TICK)
+                    display.writeIndexF4('')
+                    time.sleep(TICK)
+                    display.writeIndexF5('')
+                    time.sleep(TICK)
+                    display.writeIndexF6('')
+                    time.sleep(TICK)
+                    display.writeIndexF7('')
+                    time.sleep(TICK)
+                    display.writeIndexF8(' ')
+                    time.sleep(TICK)
+                    display.writeIndexF9('')
+                    time.sleep(TICK)
+                    updateIndex = False
 
     def stop(self):
         logging.info('Display shutdown')
@@ -331,13 +423,72 @@ class buttonIO(object):
         pass
 
     def slctIndexF0(self):
-        pass
+        global updateIndex
+        global menuLevel
+        if menuLevel == 'homeMain':  # Home
+            if pB_audio.setClient('vlm') is True:  # Set client Volumio
+                menuLevel = 'vlmMain'  # Home -> Volumio Main
+                logging.debug('Set menu level: %s' % menuLevel)
+                updateIndex = True
+            else:
+                id = 01
+                error(id)
+                logging.error("ERROR: %s" % id)
+        elif menuLevel == 'btMain':  # <-- Back --
+            if pB_audio.setClient('vlm') is True:  # Set client Volumio
+                menuLevel = 'homeMain'  # Bluetooth Main -> Home
+                logging.debug('Set menu level: %s' % menuLevel)
+                updateIndex = True
+            else:
+                id = 04
+                error(id)
+                logging.error("ERROR: %s" % id)
+        elif menuLevel == 'btSelectDevice':  # <-- Back --
+            menuLevel = 'btMain'  # Select device -> Bluetooth Main
+            logging.debug('Set menu level: %s' % menuLevel)
+            updateIndex = True
+        elif menuLevel == 'btNewDevice':  # <-- Back --
+            menuLevel = 'btSelectDevice'  # Add a new device -> Select device
+            logging.debug('Set menu level: %s' % menuLevel)
+            updateIndex = True
 
     def slctIndexF1(self):
-        pass
+        global updateIndex
+        global menuLevel
+        if menuLevel == 'homeMain':  # Home
+            if pB_audio.setClient('bt') is True:  # Set client Bluetooth
+                menuLevel = 'btMain'
+                logging.debug('Set menu level: %s' % menuLevel)
+                updateIndex = True
+            else:
+                id = 02
+                error(id)
+                logging.error("ERROR: %s" % id)
+        elif menuLevel == 'btSelectDevice':
+            menuLevel = 'btSelectDevice'  # Bluetooth -> Select device
+            logging.debug('Set menu level: %s' % menuLevel)
+            updateIndex = True
+        elif menuLevel == 'btSelectDevice':
+            updateIndex = True
 
     def slctIndexF2(self):
-        pass
+        global updateIndex
+        global menuLevel
+        if menuLevel == 'homeMain':  # Home
+            if pB_audio.setClient('ap') is True:  # Set client AirPlay
+                menuLevel = 'apMain'  # Home -> AirPlay Main
+                logging.debug('Set menu level: %s' % menuLevel)
+                updateIndex = True
+            else:
+                id = 03
+                error(id)
+                logging.error("ERROR: %s" % id)
+        elif menuLevel == 'btMain':
+            menuLevel = 'btNewDevice'  # Bluetooth Main -> Add a new device
+            logging.debug('Set menu level: %s' % menuLevel)
+            updateIndex = True
+        elif menuLevel == 'btNewDevice':
+            updateIndex = True
 
     def slctIndexF3(self):
         pass
@@ -346,10 +497,12 @@ class buttonIO(object):
         pass
 
     def slctIndexF5(self):
-        pass
+        if menuLevel == 'homeMain':
+            pB_audio.Reboot()
 
     def slctIndexF6(self):
-        pass
+        if menuLevel == 'homeMain':
+            pB_audio.Shutdown()
 
     def slctIndexF7(self):
         pass
