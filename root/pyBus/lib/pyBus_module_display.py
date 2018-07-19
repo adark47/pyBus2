@@ -18,7 +18,7 @@ WRITER = None  # Writer thread
 
 def _hexText(string, dataPacket ,max_stringlen):
     stringLen = 0
-    logging.debug("Got string for hexing: %s", string)
+    logging.debug('Got string for hexing: %s', string)
     while (stringLen < max_stringlen) and (len(string) > 0):
         # stringLen doubles up as the index to use when retrieving characters of
         #  the string to be displayed.. apologies for how misleading this may be
@@ -33,7 +33,7 @@ def _hexText(string, dataPacket ,max_stringlen):
 # TEXT DISPLAY
 ############################################################################
 
-class busWriter(object):
+class busWriter:
     def __init__(self, ibus):
         self.IBUS = ibus
 
@@ -42,7 +42,7 @@ class busWriter(object):
     # 12 characters
     def immediate(self, string):
         self.IBUS.writeBusPacket('C8', '80', _hexText(string, ['23', '42', '01'], 12))
-        logging.debug('Immediate text - write Text: %s' %string)
+        logging.debug('Immediate text - write Text: %s' % string)
 
     def immediateClear(self):
         self.IBUS.writeBusPacket('c8', '80', ['23', '42', '32', '1e'])
@@ -159,8 +159,6 @@ class busWriter(object):
     def refreshIndex(self):
         self.IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00', '91'])
         logging.debug('MK4 - refresh Index')
-
-############################################################################
 
 ############################################################################
 

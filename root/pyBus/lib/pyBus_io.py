@@ -26,9 +26,9 @@ import pyBus_cdc as pB_cdc
 
 versionPB = 'v1.1'
 WRITER = None
-menuLevel = None
-threadDisplay = None
+menuLevel = 'homeMain'
 display = None
+displayThread = None
 ERROR = None
 updateIndex = True
 TrackInfo = None
@@ -44,15 +44,15 @@ def init(writer):
     global display
     WRITER = writer
 
-    display = pB_display.busWriter(WRITER)
     pB_audio.init()
-    threadDisplay = displayIO()
-    threadDisplay.start()
+    display = pB_display.busWriter(WRITER)
+    displayThread = displayIO()
+    displayThread.start()
 
 
 def end():
-    if threadDisplay:
-        threadDisplay.stop()
+    if displayThread:
+        displayThread.stop()
     pB_audio.end()
     logging.debug("Quitting Audio CLIENT")
 
@@ -97,18 +97,15 @@ class TextScroller:
 
 class displayIO(threading.Thread):
     def __init__(self):
-        display.writeTitleT0('Initialized')
-        global menuLevel
-        menuLevel = 'homeMain'
         threading.Thread.__init__(self)
 
-    ############################################################################
+############################################################################
 
     def run(self):
         global updateIndex
         global ERROR
         global versionPB
-        global menuLevel
+        global display
         logging.info('Display thread initialized')
 
         while True:
@@ -159,8 +156,7 @@ class displayIO(threading.Thread):
                     time.sleep(TICK)
                     updateIndex = False
 
-
-            elif menuLevel == 'btMain':  # Bluetooth Main
+            elif menuLevel == 'btMain':     # Bluetooth Main
                 display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
                                                   pB_audio.getTrackInfo().get('title')))
                 time.sleep(TICK)
@@ -322,7 +318,7 @@ class displayIO(threading.Thread):
 # BUTTON CLASS
 ############################################################################
 
-class buttonIO():
+class buttonIO:
     def infoP(self):
         pass
 
@@ -433,7 +429,7 @@ class buttonIO():
             else:
                 id = 01
                 error(id)
-                logging.error("ERROR: %s" % id)
+                logging.error('ERROR: %s' % id)
         elif menuLevel == 'btMain':  # <-- Back --
             if pB_audio.setClient('vlm') is True:  # Set client Volumio
                 menuLevel = 'homeMain'  # Bluetooth Main -> Home
@@ -442,7 +438,7 @@ class buttonIO():
             else:
                 id = 04
                 error(id)
-                logging.error("ERROR: %s" % id)
+                logging.error('ERROR: %s' % id)
         elif menuLevel == 'btSelectDevice':  # <-- Back --
             menuLevel = 'btMain'  # Select device -> Bluetooth Main
             logging.debug('Set menu level: %s' % menuLevel)
@@ -463,7 +459,7 @@ class buttonIO():
             else:
                 id = 02
                 error(id)
-                logging.error("ERROR: %s" % id)
+                logging.error('ERROR: %s' % id)
         elif menuLevel == 'btSelectDevice':
             menuLevel = 'btSelectDevice'  # Bluetooth -> Select device
             logging.debug('Set menu level: %s' % menuLevel)
@@ -482,7 +478,7 @@ class buttonIO():
             else:
                 id = 03
                 error(id)
-                logging.error("ERROR: %s" % id)
+                logging.error('ERROR: %s' % id)
         elif menuLevel == 'btMain':
             menuLevel = 'btNewDevice'  # Bluetooth Main -> Add a new device
             logging.debug('Set menu level: %s' % menuLevel)

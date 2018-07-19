@@ -84,11 +84,11 @@ def revive(funcName):
     global FUNC_STACK
     funcSpec = FUNC_STACK.get(funcName, None)
     if funcSpec:
-        count = funcSpec["COUNT"]
+        count = funcSpec['COUNT']
         if count != 1:
-            FUNC_STACK[funcName]["COUNT"] = count - 1
-            funcSpec["THREAD"].cancel()  # Kill off this thread just in case..
-            enableFunc(funcName, funcSpec["INTERVAL"])  # REVIVE!
+            FUNC_STACK[funcName]['COUNT'] = count - 1
+            funcSpec['THREAD'].cancel()  # Kill off this thread just in case..
+            enableFunc(funcName, funcSpec['INTERVAL'])  # REVIVE!
 
 ############################################################################
 # CDC Functions
@@ -96,50 +96,49 @@ def revive(funcName):
 
 def pollResponse():
     WRITER.writeBusPacket('18', 'FF', ['02', '00'])
-    logging.debug("CDC sent the status: Alive")
+    logging.debug('CDC sent the status: Alive')
 
 
 def announce():
     WRITER.writeBusPacket('18', 'FF', ['02', '01'])
-    logging.debug("CDC sent the status: Start")
+    logging.debug('CDC sent the status: Start')
 
 
 # General Use: CD title and status when the CD changer is not playing (Status = Pause)
 def stop(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '00', '02', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: Stop")
+    logging.debug('CDC sent the status: Stop')
 
 
 # General Use: Start playing the title (Status = Play)
 def pause(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '01', '09', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: Pause")
+    logging.debug('CDC sent the status: Pause')
 
 
 # General Use: CD title and status if CD changer plays (Status = Play)
 def play(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '02', '09', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: Play")
+    logging.debug('CDC sent the status: Play')
 
 
 # General Use: Start playing the title
 def scanFWD(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '03', '09', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: FFWD")
+    logging.debug('CDC sent the status: FFWD')
 
 
 # General Use: Start playing the title
 def scanBWD(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '04', '09', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: FRWD")
+    logging.debug('CDC sent the status: FRWD')
 
 def end(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '07', '02', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: End")
+    logging.debug('CDC sent the status: End')
 
 def load(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '08', '02', '00', '3F', '00', cdNumber, cdSong])
-    logging.debug("CDC sent the status: Load")
+    logging.debug('CDC sent the status: Load')
 
 ############################################################################
-

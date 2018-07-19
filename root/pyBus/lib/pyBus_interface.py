@@ -91,11 +91,11 @@ class ibusFace():
         self.SDEV.flushInput()
         self.SDEV.lastWrite = int(round(time.time() * 1000))
         self.PACKET_STACK = []
-        logging.debug("Initialized iBus")
+        logging.debug('Initialized iBus')
 
     # Wait for a significant delay in the bus before parsing stuff (signals separated by pauses)
     def waitClearBus(self):
-        logging.debug("Waiting for clear bus")
+        logging.debug('Waiting for clear bus')
         oldTime = time.time()
         while True:
             # Wait for large interval between packets
@@ -132,7 +132,7 @@ class ibusFace():
 
         dataLen = int(packet['len'], 16) - 2
         if dataLen > 20:
-            logging.critical("Length of +20 found, no useful packet is this long.. cleaning up")
+            logging.critical('Length of +20 found, no useful packet is this long.. cleaning up')
             self.waitClearBus()
             return None
 
@@ -152,7 +152,7 @@ class ibusFace():
         try:
             char = '%02X' % ord(char)
         except SerialException, e:
-            logging.warning("Hit a serialException: %s" % e)
+            logging.warning('Hit a serialException: %s' % e)
             pass
         return char
 
@@ -183,7 +183,7 @@ class ibusFace():
         packet = [src, length, dst]
         for p in data:
             packet.append(p)
-        logging.debug("WRITE: Adding to stack: %s" % packet)
+        logging.debug('WRITE: Adding to stack: %s' % packet)
         for i in range(len(packet)):
             packet[i] = int('0x%s' % packet[i], 16)
 
@@ -193,15 +193,15 @@ class ibusFace():
 
         packetSent = False
         while (not packetSent):
-            logging.debug("WRITE: %s" % packet)
+            logging.debug('WRITE: %s' % packet)
             if (self.SDEV.getCTS()) and ((int(round(
                         time.time() * 1000)) - self.SDEV.lastWrite) > 10):  # dont write packets to close together.. issues arise
                 self.writeFullPacket(packet)
-                logging.debug("WRITE: SUCCESS")
+                logging.debug('WRITE: SUCCESS')
                 self.SDEV.lastWrite = int(round(time.time() * 1000))
                 packetSent = True
             else:
-                logging.debug("WRITE: WAIT")
+                logging.debug('WRITE: WAIT')
                 time.sleep(0.01)
 
     def close(self):

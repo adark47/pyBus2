@@ -174,19 +174,21 @@ DIRECTIVES = {
 
 WRITER = None
 SESSION_DATA = {}
-#TICK = 0.02 # sleep interval in seconds used between iBUS reads
-TICK = 0.1
 buttonIO = None
+TICK = 0.1  # sleep interval in seconds used between iBUS reads (0.02 not worked)
+
 
 ############################################################################
 # FUNCTIONS
 ############################################################################
 
 def init(writer):
-    global WRITER, SESSION_DATA
+    global WRITER
+    global SESSION_DATA
+    global buttonIO
     WRITER = writer
 
-    #pB_io.init(WRITER)
+    pB_io.init(WRITER)
     buttonIO = pB_io.buttonIO()
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
@@ -212,17 +214,17 @@ def manage(packet):
     if methodName != None:
         methodToCall = globals().get(methodName, None)
         if methodToCall:
-            logging.debug("Directive found for packet - %s" % methodName)
+            logging.debug('Directive found for packet - %s' % methodName)
             try:
                 result = methodToCall(packet)
             except:
-                logging.error("Exception raised from [%s]" % methodName)
+                logging.error('Exception raised from [%s]' % methodName)
                 logging.error(traceback.format_exc())
 
         else:
-            logging.debug("Method (%s) does not exist" % methodName)
+            logging.debug('Method (%s) does not exist' % methodName)
     else:
-        logging.debug("MethodName (%s) does not match a function" % methodName)
+        logging.debug('MethodName (%s) does not match a function' % methodName)
 
     return result
 
@@ -237,12 +239,12 @@ def listen():
 
 
 def shutDown():
-#    logging.debug("Stopping IO Driver")
-#    pB_io.end()
-    logging.debug("Killing CDC")
+    logging.debug('Stopping IO Driver')
+    pB_io.end()
+    logging.debug('Killing CDC')
     pB_cdc.shutDown()
-    logging.debug("Killing Utilities")
-    pB_cdc.shutDown()
+    logging.debug('Killing Util')
+    pB_util.shutDown()
 
 
 ############################################################################
@@ -270,9 +272,9 @@ def d_custom_IKE(packet):
 
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    pB_cdc.disableFunc("announce")           # stop announcing
-    pB_cdc.disableFunc("pollResponse")
-    pB_cdc.enableFunc("pollResponse", 10)    # default 30 (not worked)
+    pB_cdc.disableFunc('announce')           # stop announcing
+    pB_cdc.disableFunc('pollResponse')
+    pB_cdc.enableFunc('pollResponse', 10)    # default 30 (not worked)
 
 
 def d_cdStatusPlaying(packet):
