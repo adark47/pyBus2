@@ -25,13 +25,13 @@ FUNC_STACK = {}
 # Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 def init(writer):
     global WRITER
-    logging.info("Initializing the iBus interface for CDChanger")
+    logging.info('Initializing the iBus interface for CDChanger')
     WRITER = writer
 
 
 def shutDown():
     global WRITER
-    logging.info("Dereferencing iBus interface")
+    logging.info('Dereferencing iBus interface')
     WRITER = None
 
 
@@ -39,31 +39,31 @@ def enableFunc(funcName, interval, count=0):
     global FUNC_STACK
 
     # Cancel Thread if it already exists.
-    if FUNC_STACK.get(funcName) and FUNC_STACK.get(funcName).get("THREAD"):
-        FUNC_STACK[funcName]["THREAD"].cancel()
+    if FUNC_STACK.get(funcName) and FUNC_STACK.get(funcName).get('THREAD'):
+        FUNC_STACK[funcName]['THREAD'].cancel()
 
     # Dont worry about checking if a function is already enabled, as the thread would have died. Rather than updating the spec, just run a new thread.
     if getattr(sys.modules[__name__], funcName):
         FUNC_STACK[funcName] = {
-            "COUNT": count,
-            "INTERVAL": interval,
-            "THREAD": threading.Timer(
+            'COUNT': count,
+            'INTERVAL': interval,
+            'THREAD': threading.Timer(
                 interval,
                 revive, [funcName]
             )
         }
-        logging.debug("Enabling New Thread: %s %s" % (funcName, FUNC_STACK[funcName]))
+        logging.debug('Enabling New Thread: %s %s' % (funcName, FUNC_STACK[funcName]))
         worker_func = getattr(sys.modules[__name__], funcName)
         worker_func()
-        FUNC_STACK[funcName]["THREAD"].start()
+        FUNC_STACK[funcName]['THREAD'].start()
     else:
-        logging.warning("No function found (%s)" % funcName)
+        logging.warning('No function found (%s)' % funcName)
 
 
 def disableFunc(funcName):
     global FUNC_STACK
     if funcName in FUNC_STACK.keys():
-        thread = FUNC_STACK[funcName].get("THREAD")
+        thread = FUNC_STACK[funcName].get('THREAD')
         if thread: thread.cancel()
         del FUNC_STACK[funcName]
 
@@ -71,7 +71,7 @@ def disableFunc(funcName):
 def disableAllFunc():
     global FUNC_STACK
     for funcName in FUNC_STACK:
-        thread = FUNC_STACK[funcName].get("THREAD")
+        thread = FUNC_STACK[funcName].get('THREAD')
         if thread: thread.cancel()
     FUNC_STACK = {}
 
