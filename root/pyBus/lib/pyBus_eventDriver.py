@@ -190,7 +190,7 @@ def init(writer):
     WRITER = writer
 
     pB_io.init(WRITER)
-    buttonIO = pB_io.buttonIO()
+    buttonIO = pB_io.ButtonIO()
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
     pB_cdc.enableFunc("announce", 10)

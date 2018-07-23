@@ -30,7 +30,6 @@ menuLevel = 'homeMain'
 display = None
 displayThread = None
 ERROR = None
-updateIndex = True
 TrackInfo = None
 TICK = 0.2  # sleep interval in seconds used after displaying a string (default 1)
 
@@ -46,7 +45,7 @@ def init(writer):
 
     pB_audio.init()
     display = pB_display.busWriter(WRITER)
-    displayThread = displayIO()
+    displayThread = DisplayIO()
     displayThread.start()
 
 
@@ -94,15 +93,64 @@ class TextScroller:
 ############################################################################
 # DISPLAY CLASS
 ############################################################################
+def displayF(titleT0, titleT1, titleT2, titleT3, titleT4, titleT5, titleT6,
+             indexF0, indexF1, indexF2, indexF3, indexF4, indexF5, indexF6, indexF7, indexF8, indexF9,
+             updateIndex=False):
 
-class displayIO(threading.Thread):
+    display.writeTitleT0(titleT0)   # Title field T0 - 11 characters
+    time.sleep(TICK)
+    display.writeTitleT1(titleT1)   # Title field T1 - 4 characters
+    time.sleep(TICK)
+    display.writeTitleT3(titleT3)   # Title field T3 - 4 characters
+    time.sleep(TICK)
+    display.writeTitleT4(titleT4)   # Title field T4 - 2 characters
+    time.sleep(TICK)
+    display.writeTitleT6(titleT6)   # Title field T6 - 11 characters
+    time.sleep(TICK)
+    if ERROR is None:
+        display.writeTitleT5(titleT5)   # Title field T5 - 7 characters
+        time.sleep(TICK)
+        display.writeTitleT2(titleT2)   # Title field T2 - 2 characters
+        time.sleep(TICK)
+    else:
+        display.writeTitleT5('Error:')
+        time.sleep(TICK)
+        display.writeTitleT2(ERROR)
+        time.sleep(TICK)
+
+    if updateIndex is True:
+        display.refreshIndex()
+
+    time.sleep(TICK)
+    display.writeIndexF0(indexF0)
+    time.sleep(TICK)
+    display.writeIndexF1(indexF1)
+    time.sleep(TICK)
+    display.writeIndexF2(indexF2)
+    time.sleep(TICK)
+    display.writeIndexF3(indexF3)
+    time.sleep(TICK)
+    display.writeIndexF4(indexF4)
+    time.sleep(TICK)
+    display.writeIndexF5(indexF5)
+    time.sleep(TICK)
+    display.writeIndexF6(indexF6)
+    time.sleep(TICK)
+    display.writeIndexF7(indexF7)
+    time.sleep(TICK)
+    display.writeIndexF8(indexF8)
+    time.sleep(TICK)
+    display.writeIndexF9(indexF9)
+    time.sleep(TICK)
+
+
+class DisplayIO(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
 
 ############################################################################
 
     def run(self):
-        global updateIndex
         global ERROR
         global versionPB
         global display
@@ -110,99 +158,48 @@ class displayIO(threading.Thread):
 
         while True:
             if menuLevel == 'homeMain':  # HOME
-                display.writeTitleT0('BMW-MUSIC')
-                time.sleep(TICK)
-                display.writeTitleT1(' ')
-                time.sleep(TICK)
-                display.writeTitleT3(versionPB)
-                time.sleep(TICK)
-                display.writeTitleT4(' ')
-                time.sleep(TICK)
-                display.writeTitleT6('Not chosen')
-                time.sleep(TICK)
-                if ERROR is None:
-                    display.writeTitleT5('Status:')
-                    time.sleep(TICK)
-                    display.writeTitleT2('OK')
-                    time.sleep(TICK)
-                else:
-                    display.writeTitleT5('Error:')
-                    time.sleep(TICK)
-                    display.writeTitleT2(ERROR)
-                    time.sleep(TICK)
+                displayF(
+                    titleT0='BMW-MUSIC',
+                    titleT1='_',
+                    titleT2='OK',
+                    titleT3=versionPB,
+                    titleT4='_',
+                    titleT5='Status:',
+                    titleT6='<======>',
 
-                if updateIndex is True:
-                    display.refreshIndex()
-                    time.sleep(TICK)
-                    display.writeIndexF0('Volumio')
-                    time.sleep(TICK)
-                    display.writeIndexF1('Bluetooth')
-                    time.sleep(TICK)
-                    display.writeIndexF2('AirPlay')
-                    time.sleep(TICK)
-                    display.writeIndexF3('')
-                    time.sleep(TICK)
-                    display.writeIndexF4('')
-                    time.sleep(TICK)
-                    display.writeIndexF5('Reboot')
-                    time.sleep(TICK)
-                    display.writeIndexF6('Shutdown')
-                    time.sleep(TICK)
-                    display.writeIndexF7('')
-                    time.sleep(TICK)
-                    display.writeIndexF8('')
-                    time.sleep(TICK)
-                    display.writeIndexF9('')
-                    time.sleep(TICK)
-                    updateIndex = False
+                    indexF0='Volumio',
+                    indexF1='Bluetooth',
+                    indexF2='AirPlay',
+                    indexF3='_',
+                    indexF4='_',
+                    indexF5='Reboot',
+                    indexF6='Shutdown',
+                    indexF7='_',
+                    indexF8='_',
+                    indexF9='_'
+                    )
 
             elif menuLevel == 'btMain':     # Bluetooth Main
-                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
-                                                  pB_audio.getTrackInfo().get('title')))
-                time.sleep(TICK)
-                display.writeTitleT1(' ')
-                time.sleep(TICK)
-                display.writeTitleT3(' ')
-                time.sleep(TICK)
-                display.writeTitleT4(' ')
-                time.sleep(TICK)
-                display.writeTitleT6('Bluetooth')
-                time.sleep(TICK)
-                if ERROR is None:
-                    display.writeTitleT5('%s' % pB_audio.getTrackInfo().get('status'))
-                    time.sleep(TICK)
-                    display.writeTitleT2(' ')
-                    time.sleep(TICK)
-                else:
-                    display.writeTitleT5('Error:')
-                    time.sleep(TICK)
-                    display.writeTitleT2(ERROR)
-                    time.sleep(TICK)
+                displayF(
+                    titleT0='%s - %s' % (pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
+                    titleT1='_',
+                    titleT2='OK',
+                    titleT3=versionPB,
+                    titleT4='_',
+                    titleT5='%s' % pB_audio.getTrackInfo().get('status'),
+                    titleT6='Bluetooth',
 
-                if updateIndex is True:
-                    display.refreshIndex()
-                    time.sleep(TICK)
-                    display.writeIndexF0('<-- Back --')
-                    time.sleep(TICK)
-                    display.writeIndexF1('Select device')
-                    time.sleep(TICK)
-                    display.writeIndexF2('Add a new device')
-                    time.sleep(TICK)
-                    display.writeIndexF3('')
-                    time.sleep(TICK)
-                    display.writeIndexF4('')
-                    time.sleep(TICK)
-                    display.writeIndexF5('')
-                    time.sleep(TICK)
-                    display.writeIndexF6('')
-                    time.sleep(TICK)
-                    display.writeIndexF7('')
-                    time.sleep(TICK)
-                    display.writeIndexF8(' ')
-                    time.sleep(TICK)
-                    display.writeIndexF9('')
-                    time.sleep(TICK)
-                    updateIndex = False
+                    indexF0='<-- Back --',
+                    indexF1='Select device',
+                    indexF2='Add a new device',
+                    indexF3='_',
+                    indexF4='_',
+                    indexF5='_',
+                    indexF6='_',
+                    indexF7='',
+                    indexF8='_',
+                    indexF9='_'
+                    )
 
             elif menuLevel == 'btSelectDevice':  # Bluetooth -> Select device
                 pass
@@ -214,100 +211,10 @@ class displayIO(threading.Thread):
                 pass
 
             elif menuLevel == 'vlmMain':  # Volumio Main
-                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
-                                                  pB_audio.getTrackInfo().get('title')))
-                time.sleep(TICK)
-                display.writeTitleT1(' ')
-                time.sleep(TICK)
-                display.writeTitleT3(' ')
-                time.sleep(TICK)
-                display.writeTitleT4(' ')
-                time.sleep(TICK)
-                display.writeTitleT6('Volumio')
-                time.sleep(TICK)
-                if ERROR is None:
-                    display.writeTitleT5('%s' % pB_audio.getTrackInfo().get('status'))
-                    time.sleep(TICK)
-                    display.writeTitleT2(' ')
-                    time.sleep(TICK)
-                else:
-                    display.writeTitleT5('Error:')
-                    time.sleep(TICK)
-                    display.writeTitleT2(ERROR)
-                    time.sleep(TICK)
-
-                if updateIndex is True:
-                    display.refreshIndex()
-                    time.sleep(TICK)
-                    display.writeIndexF0('')
-                    time.sleep(TICK)
-                    display.writeIndexF1('')
-                    time.sleep(TICK)
-                    display.writeIndexF2('')
-                    time.sleep(TICK)
-                    display.writeIndexF3('')
-                    time.sleep(TICK)
-                    display.writeIndexF4('')
-                    time.sleep(TICK)
-                    display.writeIndexF5('')
-                    time.sleep(TICK)
-                    display.writeIndexF6('')
-                    time.sleep(TICK)
-                    display.writeIndexF7('')
-                    time.sleep(TICK)
-                    display.writeIndexF8(' ')
-                    time.sleep(TICK)
-                    display.writeIndexF9('')
-                    time.sleep(TICK)
-                    updateIndex = False
+                pass
 
             elif menuLevel == 'apMain':  # AirPlay Main
-                display.writeTitleT0('%s - %s' % (pB_audio.getTrackInfo().get('artist'),
-                                                  pB_audio.getTrackInfo().get('title')))
-                time.sleep(TICK)
-                display.writeTitleT1(' ')
-                time.sleep(TICK)
-                display.writeTitleT3(' ')
-                time.sleep(TICK)
-                display.writeTitleT4(' ')
-                time.sleep(TICK)
-                display.writeTitleT6('AirPlay')
-                time.sleep(TICK)
-                if ERROR is None:
-                    display.writeTitleT5('%s' % pB_audio.getTrackInfo().get('status'))
-                    time.sleep(TICK)
-                    display.writeTitleT2(' ')
-                    time.sleep(TICK)
-                else:
-                    display.writeTitleT5('Error:')
-                    time.sleep(TICK)
-                    display.writeTitleT2(ERROR)
-                    time.sleep(TICK)
-
-                if updateIndex is True:
-                    display.refreshIndex()
-                    time.sleep(TICK)
-                    display.writeIndexF0('')
-                    time.sleep(TICK)
-                    display.writeIndexF1('')
-                    time.sleep(TICK)
-                    display.writeIndexF2('')
-                    time.sleep(TICK)
-                    display.writeIndexF3('')
-                    time.sleep(TICK)
-                    display.writeIndexF4('')
-                    time.sleep(TICK)
-                    display.writeIndexF5('')
-                    time.sleep(TICK)
-                    display.writeIndexF6('')
-                    time.sleep(TICK)
-                    display.writeIndexF7('')
-                    time.sleep(TICK)
-                    display.writeIndexF8(' ')
-                    time.sleep(TICK)
-                    display.writeIndexF9('')
-                    time.sleep(TICK)
-                    updateIndex = False
+                pass
 
     def stop(self):
         logging.info('Display shutdown')
@@ -318,7 +225,7 @@ class displayIO(threading.Thread):
 # BUTTON CLASS
 ############################################################################
 
-class buttonIO:
+class ButtonIO:
     def infoP(self):
         pass
 
