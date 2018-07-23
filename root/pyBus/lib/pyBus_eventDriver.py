@@ -36,21 +36,22 @@ DIRECTIVES = {
 #            '7A5020': '',                       # driver window popped up after closing door
 #            '7A5021': '',                       # driver door closed
 #            '7A5120': '',                       # driver window popped down before opening door
-#            '7A5121': '',                       # driver door opened
+#            '7A5121': ''                        # driver door opened
 #        }
 #    },
 #    '3F': {
 #        '00': {
 #            '0C3401': '',                       # All doors unlocked
 #            '0C4601': '',                       # Passenger Door Locked
-#            '0C4701': '',                       # Driver Door Locked
+#            '0C4701': ''                        # Driver Door Locked
 #        }
 #    },
 #    '44': {
 #        'BF': {
-#            '7401FF': '',                       # key position 1
-#            '740401': '',                       # key
-#            '7400FF': ''                        # key removed
+#            '740400': ''                        # Ignition key in
+#            '7401FF': '',                       # Ignition key position 1
+#            '740401': '',                       # Ignition key position 2
+#            '7400FF': ''                        # Ignition key removed
 #        }
 #    },
 #    'C0': {
@@ -279,7 +280,10 @@ def d_cdPollResponse(packet):
 
 def d_cdStatusPlaying(packet):
     pB_cdc.play('01', '01')
-
+    # temp
+    pB_cdc.disableFunc('announce')           # stop announcing
+    pB_cdc.disableFunc('pollResponse')
+    pB_cdc.enableFunc('pollResponse', 10)    # default 30 (not worked)
 
 #def d_cdStop(packet):
 #    pB_cdc.stop('01', '01')
@@ -566,7 +570,3 @@ def wheelArrowDR(packet):
 
 
 ############################################################################
-
-
-
-
