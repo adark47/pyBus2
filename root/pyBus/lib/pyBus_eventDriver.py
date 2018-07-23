@@ -259,12 +259,12 @@ def d_custom_IKE(packet):
     if packet_data[0] == '18':
         speed = int(packet_data[1], 16) * 2
         revs = int(packet_data[2], 16) * 10000
-        customState = {'speed' : speed, 'revs' : revs}
+        customState = {'speed': speed, 'revs': revs}
     # 19 = Temperature
     elif packet_data[0] == '19':
         extTemp = int(packet_data[1], 16)
         oilTemp = int(packet_data[2], 16)
-        customState = {'extTemp' : extTemp, 'oilTemp' : oilTemp}
+        customState = {'extTemp': extTemp, 'oilTemp': oilTemp}
 
 
 ############################################################################
@@ -555,7 +555,7 @@ def wheelArrowUR(packet):
 
 
 def wheelArrowDP(packet):
-    logging.debug('Multifunction steering wheel (%s) - "<" press' % packet)
+    logging.debug('Multifunction steering wheel - "<" press (%s)' % packet)
     buttonIO.wheelArrowDP()
 
 

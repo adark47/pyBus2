@@ -161,5 +161,7 @@ class busWriter:
         self.IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00', '91'])
         logging.debug('MK4 - refresh Index')
 
+    def clearScreen(self):
+        self.IBUS.writeBusPacket('68', '3B', ['46', '0C'])
+        logging.debug('MK4 - clear Screen')
 ############################################################################
-# 68 XX 3B> <46 0C> - "Clear screen"

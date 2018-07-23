@@ -95,7 +95,10 @@ class TextScroller:
 ############################################################################
 def displayF(titleT0, titleT1, titleT2, titleT3, titleT4, titleT5, titleT6,
              indexF0, indexF1, indexF2, indexF3, indexF4, indexF5, indexF6, indexF7, indexF8, indexF9,
-             updateIndex=False):
+             clearScreen=True, refreshIndex=False):
+
+    if clearScreen is True:
+        display.clearScreen()
 
     display.writeTitleT0(titleT0)   # Title field T0 - 11 characters
     time.sleep(TICK)
@@ -118,7 +121,7 @@ def displayF(titleT0, titleT1, titleT2, titleT3, titleT4, titleT5, titleT6,
         display.writeTitleT2(ERROR)
         time.sleep(TICK)
 
-    if updateIndex is True:
+    if refreshIndex is True:
         display.refreshIndex()
 
     time.sleep(TICK)
