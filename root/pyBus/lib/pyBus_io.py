@@ -66,7 +66,6 @@ def error(errorID):
 ############################################################################
 
 class TextScroller:
-    'Class for scrolling text'
     text = ''
     position = 0
     textLength = 0
@@ -93,28 +92,45 @@ class TextScroller:
 ############################################################################
 # DISPLAY CLASS
 ############################################################################
-def displayF(titleT0, titleT1, titleT2, titleT3, titleT4, titleT5, titleT6,
-             indexF0, indexF1, indexF2, indexF3, indexF4, indexF5, indexF6, indexF7, indexF8, indexF9,
+# T0 Dialog / Name artist - song(Scroll)                 # Title field T0 - 11 characters
+# T1 mp3 / waw / flac                                    # Title field T1 - 4 characters
+# T2 OK / ER                                             # Title field T2 - 2 characters
+# T3 Number of songs in the folder                       # Title field T3 - 4 characters
+# T4 number of the playing song in the folder            # Title field T4 - 2 characters
+# T5 Play / Stop / Pause / Status: / Error:              # Title field T5 - 7 characters
+# T6 Bluetooth / AirPlay / Volumio                       # Title field T6 - 11 characters
+
+
+def displayF(titleT0=None, titleT1=None, titleT2=None, titleT3=None, titleT4=None, titleT5=None, titleT6=None,
+             indexF0=None, indexF1=None, indexF2=None, indexF3=None, indexF4=None,
+             indexF5=None, indexF6=None, indexF7=None, indexF8=None, indexF9=None,
              clearScreen=True, refreshIndex=False):
 
     if clearScreen is True:
         display.clearScreen()
 
-    display.writeTitleT0(titleT0)   # Title field T0 - 11 characters
-    time.sleep(TICK)
-    display.writeTitleT1(titleT1)   # Title field T1 - 4 characters
-    time.sleep(TICK)
-    display.writeTitleT3(titleT3)   # Title field T3 - 4 characters
-    time.sleep(TICK)
-    display.writeTitleT4(titleT4)   # Title field T4 - 2 characters
-    time.sleep(TICK)
-    display.writeTitleT6(titleT6)   # Title field T6 - 11 characters
-    time.sleep(TICK)
+    if titleT0 is not None:
+        display.writeTitleT0(titleT0)
+        time.sleep(TICK)
+    if titleT1 is not None:
+        display.writeTitleT1(titleT1)
+        time.sleep(TICK)
+    if titleT3 is not None:
+        display.writeTitleT3(titleT3)
+        time.sleep(TICK)
+    if titleT4 is not None:
+        display.writeTitleT4(titleT4)
+        time.sleep(TICK)
+    if titleT6 is not None:
+        display.writeTitleT6(titleT6)
+        time.sleep(TICK)
     if ERROR is None:
-        display.writeTitleT5(titleT5)   # Title field T5 - 7 characters
-        time.sleep(TICK)
-        display.writeTitleT2(titleT2)   # Title field T2 - 2 characters
-        time.sleep(TICK)
+        if titleT5 is not None:
+            display.writeTitleT5(titleT5)
+            time.sleep(TICK)
+        if titleT5 is not None:
+            display.writeTitleT2(titleT2)
+            time.sleep(TICK)
     else:
         display.writeTitleT5('Error:')
         time.sleep(TICK)
@@ -124,27 +140,36 @@ def displayF(titleT0, titleT1, titleT2, titleT3, titleT4, titleT5, titleT6,
     if refreshIndex is True:
         display.refreshIndex()
 
-    time.sleep(TICK)
-    display.writeIndexF0(indexF0)
-    time.sleep(TICK)
-    display.writeIndexF1(indexF1)
-    time.sleep(TICK)
-    display.writeIndexF2(indexF2)
-    time.sleep(TICK)
-    display.writeIndexF3(indexF3)
-    time.sleep(TICK)
-    display.writeIndexF4(indexF4)
-    time.sleep(TICK)
-    display.writeIndexF5(indexF5)
-    time.sleep(TICK)
-    display.writeIndexF6(indexF6)
-    time.sleep(TICK)
-    display.writeIndexF7(indexF7)
-    time.sleep(TICK)
-    display.writeIndexF8(indexF8)
-    time.sleep(TICK)
-    display.writeIndexF9(indexF9)
-    time.sleep(TICK)
+    if indexF0 is not None:
+        display.writeIndexF0(indexF0)
+        time.sleep(TICK)
+    if indexF1 is not None:
+        display.writeIndexF1(indexF1)
+        time.sleep(TICK)
+    if indexF2 is not None:
+        display.writeIndexF2(indexF2)
+        time.sleep(TICK)
+    if indexF3 is not None:
+        display.writeIndexF3(indexF3)
+        time.sleep(TICK)
+    if indexF4 is not None:
+        display.writeIndexF4(indexF4)
+        time.sleep(TICK)
+    if indexF5 is not None:
+        display.writeIndexF5(indexF5)
+        time.sleep(TICK)
+    if indexF6 is not None:
+        display.writeIndexF6(indexF6)
+        time.sleep(TICK)
+    if indexF7 is not None:
+        display.writeIndexF7(indexF7)
+        time.sleep(TICK)
+    if indexF8 is not None:
+        display.writeIndexF8(indexF8)
+        time.sleep(TICK)
+    if indexF9 is not None:
+        display.writeIndexF9(indexF9)
+        time.sleep(TICK)
 
 
 class DisplayIO(threading.Thread):
@@ -162,46 +187,46 @@ class DisplayIO(threading.Thread):
         while True:
             if menuLevel == 'homeMain':  # HOME
                 displayF(
-                    titleT0='BMW-MUSIC',
-                    titleT1='_',
+                    titleT0='BMW-MULTIMEDIA',
+                    titleT1='',
                     titleT2='OK',
                     titleT3=versionPB,
-                    titleT4='_',
+                    titleT4='',
                     titleT5='Status:',
                     titleT6='<======>',
 
                     indexF0='Volumio',
                     indexF1='Bluetooth',
                     indexF2='AirPlay',
-                    indexF3='_',
-                    indexF4='_',
+                    indexF3='',
+                    indexF4='',
                     indexF5='Reboot',
                     indexF6='Shutdown',
-                    indexF7='_',
-                    indexF8='_',
-                    indexF9='_'
+                    indexF7='',
+                    indexF8='',
+                    indexF9=''
                     )
 
             elif menuLevel == 'btMain':     # Bluetooth Main
                 displayF(
                     titleT0='%s - %s' % (pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
-                    titleT1='_',
+                    titleT1='',
                     titleT2='OK',
                     titleT3=versionPB,
-                    titleT4='_',
+                    titleT4='',
                     titleT5='%s' % pB_audio.getTrackInfo().get('status'),
                     titleT6='Bluetooth',
 
                     indexF0='<-- Back --',
                     indexF1='Select device',
                     indexF2='Add a new device',
-                    indexF3='_',
-                    indexF4='_',
-                    indexF5='_',
-                    indexF6='_',
+                    indexF3='',
+                    indexF4='',
+                    indexF5='',
+                    indexF6='',
                     indexF7='',
-                    indexF8='_',
-                    indexF9='_'
+                    indexF8='',
+                    indexF9=''
                     )
 
             elif menuLevel == 'btSelectDevice':  # Bluetooth -> Select device
