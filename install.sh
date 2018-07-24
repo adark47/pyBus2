@@ -11,6 +11,11 @@ sudo raspi-config
 # 6. Choose Finish
 sudo systemctl enable ssh
 sudo systemctl start ssh
+
+########################################################################################################################
+# runeaudio
+http://www.runeaudio.com/forum/pifi-dac-v2-0-not-working-on-rspberry-pi-3-solved-t3647.html
+
 ########################################################################################################################
 locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
@@ -44,10 +49,12 @@ apt -y install libsoxr-dev
 
 git clone https://github.com/mikebrady/shairport-sync.git
 cd ./shairport-sync-master/
+# git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-rtsp-c-diff
+patch -p1 rtsp.c < rtsp.c.diff
 autoreconf -i -f
 ./configure --sysconfdir=/etc --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
-make
-make install
+make && make install
+
 systemctl start shairport-sync
 systemctl enable shairport-sync
 
@@ -55,12 +62,10 @@ systemctl enable shairport-sync
 git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-main-c
 gcc main.c -o dacp_client -L /usr/lib/x86_64-linux-gnu/ -lavahi-client -lavahi-common
 
-git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-rtsp-c-diff
-patch -p1 rtsp.c < rtsp.c.diff
-
 chmod +x ./dacp_client
 cp ./dacp_client /usr/bin/dacp_client
 cp ./dacp_client.service /lib/systemd/system/dacp_client.service
+
 chmod 644 /lib/systemd/system/dacp_client.service
 systemctl daemon-reload
 systemctl enable dacp_client.service
@@ -91,22 +96,35 @@ apt -y install python-dbus python-gobject tcpreplay
 apt -y install libdbus-1-dev
 apt -y install gawk
 
+git clone git://git.kernel.org/pub/scm/bluetooth/bluez.git
+cd bluez
+git checkout 5.48
+./bootstrap
+./configure --enable-library --enable-experimental --enable-tools
+make && make install
+
+sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/libbluetooth.so
+sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/libbluetooth.so.3
+sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/libbluetooth.so.3.18.16
+
 git clone https://github.com/Arkq/bluez-alsa.git
 cd bluez-alsa
 autoreconf --install
 mkdir build && cd build
 ../configure --disable-hcitop --with-alsaplugindir=/usr/lib/arm-linux-gnueabihf/alsa-lib
-make && sudo make install
+make && make install
 
 systemctl daemon-reload
 
 systemctl enable bluetooth.service
 systemctl start bluetooth.service
 
+systemctl enable bluealsa.service
+systemctl start bluealsa.service
+
 chmod a+rwx /root/bin/a2dp-autoconnect
+touch /var/log/a2dp-autoconnect
 chmod a+rw /var/log/a2dp-autoconnect
 
 ########################################################################################################################
-
-
-
+/opt/vc/bin/vcgencmd measure_temp
