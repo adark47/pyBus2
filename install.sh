@@ -11,6 +11,9 @@ sudo raspi-config
 # 6. Choose Finish
 sudo systemctl enable ssh
 sudo systemctl start ssh
+########################################################################################################################
+locale-gen "en_US.UTF-8"
+sudo dpkg-reconfigure locales
 
 ########################################################################################################################
 apt update
@@ -40,6 +43,7 @@ apt -y install libmbedtls-dev
 apt -y install libsoxr-dev
 
 git clone https://github.com/mikebrady/shairport-sync.git
+cd ./shairport-sync-master/
 autoreconf -i -f
 ./configure --sysconfdir=/etc --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
 make
@@ -83,7 +87,7 @@ apt -y install libortp-dev
 apt -y install bluez pi-bluetooth bluez-tools libbluetooth-dev bluetooth
 apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
 apt -y install libsbc1 libsbc-dev
-apt -y install tcpbridge python-dbus python-gobject
+apt -y install python-dbus python-gobject tcpreplay
 apt -y install libdbus-1-dev
 apt -y install gawk
 
@@ -95,9 +99,6 @@ mkdir build && cd build
 make && sudo make install
 
 systemctl daemon-reload
-
-systemctl enable bluealsa.service
-systemctl start bluealsa.service
 
 systemctl enable bluetooth.service
 systemctl start bluetooth.service
