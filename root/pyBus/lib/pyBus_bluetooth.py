@@ -57,7 +57,6 @@ def init():
     logging.info('Initialized: Bluetooth ')
 
 
-
 def connect():
     global btMp
     global btMo
@@ -148,24 +147,38 @@ def removeMac(mac):
 
 def Play():
     btMp.Play()
+    logging.debug('Bluetooth sent status: Play')
+
 
 def Pause():
     btMp.Pause()
+    logging.debug('Bluetooth sent status: Pause')
+
 
 def Stop():
     btMp.Stop()
+    logging.debug('Bluetooth sent status: Stop')
+
 
 def Next():
     btMp.Next()
+    logging.debug('Bluetooth sent status: Next')
+
 
 def Prev():
     btMp.Previous()
+    logging.debug('Bluetooth sent status: Prev')
+
 
 def RewindPrev():
     btMp.Rewind()
+    logging.debug('Bluetooth sent status: Rewind Prev')
+
 
 def RewindNext():
     btMp.FastFoward()
+    logging.debug('Bluetooth sent status: Rewind Next')
+
 
 def getTrackInfo():
     dictTrack = {}
