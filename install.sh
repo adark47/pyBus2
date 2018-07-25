@@ -14,29 +14,32 @@ sudo systemctl start ssh
 
 ########################################################################################################################
 # runeaudio
-http://www.runeaudio.com/forum/pifi-dac-v2-0-not-working-on-rspberry-pi-3-solved-t3647.html
+# http://www.runeaudio.com/forum/pifi-dac-v2-0-not-working-on-rspberry-pi-3-solved-t3647.html
+# user: root
+# password: rune
 
 ########################################################################################################################
 locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 
 ########################################################################################################################
+
 apt update
-apt upgrade
+apt upgrade # !!!! NOT UPGRADE VOLUMIO !!!!
 apt -y install aptitude mc iotop htop iftop usbutils smartmontools alsa-utils alsa-tools
 apt -y install bash-completion
-apt -y install python python-setuptools mpd mpc ncmpc git python-pip python-dev build-essential
+apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
 apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
 apt -y install bc sysstat logrotate
 apt -y install exfat-fuse exfat-utils
 pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests socketIO-client websocket-client pexpect pybluez bluetool
-apt -y install hostapd udhcpd
-apt -y install samba smbclient
+# apt -y install hostapd
+# apt -y install samba smbclient
 apt -y install tree
 apt -y install netcat
 
 ########################################################################################################################
-# shairport-sync
+# Shairport-sync
 
 apt -y install build-essential git xmltoman
 apt -y install autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev
@@ -49,7 +52,7 @@ apt -y install libsoxr-dev
 
 git clone https://github.com/mikebrady/shairport-sync.git
 cd ./shairport-sync-master/
-# git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-rtsp-c-diff
+git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-rtsp-c-diff
 patch -p1 rtsp.c < rtsp.c.diff
 autoreconf -i -f
 ./configure --sysconfdir=/etc --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
@@ -72,6 +75,15 @@ systemctl enable dacp_client.service
 systemctl start dacp_client.service
 
 ########################################################################################################################
+# Shairport-sync-metadata-reader
+
+git clone https://github.com/mikebrady/shairport-sync-metadata-reader
+cd shairport-sync-metadata-reader-master
+autoreconf -i -f
+./configure
+make && make install
+
+########################################################################################################################
 # Install motd
 
 git clone https://github.com/fedya/omv_motd.git
@@ -83,8 +95,8 @@ systemctl start motd.timer
 ########################################################################################################################
 # VOLUMIO + BLUEZ-ALSA (A2DP BLUETOOTH SUPPORT)
 # https://volumio.org/forum/volumio-bluetooth-receiver-t8937.html
-pip install bluetool
 
+pip install bluetool
 apt-cache search libasound
 apt -y install libasound2-dev
 apt -y install dh-autoreconf
