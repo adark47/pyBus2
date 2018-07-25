@@ -4,7 +4,6 @@
 import pprint, os, sys, time, signal, logging
 from socket import error as SocketError
 sys.path.append('/root/pyBus/lib/')
-from socketIO_client import SocketIO, LoggingNamespace
 import pyBus_bluetooth as bt
 import pyBus_airplay as ap
 import pyBus_volumio as vlm
@@ -55,7 +54,6 @@ def getTrackInfo():
         btDictTrack.setdefault('repeat', []).append(str(bt.getTrackInfo().get('Repeat')))
         btDictTrack.setdefault('random', []).append(str(bt.getTrackInfo().get('Shuffle')))
         btDictTrack.setdefault('trackType', []).append(str(bt.getTrackInfo().get('Type')))
-#        btDictTrack.setdefault('service', []).append(bt.getTrackInfo().get('Name'))
         btDictTrack.setdefault('uri', []).append(str(bt.getTrackInfo().get('Device')))
         btDictTrack.setdefault('numberOfTracks', []).append(str(bt.getTrackInfo().get('NumberOfTracks')))
         btDictTrack.setdefault('position', []).append(str(bt.getTrackInfo().get('TrackNumber')))
@@ -63,9 +61,9 @@ def getTrackInfo():
     elif CLIENT == 'vlm':
         return vlm.getTrackInfo()
     elif CLIENT == 'airplay':
-        pass
+        return ap.getTrackInfo()
     elif CLIENT == 'mpd':
-        mpd.getTrackInfo()
+        return mpd.getTrackInfo()
     else:
         pass
 
