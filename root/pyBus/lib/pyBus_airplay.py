@@ -27,6 +27,15 @@ def getTrackInfo():
     # get info from shairport-sync-metadata-reader
     # shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 
+    # Album Name: "My Indigo".
+    # Artist: "My Indigo".
+    # Composer: "".
+    # Genre: "Indie".
+    # Title: "Black Velvet Sun".
+    # "ssnc" "mden": "320945167".
+    # "ssnc" "prgr": "320978404/320945167/330232420".
+
+
 ############################################################################
 # CONTROL
 ############################################################################
