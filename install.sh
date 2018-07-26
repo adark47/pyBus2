@@ -39,12 +39,9 @@ apt -y install netcat
 
 apt -y install build-essential git xmltoman
 apt -y install autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev
-apt -y install libasound2-dev
-apt -y install libpulse-dev
+apt -y install libasound2-dev install libpulse-dev
 apt -y install avahi-daemon libavahi-client-dev
-apt -y install libssl-dev
-apt -y install libmbedtls-dev
-apt -y install libsoxr-dev
+apt -y install libssl-dev libsoxr-dev libmbedtls-dev
 
 git clone https://github.com/mikebrady/shairport-sync.git
 cd ./shairport-sync-master/
@@ -136,7 +133,7 @@ amixer -D bluealsa sset '<control name>' 70%
 ########################################################################################################################
 # pyBus2
 
-git clone https://github.com/adark47/pyBus2
+git clone https://github.com/adark47/pyBus2.git
 
 apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
 apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
