@@ -107,7 +107,7 @@ sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/l
 sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/libbluetooth.so.3
 sudo ln -s /usr/local/lib/libbluetooth.so.3.18.16 /usr/lib/arm-linux-gnueabihf/libbluetooth.so.3.18.16
 
-git clone https://github.com/Arkq/bluez-alsa.git
+git clone https://github.com/Arkq/bluez-alsa.git # !!!! v1.3.0 NOT WORKED, only 1.2.0 !!!!
 cd bluez-alsa
 autoreconf --install
 mkdir build && cd build
@@ -128,7 +128,6 @@ chmod a+rw /var/log/a2dp-autoconnect
 
 # test
 bluealsa-aplay E0:C7:67:AB:C7:9F
-amixer -D bluealsa sset '<control name>' 70%
 
 ########################################################################################################################
 # pyBus2
