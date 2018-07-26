@@ -70,7 +70,7 @@ cp ./dacp_client /usr/bin/dacp_client
 cp ./dacp_client.service /lib/systemd/system/dacp_client.service
 
 chmod 644 /lib/systemd/system/dacp_client.service
-chmod 644 /usr/bin/dacp_client
+chmod 744 /usr/bin/dacp_client
 systemctl daemon-reload
 systemctl enable dacp_client.service
 systemctl start dacp_client.service
@@ -99,11 +99,9 @@ systemctl start motd.timer
 
 pip install bluetool
 apt-cache search libasound
-
 apt -y install dh-autoreconf libasound2-dev libortp-dev pi-bluetooth
 apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev
 apt -y install python-dbus python-gobject
-
 apt -y install gawk
 
 git clone git://git.kernel.org/pub/scm/bluetooth/bluez.git
