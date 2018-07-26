@@ -28,14 +28,10 @@ apt update
 apt upgrade # !!!! NOT UPGRADE VOLUMIO !!!!
 apt -y install aptitude mc iotop htop iftop usbutils smartmontools alsa-utils alsa-tools
 apt -y install bash-completion
-apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
-apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
 apt -y install bc sysstat logrotate
-pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests socketIO-client websocket-client pexpect pybluez bluetool
 # apt -y install hostapd
 # apt -y install samba smbclient
 # apt -y install exfat-fuse exfat-utils
-apt -y install tree
 apt -y install netcat
 
 ########################################################################################################################
@@ -97,7 +93,6 @@ systemctl start motd.timer
 # VOLUMIO + BLUEZ-ALSA (A2DP BLUETOOTH SUPPORT)
 # https://volumio.org/forum/volumio-bluetooth-receiver-t8937.html
 
-pip install bluetool
 apt-cache search libasound
 apt -y install dh-autoreconf libasound2-dev libortp-dev pi-bluetooth
 apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev
@@ -134,9 +129,15 @@ chmod a+rwx /root/bin/a2dp-autoconnect
 touch /var/log/a2dp-autoconnect
 chmod a+rw /var/log/a2dp-autoconnect
 
-# тест
+# test
 bluealsa-aplay E0:C7:67:AB:C7:9F
 amixer -D bluealsa sset '<control name>' 70%
 
 ########################################################################################################################
-/opt/vc/bin/vcgencmd measure_temp
+# pyBus2
+
+git clone https://github.com/adark47/pyBus2
+
+apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
+apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
+pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests socketIO-client websocket-client pexpect pybluez bluetool
