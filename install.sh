@@ -31,10 +31,10 @@ apt -y install bash-completion
 apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
 apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
 apt -y install bc sysstat logrotate
-apt -y install exfat-fuse exfat-utils
 pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests socketIO-client websocket-client pexpect pybluez bluetool
 # apt -y install hostapd
 # apt -y install samba smbclient
+# apt -y install exfat-fuse exfat-utils
 apt -y install tree
 apt -y install netcat
 
@@ -70,6 +70,7 @@ cp ./dacp_client /usr/bin/dacp_client
 cp ./dacp_client.service /lib/systemd/system/dacp_client.service
 
 chmod 644 /lib/systemd/system/dacp_client.service
+chmod 644 /usr/bin/dacp_client
 systemctl daemon-reload
 systemctl enable dacp_client.service
 systemctl start dacp_client.service
@@ -98,14 +99,11 @@ systemctl start motd.timer
 
 pip install bluetool
 apt-cache search libasound
-apt -y install libasound2-dev
-apt -y install dh-autoreconf
-apt -y install libortp-dev
-apt -y install bluez pi-bluetooth bluez-tools libbluetooth-dev bluetooth
-apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
-apt -y install libsbc1 libsbc-dev
-apt -y install python-dbus python-gobject tcpreplay
-apt -y install libdbus-1-dev
+
+apt -y install dh-autoreconf libasound2-dev libortp-dev pi-bluetooth
+apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev
+apt -y install python-dbus python-gobject
+
 apt -y install gawk
 
 git clone git://git.kernel.org/pub/scm/bluetooth/bluez.git
@@ -137,6 +135,10 @@ systemctl start bluealsa.service
 chmod a+rwx /root/bin/a2dp-autoconnect
 touch /var/log/a2dp-autoconnect
 chmod a+rw /var/log/a2dp-autoconnect
+
+# тест
+bluealsa-aplay E0:C7:67:AB:C7:9F
+amixer -D bluealsa sset '<control name>' 70%
 
 ########################################################################################################################
 /opt/vc/bin/vcgencmd measure_temp
