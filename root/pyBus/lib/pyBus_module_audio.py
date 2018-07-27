@@ -7,7 +7,7 @@ sys.path.append('/root/pyBus/lib/')
 import pyBus_bluetooth as bt
 import pyBus_airplay as ap
 import pyBus_volumio as vlm
-import pyBus_mpd as mpd
+#import pyBus_mpd as mpd
 
 ############################################################################
 # GLOBALS
@@ -34,7 +34,7 @@ def init():
     bt.init()
     ap.init()
     vlm.init()
-    mpd.init()
+#    mpd.init()
     CLIENT = 'vlm'
     logging.info('Аudio client assigned: ', CLIENT)
 
@@ -62,8 +62,8 @@ def getTrackInfo():
         return vlm.getTrackInfo()
     elif CLIENT == 'airplay':
         return ap.getTrackInfo()
-    elif CLIENT == 'mpd':
-        return mpd.getTrackInfo()
+#    elif CLIENT == 'mpd':
+#        return mpd.getTrackInfo()
     else:
         pass
 
@@ -94,11 +94,11 @@ def setClient(client):
         CLIENT = client
         logging.debug('Control the player assigned: ', CLIENT)
 
-    elif client == 'mpd':
-        mpd.Stop()
-        time.sleep(1)
-        CLIENT = client
-        logging.debug('Control the player assigned: ', CLIENT)
+#    elif client == 'mpd':
+#        mpd.Stop()
+#        time.sleep(1)
+#        CLIENT = client
+#        logging.debug('Control the player assigned: ', CLIENT)
 
     else:
         CLIENT = None
@@ -115,8 +115,8 @@ def Play():
         ap.Play()
     elif CLIENT == 'bluetooth':
         bt.Play()
-    elif CLIENT == 'mpd':
-        mpd.Play()
+#    elif CLIENT == 'mpd':
+#        mpd.Play()
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -136,8 +136,8 @@ def Stop():
         ap.Stop()
     elif CLIENT == 'bluetooth':
         bt.Stop()
-    elif CLIENT == 'mpd':
-        mpd.Stop()
+#    elif CLIENT == 'mpd':
+#        mpd.Stop()
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -149,8 +149,8 @@ def Pause():
         ap.Pause()
     elif CLIENT == 'bluetooth':
         bt.Pause()
-    elif CLIENT == 'mpd':
-        mpd.Pause()
+#    elif CLIENT == 'mpd':
+#        mpd.Pause()
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -162,8 +162,8 @@ def Next():
         ap.Next()
     elif CLIENT == 'bluetooth':
         bt.Next()
-    elif CLIENT == 'mpd':
-        mpd.Next()
+#    elif CLIENT == 'mpd':
+#        mpd.Next()
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -175,8 +175,8 @@ def Prev():
         ap.Prev()
     elif CLIENT == 'bluetooth':
         bt.Prev()
-    elif CLIENT == 'mpd':
-        mpd.Prev()
+#    elif CLIENT == 'mpd':
+#        mpd.Prev()
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -188,8 +188,8 @@ def RewindPrev():
         ap.RewindPrev()
     elif CLIENT == 'bluetooth':
         bt.RewindPrev()
-    elif CLIENT == 'mpd':
-        pass
+#    elif CLIENT == 'mpd':
+#        pass
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -201,8 +201,8 @@ def RewindNext():
         ap.RewindNext()
     elif CLIENT == 'bluetooth':
         bt.RewindNext()
-    elif CLIENT == 'mpd':
-        pass
+#    elif CLIENT == 'mpd':
+#        pass
     else:
         logging.debug('not supported service:', CLIENT)
 
@@ -223,8 +223,8 @@ def Random():
         vlm.Random()
     elif CLIENT == 'airplay':
         ap.Random()
-    elif CLIENT == 'mpd':
-        pass
+#    elif CLIENT == 'mpd':
+#        pass
     else:
         logging.debug('not supported service:', CLIENT)
 
