@@ -15,10 +15,8 @@ import pyBus_volumio as vlm
 HOST = 'localhost'
 PORT = '3000'
 PASSWORD = False
-VOLUME = 85
 
 CLIENT = None
-socketIO = None
 dictTrack = None
 
 logging.getLogger('socketIO-client').setLevel(logging.DEBUG)
