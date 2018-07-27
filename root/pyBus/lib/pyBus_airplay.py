@@ -1,13 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pprint, os, sys, time, signal, logging
-from socket import error as SocketError
+import pprint
+import os
+import sys
+import time
+import signal
+import logging
+from shairportdecoder import decoder
 sys.path.append('/root/pyBus/lib/')
 
 ############################################################################
 # GLOBALS
 ############################################################################
+
+def main():
+  processor = decoder.Processor()
+  processor.add_listener(event_processor)
+  processor.parse("/tmp/shairport-sync-metadata")
+
+def event_processor(event_type, info):
+
+    assert(isinstance(event_type, info))
+    print info
+    if event_type == decoder.VOLUME:
+        print info.volume
+    elif event_type == decoder.META:
+        print info.to_simple_string()
+    elif event_type == decoder.CLIENT_REMOTE_AVAILABLE:
+        print("Got Airplay Remote informations.")
+#        remote = AirplayRemote.from_dacp_id(self.info.dacp_id, self.info.active_remote)
 
 
 ############################################################################

@@ -1,8 +1,13 @@
 #!/usr/bin/python
 
 # The MPD module has practically no documentation as far as I know.. so a lot of this is guess-work, albeit educated guess-work
-import pprint, os, sys, time, signal, logging
-from MPD import (MPDClient, CommandError)
+import pprint
+import os
+import sys
+import time
+import signal
+import logging
+from mpd import (MPDClient, CommandError)
 from socket import error as SocketError
 
 # import pyBus_core as core
