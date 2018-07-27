@@ -36,7 +36,6 @@ def init():
 
 
 def end():
-    bt.end()
     logging.info('End: module Volumio')
 
 
