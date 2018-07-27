@@ -208,7 +208,7 @@ def getTrackID():
     try:
         currentTID = MPD.status()['songid']
         return currentTID
-    except e:
+    except Exception as e:
         logging.warning("Unexpected Exception occured:")
-        logging.warning(traceback.format_exc())
+        logging.warning(e.format_exc())
         return 0
