@@ -134,6 +134,14 @@ bluealsa-aplay E0:C7:67:AB:C7:9F
 
 git clone https://github.com/adark47/pyBus2.git
 
-apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential # mpd
+apt -y install python python-setuptools mpc ncmpc git python-pip python-dev build-essential mpd
 apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl avahi-utils libmodule-build-perl
-pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests socketIO-client websocket-client pexpect pybluez bluetool
+pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests
+pip install socketIO-client websocket-client pexpect pybluez bluetool
+
+# shairport-decoder
+pip install luckydonald-utils
+pip install python-magic
+git clone https://github.com/luckydonald/shairport-decoder.git
+cd ./shairport-decoder/
+python ./setup.py install

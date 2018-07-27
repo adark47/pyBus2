@@ -252,7 +252,6 @@ def shutDown():
 # IKE
 ############################################################################
 
-
 def d_custom_IKE(packet):
     packet_data = packet['dat']
     # 18 : speed and RPM
@@ -400,17 +399,17 @@ def button6P(packet):
 
 
 def button6H(packet):
-    logging.debug('MK4 - Button 6 hold(%s)' % packet)
+    logging.debug('MK4 - Button 6 hold (%s)' % packet)
     buttonIO.button6H()
 
 
 def button6R(packet):
-    logging.debug('MK4 - Button 6 released(%s)' % packet)
+    logging.debug('MK4 - Button 6 released (%s)' % packet)
     buttonIO.button6R()
 
 
 def ArrowLP(packet):
-    logging.debug('MK4 - "<" ArrowLeft press' % packet)
+    logging.debug('MK4 - "<" ArrowLeft press (%s)' % packet)
     buttonIO.ArrowLP()
 
 
@@ -435,7 +434,7 @@ def ArrowRH(packet):
 
 
 def ArrowRR(packet):
-    logging.debug('MK4 - ">" ArrowRight released' % packet)
+    logging.debug('MK4 - ">" ArrowRight released (%s)' % packet)
     buttonIO.ArrowRR()
 
 
@@ -445,12 +444,12 @@ def ArrowP(packet):
 
 
 def ArrowH(packet):
-    logging.debug('MK4 - "<>" Arrow hold' % packet)
+    logging.debug('MK4 - "<>" Arrow hold (%s)' % packet)
     buttonIO.ArrowH()
 
 
 def ArrowR(packet):
-    logging.debug('MK4 - "<>" Arrow released' % packet)
+    logging.debug('MK4 - "<>" Arrow released (%s)' % packet)
     buttonIO.ArrowR()
 
 
