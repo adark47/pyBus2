@@ -25,12 +25,12 @@ MPD = None
 PLAYLIST = None
 LIBRARY = None
 T_STATUS = None
-VOLUME = 85
 ROOT_DIR = '/media'
 
 #####################################
 # FUNCTIONS
 #####################################
+
 def mpdConnect(client, con_id):
     try:
         client.connect(**con_id)
@@ -154,12 +154,12 @@ def getInfo(lastID=-1):
             time.sleep(.5)
             MPD == None
 
-    if (state['state'] != "stop"):
-        if ("songid" in state):
+    if state['state'] != "stop":
+        if "songid" in state:
             songID = state['songid']
             if (songID != lastID):
                 getTrackInfo()
-        if (T_STATUS == None):
+        if T_STATUS == None:
             getTrackInfo()
     status = {"status": state, "track": T_STATUS}
     logging.debug("Player Status Requested. Returning:")
@@ -176,7 +176,7 @@ def getInfoByPath(filePath):
 
 def addSong(filepath):
     global PLAYLIST
-    if (getInfoByPath(filepath) == None):
+    if getInfoByPath(filepath) == None:
         MPD.add(filepath)
         PLAYLIST = MPD.playlistinfo()
 
@@ -202,7 +202,7 @@ def getLibrary():
 
 
 def getTrackID():
-    if ("songid" not in MPD.status()):
+    if "songid" not in MPD.status():
         logging.warning("MPD status does not contain songID. Please investigate following status:")
         logging.warning(MPD.status())
     try:
