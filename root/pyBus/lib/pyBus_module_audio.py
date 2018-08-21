@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pprint, os, sys, time, signal, logging
+import pprint
+import os
+import sys
+import time
+import signal
+import logging
 from socket import error as SocketError
 sys.path.append('/root/pyBus/lib/')
 import pyBus_bluetooth as bt

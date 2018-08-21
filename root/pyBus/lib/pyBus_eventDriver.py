@@ -204,7 +204,7 @@ def manage(packet):
 
     try:
         dstDir = DIRECTIVES[src][dst]
-        if ('ALL'    in dstDir.keys()):
+        if 'ALL' in dstDir.keys():
             methodName = dstDir['ALL']
         else:
             methodName = dstDir[dataString]
@@ -212,7 +212,7 @@ def manage(packet):
         pass
 
     result = None
-    if methodName != None:
+    if methodName is not None:
         methodToCall = globals().get(methodName, None)
         if methodToCall:
             logging.debug('Directive found for packet - %s' % methodName)

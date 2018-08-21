@@ -30,7 +30,7 @@ def event_processor(event_type, info):
     elif event_type == decoder.CLIENT_REMOTE_AVAILABLE:
         print("Got Airplay Remote informations.")
 #        remote = AirplayRemote.from_dacp_id(self.info.dacp_id, self.info.active_remote)
-
+# https://habr.com/post/149420/
 
 ############################################################################
 # FUNCTIONS

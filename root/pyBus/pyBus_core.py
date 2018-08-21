@@ -36,7 +36,7 @@ def initialize():
     REGISTERED = False
 
     # Initialize the iBus interface or wait for it to become available.
-    while IBUS == None:
+    while IBUS is None:
         if os.path.exists(DEVPATH):
             IBUS = ibusFace(DEVPATH)
         else:
