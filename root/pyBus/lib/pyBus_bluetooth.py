@@ -193,6 +193,17 @@ def getTrackInfo():
             else:
                 dictTrack[key] = value
 
+    dictTrack.setdefault('status').append(str(bt.getTrackInfo().get('Status')))
+    dictTrack.setdefault('album', []).append(str(bt.getTrackInfo().get('Album')))
+    dictTrack.setdefault('artist', []).append(str(bt.getTrackInfo().get('Artist')))
+    dictTrack.setdefault('title', []).append(str(bt.getTrackInfo().get('Title')))
+    dictTrack.setdefault('repeat', []).append(str(bt.getTrackInfo().get('Repeat')))
+    dictTrack.setdefault('random', []).append(str(bt.getTrackInfo().get('Shuffle')))
+    dictTrack.setdefault('trackType', []).append(str(bt.getTrackInfo().get('Type')))
+    dictTrack.setdefault('uri', []).append(str(bt.getTrackInfo().get('Device')))
+    dictTrack.setdefault('numberOfTracks', []).append(str(bt.getTrackInfo().get('NumberOfTracks')))
+    dictTrack.setdefault('position', []).append(str(bt.getTrackInfo().get('TrackNumber')))
+
     return dictTrack
 
 ############################################################################

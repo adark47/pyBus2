@@ -41,6 +41,7 @@ def mpdConnect(client, con_id):
 
 def init():
     global MPD, PLAYLIST, LIBRARY
+    logging.info('Initializing: module MPD')
     ## MPD object instance
     MPD = MPDClient()
     if mpdConnect(MPD, CON_ID):

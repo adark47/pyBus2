@@ -12,7 +12,7 @@ sys.path.append('/root/pyBus/lib/')
 import pyBus_bluetooth as bt
 import pyBus_airplay as ap
 import pyBus_volumio as vlm
-#import pyBus_mpd as mpd
+import pyBus_mpd as mpd
 
 ############################################################################
 # GLOBALS
@@ -49,18 +49,7 @@ def end():
 
 def getTrackInfo():
     if CLIENT == 'bluetooth':
-        btDictTrack = {}
-        btDictTrack.setdefault('status').append(str(bt.getTrackInfo().get('Status')))
-        btDictTrack.setdefault('album', []).append(str(bt.getTrackInfo().get('Album')))
-        btDictTrack.setdefault('artist', []).append(str(bt.getTrackInfo().get('Artist')))
-        btDictTrack.setdefault('title', []).append(str(bt.getTrackInfo().get('Title')))
-        btDictTrack.setdefault('repeat', []).append(str(bt.getTrackInfo().get('Repeat')))
-        btDictTrack.setdefault('random', []).append(str(bt.getTrackInfo().get('Shuffle')))
-        btDictTrack.setdefault('trackType', []).append(str(bt.getTrackInfo().get('Type')))
-        btDictTrack.setdefault('uri', []).append(str(bt.getTrackInfo().get('Device')))
-        btDictTrack.setdefault('numberOfTracks', []).append(str(bt.getTrackInfo().get('NumberOfTracks')))
-        btDictTrack.setdefault('position', []).append(str(bt.getTrackInfo().get('TrackNumber')))
-        return btDictTrack
+       return bt.getTrackInfo()
     elif CLIENT == 'vlm':
         return vlm.getTrackInfo()
     elif CLIENT == 'airplay':
@@ -97,11 +86,11 @@ def setClient(client):
         CLIENT = client
         logging.debug('Control the player assigned: ', CLIENT)
 
-#    elif client == 'mpd':
-#        mpd.Stop()
-#        time.sleep(1)
-#        CLIENT = client
-#        logging.debug('Control the player assigned: ', CLIENT)
+    elif client == 'mpd':
+        mpd.Stop()
+        time.sleep(1)
+        CLIENT = client
+        logging.debug('Control the player assigned: ', CLIENT)
 
     else:
         CLIENT = None
