@@ -43,14 +43,15 @@ class busWriter:
     def __init__(self, ibus):
         self.IBUS = ibus
 
-# Immediate Text #######################################################################
+# IKEConsole LCD  #######################################################################
 
-    # 12 characters
-    def immediate(self, string):
+    # Text IKEConsole LCD - 12 characters
+    def textIKE(self, string):
         self.IBUS.writeBusPacket('C8', '80', _hexText(string, ['23', '42', '01'], 12))
         logging.debug('Immediate text - write Text: %s' % string)
 
-    def immediateClear(self):
+    # Clear IKEConsole LCD
+    def clearIKE(self):
         self.IBUS.writeBusPacket('c8', '80', ['23', '42', '32', '1e'])
         logging.debug('Immediate text - Clear')
 
