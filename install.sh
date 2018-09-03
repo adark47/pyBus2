@@ -39,7 +39,7 @@ apt -y install netcat
 
 apt -y install build-essential git xmltoman
 apt -y install autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev
-apt -y install libasound2-dev install libpulse-dev
+apt -y install libasound2-dev libpulse-dev
 apt -y install avahi-daemon libavahi-client-dev
 apt -y install libssl-dev libsoxr-dev libmbedtls-dev
 
@@ -145,3 +145,22 @@ pip install python-magic
 git clone https://github.com/luckydonald/shairport-decoder.git
 cd ./shairport-decoder/
 python ./setup.py install
+
+systemctl enable pyBus.service
+systemctl start pyBus.service
+
+
+systemctl status shairport-sync
+systemctl status dacp_client.service
+systemctl status bluetooth.service
+systemctl status bluealsa.service
+systemctl status pyBus.service
+
+# bluetoothctl
+# power on
+# agent on
+# default-agent
+# scan on => xx:xx of your device
+# pair xx:xx
+# trust xx:xx
+# exit
