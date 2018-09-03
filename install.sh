@@ -1,6 +1,8 @@
 #!/bin/sh
 
 ########################################################################################################################
+# login: pi
+# pass: raspberry
 sudo raspi-config
 # 1. Enter
 # sudo raspi-config in a terminal window
@@ -78,15 +80,6 @@ autoreconf -i -f
 make && make install
 
 ########################################################################################################################
-# Install motd
-
-git clone https://github.com/fedya/omv_motd.git
-cp -v motd_hello_gen /usr/bin/
-cp motd.service motd.timer /etc/systemd/system/
-systemctl enable motd.timer
-systemctl start motd.timer
-
-########################################################################################################################
 # VOLUMIO + BLUEZ-ALSA (A2DP BLUETOOTH SUPPORT)
 # https://volumio.org/forum/volumio-bluetooth-receiver-t8937.html
 
@@ -149,7 +142,7 @@ python ./setup.py install
 systemctl enable pyBus.service
 systemctl start pyBus.service
 
-
+########################################################################################################################
 systemctl status shairport-sync
 systemctl status dacp_client.service
 systemctl status bluetooth.service
