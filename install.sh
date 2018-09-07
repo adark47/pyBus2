@@ -1,16 +1,6 @@
 #!/bin/sh
 
 ########################################################################################################################
-# login: pi
-# pass: raspberry
-sudo raspi-config
-# 1. Enter
-# sudo raspi-config in a terminal window
-# 2. Select Interfacing Options
-# 3. Navigate to and select SSH
-# 4. Choose Yes
-# 5. Select Ok
-# 6. Choose Finish
 sudo systemctl enable ssh
 sudo systemctl start ssh
 
@@ -21,17 +11,15 @@ sudo systemctl start ssh
 # password: rune
 
 ########################################################################################################################
-locale-gen "en_US.UTF-8"
-sudo dpkg-reconfigure locales
+locale-gen "en_US.UTF-8" && sudo dpkg-reconfigure locales
 
 ########################################################################################################################
 echo "deb http://archive.raspbian.org/raspbian jessie main contrib non-free" | sudo tee -a /etc/apt/sources.list
 echo "deb-src http://archive.raspbian.org/raspbian jessie main contrib non-free" | sudo tee -a /etc/apt/sources.list
 wget https://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
 
-
 apt update
-apt upgrade # !!!! NOT UPGRADE VOLUMIO !!!!
+apt -y upgrade # !!!! NOT UPGRADE VOLUMIO !!!!
 apt -y install aptitude mc iotop htop iftop usbutils smartmontools alsa-utils alsa-tools
 apt -y install bash-completion
 apt -y install bc sysstat logrotate
@@ -58,8 +46,8 @@ autoreconf -i -f
 ./configure --sysconfdir=/etc --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd
 make && make install
 
-systemctl start shairport-sync
 systemctl enable shairport-sync
+systemctl start shairport-sync
 
 # shairport-sync dacp
 git clone https://gist.github.com/unnmd/b64c3a98076a57717aeeaa5bebd3eef7#file-main-c
@@ -91,7 +79,7 @@ cd ..
 
 apt-cache search libasound
 apt -y install dh-autoreconf libortp-dev pi-bluetooth
-apt -y install libasound2-data libasound-dev libasound2 libasound2-data libasound2-plugin-equal libasound2-dev
+apt -y install libasound2-dev
 apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev
 apt -y install python-dbus python-gobject
 apt -y install gawk
@@ -116,7 +104,8 @@ git clone https://github.com/Arkq/bluez-alsa.git # !!!! v1.3.0 NOT WORKED, only 
 cd bluez-alsa
 autoreconf --install
 mkdir build && cd build
-../configure --disable-hcitop --with-alsaplugindir=/usr/lib/arm-linux-gnueabihf/alsa-lib
+#../configure --enable-debug --disable-hcitop --with-alsaplugindir=/usr/lib/arm-linux-gnueabihf/alsa-lib --disable-thread-safety
+../configure --enable-debug --disable-hcitop --with-alsaplugindir=/usr/lib/arm-linux-gnueabihf/alsa-lib
 make && make install
 cd ..
 
@@ -134,7 +123,6 @@ chmod a+rw /var/log/a2dp-autoconnect
 git clone https://github.com/adark47/pyBus2.git
 
 apt -y install python python-setuptools mpc ncmpc python-pip python-dev mpd
-apt -y install libao-dev libssl-dev libcrypt-openssl-rsa-perl libio-socket-inet6-perl libwww-perl libmodule-build-perl
 pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests
 pip install socketIO-client websocket-client pexpect pybluez bluetool
 
