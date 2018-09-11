@@ -100,6 +100,7 @@ sessions="$totalsessions(total), $loggedinsessions(logins), $stdinsessions(inter
 pybus=$(systemctl is-active pyBus)
 bluetoothd=$(systemctl is-active bluetooth)
 bluetoothAgent=$(systemctl is-active bluetooth-agent)
+bluezAlsa=$(systemctl is-active bluezalsa)
 shairportSync=$(systemctl is-active shairport-sync)
 dacpClient=$(systemctl is-active dacp_client)
 
@@ -159,13 +160,17 @@ label11="$borderBar  $(color $statsLabelColor "Bluetooth.......:") $label11$bord
 label12="$(extend "$bluetoothAgent")"
 label12="$borderBar  $(color $statsLabelColor "Bluetooth-agent.:") $label12$borderBar"
 
-label13="$(extend "$shairportSync")"
-label13="$borderBar  $(color $statsLabelColor "Shairport-sync..:") $label13$borderBar"
+label13="$(extend "$bluezAlsa")"
+label13="$borderBar  $(color $statsLabelColor "BluezAlsa.......:") $label13$borderBar"
 
-label14="$(extend "$dacpClient")"
-label14="$borderBar  $(color $statsLabelColor "DACP Client.....:") $label14$borderBar"
+label14="$(extend "$shairportSync")"
+label14="$borderBar  $(color $statsLabelColor "Shairport-sync..:") $label14$borderBar"
 
-stats="$label8\n$label1\n$label7\n$label2\n$label6\n$label3\n$label4\n$label5\n$label9\n$label10\n$label11\n$label12\n$label13\n$label14"
+label15="$(extend "$dacpClient")"
+label15="$borderBar  $(color $statsLabelColor "DACP Client.....:") $label15$borderBar"
+
+
+stats="$label8\n$label1\n$label7\n$label2\n$label6\n$label3\n$label4\n$label5\n$label9\n$label10\n$label11\n$label12\n$label13\n$label14\n$label15"
 
 # Print motd
 echo -e "$header\n$borderEmptyLine\n$greetings\n$borderEmptyLine\n$stats\n$borderEmptyLine\n$borderBottomLine"
