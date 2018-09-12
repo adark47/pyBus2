@@ -100,7 +100,7 @@ sessions="$totalsessions(total), $loggedinsessions(logins), $stdinsessions(inter
 pybus=$(systemctl is-active pyBus)
 bluetoothd=$(systemctl is-active bluetooth)
 bluetoothAgent=$(systemctl is-active bluetooth-agent)
-bluezAlsa=$(systemctl is-active bluezalsa)
+blueAlsa=$(systemctl is-active bluealsa)
 shairportSync=$(systemctl is-active shairport-sync)
 dacpClient=$(systemctl is-active dacp_client)
 
@@ -160,8 +160,8 @@ label11="$borderBar  $(color $statsLabelColor "Bluetooth.......:") $label11$bord
 label12="$(extend "$bluetoothAgent")"
 label12="$borderBar  $(color $statsLabelColor "Bluetooth-agent.:") $label12$borderBar"
 
-label13="$(extend "$bluezAlsa")"
-label13="$borderBar  $(color $statsLabelColor "BluezAlsa.......:") $label13$borderBar"
+label13="$(extend "$blueAlsa")"
+label13="$borderBar  $(color $statsLabelColor "BlueAlsa........:") $label13$borderBar"
 
 label14="$(extend "$shairportSync")"
 label14="$borderBar  $(color $statsLabelColor "Shairport-sync..:") $label14$borderBar"
