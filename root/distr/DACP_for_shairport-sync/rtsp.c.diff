@@ -1,0 +1,69 @@
+--- rtsp.c      2018-02-21 20:00:15.431587522 +0000
++++ rtsp.c.new  2018-02-21 19:52:03.000000000 +0000
+@@ -31,6 +31,7 @@
+ #include <fcntl.h>
+ #include <memory.h>
+ #include <netdb.h>
++#include <netinet/tcp.h>
+ #include <netinet/in.h>
+ #include <poll.h>
+ #include <pthread.h>
+@@ -398,6 +399,45 @@ static void msg_free(rtsp_message *msg)
+   }
+ }
+
++static void dacp_update_params(char *dacp_id, char *active_remote) {
++       static struct {
++               char *dacp_id;
++               char *active_remote;
++       } p;
++
++       static int sockfd;
++       if (sockfd == 0)
++               sockfd = socket(AF_INET, SOCK_DGRAM, 0);
++       if (dacp_id == NULL || active_remote == NULL)
++               return;
++
++       int changed = 0;
++
++       if (p.dacp_id == NULL || strcmp(p.dacp_id, dacp_id))
++               changed++;
++       if (p.active_remote == NULL || strcmp(p.active_remote, active_remote))
++               changed++;
++
++       if (changed) {
++               if (p.dacp_id) free(p.dacp_id);
++               if (p.active_remote) free(p.active_remote);
++               p.dacp_id = strdup(dacp_id);
++               p.active_remote = strdup(active_remote);
++
++               struct sockaddr_in si;
++               memset(&si, 0, sizeof(si));
++               si.sin_family = AF_INET;
++               si.sin_port = htons(3391);
++               inet_aton("127.0.0.1", &si.sin_addr);
++
++               char *s = (char *)malloc(strlen(p.dacp_id) + strlen(p.active_remote) + 128);
++               sprintf(s, "resolve,iTunes_Ctrl_%s,%s", p.dacp_id, p.active_remote);
++               fprintf(stderr, "DACP update: %s\n", s);
++               sendto(sockfd, s, strlen(s)+1, 0, (struct sockaddr *)&si, sizeof(si));
++               free(s);
++       }
++}
++
+ static int msg_handle_line(rtsp_message **pmsg, char *line) {
+   rtsp_message *msg = *pmsg;
+
+@@ -439,6 +479,12 @@ static int msg_handle_line(rtsp_message
+     debug(3, "    %s: %s.", line, p);
+     return -1;
+   } else {
++
++                               char *active_remote = msg_get_header(msg, "Active-Remote");
++                               char *dacp_id = msg_get_header(msg, "DACP-ID");
++
++                               dacp_update_params(dacp_id, active_remote);
++
+     char *cl = msg_get_header(msg, "Content-Length");
+     if (cl)
+       return atoi(cl);

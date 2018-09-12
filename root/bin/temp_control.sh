@@ -10,7 +10,7 @@ SENSOR="`/opt/vc/bin/vcgencmd measure_temp | cut -d "=" -f2 | cut -d "'" -f1`"
 # -gt only deals with whole numbers, so round it.
 TEMP="`/usr/bin/printf "%.0f\n" ${SENSOR}`"
 # How hot will we allow the SoC to get?
-MAX="78"
+MAX="75"
 
 if [ "${TEMP}" -gt "${MAX}" ] ; then
  # This will be mailed to root if called from cron
