@@ -7,8 +7,7 @@ After=bluetooth.target bluetooth.service
 Type=simple
 User=root
 Group=audio
-#ExecStart=/usr/bin/bluealsa
-ExecStart=/usr/bin/bluealsa --disable-hsp
+ExecStart=/usr/bin/bluealsa
 
 [Install]
 WantedBy=multi-user.target
