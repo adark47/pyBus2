@@ -24,14 +24,14 @@ import pyBus_cdc as pB_cdc
 # CONFIG
 ############################################################################
 
-versionPB = 'v1.1'
+versionPB = 'v1.2'
 WRITER = None
 menuLevel = 'homeMain'
 display = None
 displayThread = None
 ERROR = None
 TrackInfo = None
-TICK = 0.2  # sleep interval in seconds used after displaying a string (default 1)
+TICK = 0.1  # sleep interval in seconds used after displaying a string (default 1)
 
 
 ############################################################################
@@ -137,8 +137,8 @@ def displayF(titleT0=None, titleT1=None, titleT2=None, titleT3=None, titleT4=Non
         display.writeTitleT2(ERROR)
         time.sleep(TICK)
 
-    if refreshIndex is True:
-        display.refreshIndex()
+    #if refreshIndex is True:
+    #    display.refreshIndex()
 
     if indexF0 is not None:
         display.writeIndexF0(indexF0)
