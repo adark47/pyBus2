@@ -296,7 +296,7 @@ def d_cdPollResponse(packet):
         pB_cdc.enableFunc('pollResponse', 10)       # default 30 (not worked)
     else:
         pB_cdc.enableFunc("announce", 10)           # default 30 (not worked)
-
+    WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])   # for test
 
 
 def d_cdStatusPlaying(packet):
