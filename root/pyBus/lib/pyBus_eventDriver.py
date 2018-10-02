@@ -18,7 +18,6 @@ import pyBus_util as pB_util
 import pyBus_cdc as pB_cdc
 import pyBus_io as pB_io
 
-leadTime = None
 ############################################################################
 # GLOBALS DIRECTIVES
 ############################################################################
@@ -200,7 +199,10 @@ def init(writer):
     buttonIO = pB_io.ButtonIO()
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
-    pB_cdc.enableFunc("announce", 10)              # default 30 (not worked)
+
+    WRITER.writeBusPacket('18', 'FF', ['02', '01'])
+    logging.debug('CDC sent the status: Start')
+    #pB_cdc.enableFunc("announce", 10)              # default 30 (not worked)
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
@@ -276,33 +278,14 @@ def d_custom_IKE(packet):
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
 ############################################################################
-def timePollResponse(difference):
-    global leadTime
-    leadTimeNow = datetime.datetime.now()
-    if leadTime is None:
-        leadTime = leadTimeNow
-        return True
-    else:
-        timeDifference = leadTimeNow - leadTime
-        leadTime = leadTimeNow
-        timeDifference = divmod(timeDifference.days * 86400 + timeDifference.seconds, 60)
-        if timeDifference[0] > 0 or timeDifference[1] > difference:
-            logging.warning('Time difference on request - %s' % timeDifference)
-            return False
-        else:
-            logging.debug('Time difference on request - %s' % timeDifference)
-            return True
-
 
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    pB_cdc.disableFunc('announce')                          # stop announcing
-    if timePollResponse(30) is True:
-        WRITER.writeBusPacket('18', 'FF', ['02', '00'])
-        pB_cdc.disableFunc('pollResponse')
-        pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
-    else:
-        pB_cdc.enableFunc("announce", 10)                   # default 30 (not worked)
+    #pB_cdc.disableFunc('announce')                          # stop announcing
+    WRITER.writeBusPacket('18', 'FF', ['02', '00'])
+    logging.debug('CDC sent the status: Alive')
+    #pB_cdc.disableFunc('pollResponse')
+    #pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
     WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 

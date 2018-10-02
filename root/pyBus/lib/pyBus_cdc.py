@@ -3,6 +3,7 @@
 
 import os
 import sys
+import datetime
 import time
 import signal
 import json
@@ -17,7 +18,7 @@ import threading
 WRITER = None
 STATE_DATA = {}
 FUNC_STACK = {}
-
+leadTime = None
 ############################################################################
 # FUNCTIONS
 ############################################################################
@@ -75,6 +76,22 @@ def disableAllFunc():
         if thread: thread.cancel()
     FUNC_STACK = {}
 
+def timePollResponse(difference):
+    global leadTime
+    leadTimeNow = datetime.datetime.now()
+    if leadTime is None:
+        leadTime = leadTimeNow
+        return True
+    else:
+        timeDifference = leadTimeNow - leadTime
+        leadTime = leadTimeNow
+        timeDifference = divmod(timeDifference.days * 86400 + timeDifference.seconds, 60)
+        if timeDifference[0] > 0 or timeDifference[1] > difference:
+            logging.warning('Time difference on request - %s' % timeDifference)
+            return False
+        else:
+            logging.debug('Time difference on request - %s' % timeDifference)
+            return True
 ############################################################################
 # THREAD FOR TICKING AND CHECKING EVENTS
 # Calls itself again
@@ -133,9 +150,11 @@ def scanBWD(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '04', '09', '00', '3F', '00', cdNumber, cdSong])
     logging.debug('CDC sent the status: FRWD')
 
+
 def end(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '07', '02', '00', '3F', '00', cdNumber, cdSong])
     logging.debug('CDC sent the status: End')
+
 
 def load(cdNumber, cdSong):
     WRITER.writeBusPacket('18', '68', ['39', '08', '02', '00', '3F', '00', cdNumber, cdSong])
