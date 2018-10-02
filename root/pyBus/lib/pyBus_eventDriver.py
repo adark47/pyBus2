@@ -224,17 +224,17 @@ def manage(packet):
     if methodName is not None:
         methodToCall = globals().get(methodName, None)
         if methodToCall:
-            logging.debug('Directive found for packet - %s' % methodName)
+            logging.debug('Directive found for packet - %s', methodName)
             try:
                 result = methodToCall(packet)
             except:
-                logging.error('Exception raised from [%s]' % methodName)
+                logging.error('Exception raised from [%s]', methodName)
                 logging.error(traceback.format_exc())
 
         else:
-            logging.debug('Method (%s) does not exist' % methodName)
+            logging.debug('Method (%s) does not exist', methodName)
     else:
-        logging.debug('MethodName (%s) does not match a function' % methodName)
+        logging.debug('MethodName (%s) does not match a function', methodName)
 
     return result
 
@@ -245,6 +245,7 @@ def listen():
         packet = WRITER.readBusPacket()
         if packet:
             manage(packet)
+
         time.sleep(TICK)    # sleep a bit
 
 
@@ -313,267 +314,267 @@ def d_cdStatusPlaying(packet):
 # BUTTON DISPLAY
 ############################################################################
 def infoP(packet):
-    logging.debug('MK4 - Info press (%s)' % packet)
+    logging.debug('MK4 - Info press (%s)', packet)
     buttonIO.infoP()
 
 
 def infoH(packet):
-    logging.debug('MK4 - Info hold (%s)' % packet)
+    logging.debug('MK4 - Info hold (%s)', packet)
     buttonIO.infoH()
 
 
 def infoR(packet):
-    logging.debug('MK4 - Info released (%s)' % packet)
+    logging.debug('MK4 - Info released (%s)', packet)
     buttonIO.infoR()
 
 
 def button1P(packet):
-    logging.debug('MK4 - Button 1 press (%s)' % packet)
+    logging.debug('MK4 - Button 1 press (%s)', packet)
     buttonIO.button1P()
 
 
 def button1H(packet):
-    logging.debug('MK4 - Button 1 hold (%s)' % packet)
+    logging.debug('MK4 - Button 1 hold (%s)', packet)
     buttonIO.button1H()
 
 
 def button1R(packet):
-    logging.debug('MK4 - Button 1 released (%s)' % packet)
+    logging.debug('MK4 - Button 1 released (%s)', packet)
     buttonIO.button1R()
 
 
 def button2P(packet):
-    logging.debug('MK4 - Button 2 press (%s)' % packet)
+    logging.debug('MK4 - Button 2 press (%s)', packet)
     buttonIO.button2P()
 
 
 def button2H(packet):
-    logging.debug('MK4 - Button 2 hold (%s)' % packet)
+    logging.debug('MK4 - Button 2 hold (%s)', packet)
     buttonIO.button2H()
 
 
 def button2R(packet):
-    logging.debug('MK4 - Button 2 released (%s)' % packet)
+    logging.debug('MK4 - Button 2 released (%s)', packet)
     buttonIO.button2R()
 
 
 def button3P(packet):
-    logging.debug('MK4 - Button 3 press (%s)' % packet)
+    logging.debug('MK4 - Button 3 press (%s)', packet)
     buttonIO.button3P()
 
 
 def button3H(packet):
-    logging.debug('MK4 - Button 3 hold (%s)' % packet)
+    logging.debug('MK4 - Button 3 hold (%s)', packet)
     buttonIO.button3H()
 
 
 def button3R(packet):
-    logging.debug('MK4 - Button 3 released (%s)' % packet)
+    logging.debug('MK4 - Button 3 released (%s)', packet)
     buttonIO.button3R()
 
 
 def button4P(packet):
-    logging.debug('MK4 - Button 4 press (%s)' % packet)
+    logging.debug('MK4 - Button 4 press (%s)', packet)
     buttonIO.button4P()
 
 
 def button4H(packet):
-    logging.debug('MK4 - Button 4 hold (%s)' % packet)
+    logging.debug('MK4 - Button 4 hold (%s)', packet)
     buttonIO.button4H()
 
 
 def button4R(packet):
-    logging.debug('MK4 - Button 4 released (%s)' % packet)
+    logging.debug('MK4 - Button 4 released (%s)', packet)
     buttonIO.button4R()
 
 
 def button5P(packet):
-    logging.debug('MK4 - Button 5 press (%s)' % packet)
+    logging.debug('MK4 - Button 5 press (%s)', packet)
     buttonIO.button5P()
 
 
 def button5H(packet):
-    logging.debug('MK4 - Button 5 hold (%s)' % packet)
+    logging.debug('MK4 - Button 5 hold (%s)', packet)
     buttonIO.button5H()
 
 
 def button5R(packet):
-    logging.debug('MK4 - Button 5 released (%s)' % packet)
+    logging.debug('MK4 - Button 5 released (%s)', packet)
     buttonIO.button5R()
 
 
 def button6P(packet):
-    logging.debug('MK4 - Button 6 press (%s)' % packet)
+    logging.debug('MK4 - Button 6 press (%s)', packet)
     buttonIO.button6P()
 
 
 def button6H(packet):
-    logging.debug('MK4 - Button 6 hold (%s)' % packet)
+    logging.debug('MK4 - Button 6 hold (%s)', packet)
     buttonIO.button6H()
 
 
 def button6R(packet):
-    logging.debug('MK4 - Button 6 released (%s)' % packet)
+    logging.debug('MK4 - Button 6 released (%s)', packet)
     buttonIO.button6R()
 
 
 def ArrowLP(packet):
-    logging.debug('MK4 - "<" ArrowLeft press (%s)' % packet)
+    logging.debug('MK4 - "<" ArrowLeft press (%s)' % (packet,))
     buttonIO.ArrowLP()
 
 
 def ArrowLH(packet):
-    logging.debug('MK4 - "<" ArrowLeft hold (%s)' % packet)
+    logging.debug('MK4 - "<" ArrowLeft hold (%s)', packet)
     buttonIO.ArrowLH()
 
 
 def ArrowLR(packet):
-    logging.debug('MK4 - "<" ArrowLeft released (%s)' % packet)
+    logging.debug('MK4 - "<" ArrowLeft released (%s)', packet)
     buttonIO.ArrowLR()
 
 
 def ArrowRP(packet):
-    logging.debug('MK4 - ">" ArrowRight press (%s)' % packet)
+    logging.debug('MK4 - ">" ArrowRight press (%s)', packet)
     buttonIO.ArrowRP()
 
 
 def ArrowRH(packet):
-    logging.debug('MK4 - ">" ArrowRight hold (%s)' % packet)
+    logging.debug('MK4 - ">" ArrowRight hold (%s)', packet)
     buttonIO.ArrowRH()
 
 
 def ArrowRR(packet):
-    logging.debug('MK4 - ">" ArrowRight released (%s)' % packet)
+    logging.debug('MK4 - ">" ArrowRight released (%s)', packet)
     buttonIO.ArrowRR()
 
 
 def ArrowP(packet):
-    logging.debug('MK4 - "<>" Arrow press (%s)' % packet)
+    logging.debug('MK4 - "<>" Arrow press (%s)', packet)
     buttonIO.ArrowP()
 
 
 def ArrowH(packet):
-    logging.debug('MK4 - "<>" Arrow hold (%s)' % packet)
+    logging.debug('MK4 - "<>" Arrow hold (%s)', packet)
     buttonIO.ArrowH()
 
 
 def ArrowR(packet):
-    logging.debug('MK4 - "<>" Arrow released (%s)' % packet)
+    logging.debug('MK4 - "<>" Arrow released (%s)', packet)
     buttonIO.ArrowR()
 
 
 def modeP(packet):
-    logging.debug('MK4 -  MODE press (%s)' % packet)
+    logging.debug('MK4 -  MODE press (%s)', packet)
     buttonIO.modeP()
 
 
 def modeH(packet):
-    logging.debug('MK4 - MODE hold (%s)' % packet)
+    logging.debug('MK4 - MODE hold (%s)', packet)
     buttonIO.modeH()
 
 
 def modeR(packet):
-    logging.debug('MK4 - MODE released (%s)' % packet)
+    logging.debug('MK4 - MODE released (%s)', packet)
     buttonIO.modeR()
 
 
 def slctIndexF0(packet):
-    logging.debug('MK4 - Index fields 0 (%s)' % packet)
+    logging.debug('MK4 - Index fields 0 (%s)', packet)
     buttonIO.slctIndexF0()
 
 
 def slctIndexF1(packet):
-    logging.debug('MK4 - Index fields 1 (%s)' % packet)
+    logging.debug('MK4 - Index fields 1 (%s)', packet)
     buttonIO.slctIndexF1()
 
 
 def slctIndexF2(packet):
-    logging.debug('MK4 - Index fields 2 (%s)' % packet)
+    logging.debug('MK4 - Index fields 2 (%s)', packet)
     buttonIO.slctIndexF2()
 
 
 def slctIndexF3(packet):
-    logging.debug('MK4 - Index fields 3 (%s)' % packet)
+    logging.debug('MK4 - Index fields 3 (%s)', packet)
     buttonIO.slctIndexF3()
 
 
 def slctIndexF4(packet):
-    logging.debug('MK4 - Index fields 4 (%s)' % packet)
+    logging.debug('MK4 - Index fields 4 (%s)', packet)
     buttonIO.slctIndexF4()
 
 
 def slctIndexF5(packet):
-    logging.debug('MK4 - Index fields 5 (%s)' % packet)
+    logging.debug('MK4 - Index fields 5 (%s)', packet)
     buttonIO.slctIndexF5()
 
 
 def slctIndexF6(packet):
-    logging.debug('MK4 - Index fields 6 (%s)' % packet)
+    logging.debug('MK4 - Index fields 6 (%s)', packet)
     buttonIO.slctIndexF6()
 
 
 def slctIndexF7(packet):
-    logging.debug('MK4 - Index fields 7 (%s)' % packet)
+    logging.debug('MK4 - Index fields 7 (%s)', packet)
     buttonIO.slctIndexF7()
 
 
 def slctIndexF8(packet):
-    logging.debug('MK4 - Index fields 8 (%s)' % packet)
+    logging.debug('MK4 - Index fields 8 (%s)', packet)
     buttonIO.slctIndexF8()
 
 
 def slctIndexF9(packet):
-    logging.debug('MK4 - Index fields 9 (%s)' % packet)
+    logging.debug('MK4 - Index fields 9 (%s)', packet)
     buttonIO.slctIndexF9()
 
 
 def wheelRT(packet):
-    logging.debug('Multifunction steering wheel - R/T (%s)' % packet)
+    logging.debug('Multifunction steering wheel - R/T (%s)', packet)
     buttonIO.wheelRT()
 
 
 def wheelVoiceP(packet):
-    logging.debug('Multifunction steering wheel - voice press (%s)' % packet)
+    logging.debug('Multifunction steering wheel - voice press (%s)', packet)
     buttonIO.wheelVoiceP()
 
 
 def wheelVoiceH(packet):
-    logging.debug('Multifunction steering wheel - voice hold (%s)' % packet)
+    logging.debug('Multifunction steering wheel - voice hold (%s)', packet)
     buttonIO.wheelVoiceH()
 
 
 def wheelVoiceR(packet):
-    logging.debug('Multifunction steering wheel - voice release (%s)' % packet)
+    logging.debug('Multifunction steering wheel - voice release (%s)', packet)
     buttonIO.wheelVoiceR()
 
 
 def wheelArrowUP(packet):
-    logging.debug('Multifunction steering wheel - ">" press (%s)' % packet)
+    logging.debug('Multifunction steering wheel - ">" press (%s)', packet)
     buttonIO.wheelArrowUP()
 
 
 def wheelArrowUH(packet):
-    logging.debug('Multifunction steering wheel - ">" hold (%s)' % packet)
+    logging.debug('Multifunction steering wheel - ">" hold (%s)', packet)
     buttonIO.wheelArrowUH()
 
 
 def wheelArrowUR(packet):
-    logging.debug('Multifunction steering wheel - ">" release (%s)' % packet)
+    logging.debug('Multifunction steering wheel - ">" release (%s)', packet)
     buttonIO.wheelArrowUR()
 
 
 def wheelArrowDP(packet):
-    logging.debug('Multifunction steering wheel - "<" press (%s)' % packet)
+    logging.debug('Multifunction steering wheel - "<" press (%s)', packet)
     buttonIO.wheelArrowDP()
 
 
 def wheelArrowDR(packet):
-    logging.debug('Multifunction steering wheel - "<" hold (%s)' % packet)
+    logging.debug('Multifunction steering wheel - "<" hold (%s)', packet)
     buttonIO.wheelArrowDR()
 
 
 def wheelArrowDR(packet):
-    logging.debug('Multifunction steering wheel - "<" release (%s)' % packet)
+    logging.debug('Multifunction steering wheel - "<" release (%s)', packet)
     buttonIO.wheelArrowDR()
 
 

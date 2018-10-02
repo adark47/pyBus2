@@ -163,7 +163,7 @@ def getInfo(lastID=-1):
         if T_STATUS == None:
             getTrackInfo()
     status = {"status": state, "track": T_STATUS}
-    logging.debug("Player Status Requested. Returning:")
+    logging.debug("Player Status Requested. Returning")
     logging.debug(status)
     return status
 

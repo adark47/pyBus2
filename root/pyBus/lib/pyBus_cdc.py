@@ -4,6 +4,7 @@
 import os
 import sys
 import datetime
+import string
 import time
 import signal
 import json
@@ -53,12 +54,12 @@ def enableFunc(funcName, interval, count=0):
                 revive, [funcName]
             )
         }
-        logging.debug('Enabling New Thread: %s %s' % (funcName, FUNC_STACK[funcName]))
+        logging.debug('Enabling New Thread: %s %s', funcName, FUNC_STACK[funcName])
         worker_func = getattr(sys.modules[__name__], funcName)
         worker_func()
         FUNC_STACK[funcName]['THREAD'].start()
     else:
-        logging.warning('No function found (%s)' % funcName)
+        logging.warning('No function found (%s)', funcName)
 
 
 def disableFunc(funcName):
@@ -83,14 +84,14 @@ def timePollResponse(difference):
         leadTime = leadTimeNow
         return True
     else:
-        timeDifference = leadTimeNow - leadTime
+        lead = leadTimeNow - leadTime
         leadTime = leadTimeNow
-        timeDifference = divmod(timeDifference.days * 86400 + timeDifference.seconds, 60)
+        timeDifference = divmod(lead.days * 86400 + lead.seconds, 60)
         if timeDifference[0] > 0 or timeDifference[1] > difference:
-            logging.warning('Time difference on request - %s' % timeDifference)
+            logging.warning('Time difference on request - %s', timeDifference)
             return False
         else:
-            logging.debug('Time difference on request - %s' % timeDifference)
+            logging.debug('Time difference on request - %s', timeDifference)
             return True
 ############################################################################
 # THREAD FOR TICKING AND CHECKING EVENTS

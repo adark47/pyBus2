@@ -152,7 +152,7 @@ class ibusFace():
         try:
             char = '%02X' % ord(char)
         except serial.SerialException, e:
-            logging.warning('Hit a serialException: %s' % e)
+            logging.warning('Hit a serialException: %s', e)
             pass
         return char
 
@@ -183,7 +183,7 @@ class ibusFace():
         packet = [src, length, dst]
         for p in data:
             packet.append(p)
-        logging.debug('WRITE: Adding to stack: %s' % packet)
+        logging.debug('WRITE: Adding to stack: %s', packet)
         for i in range(len(packet)):
             packet[i] = int('0x%s' % packet[i], 16)
 
@@ -193,7 +193,7 @@ class ibusFace():
 
         packetSent = False
         while not packetSent:
-            logging.debug('WRITE: %s' % packet)
+            logging.debug('WRITE: %s', packet)
             if (self.SDEV.getCTS()) and ((int(round(
                         time.time() * 1000)) - self.SDEV.lastWrite) > 10):  # dont write packets to close together.. issues arise
                 self.writeFullPacket(packet)

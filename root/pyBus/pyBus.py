@@ -70,7 +70,7 @@ def configureLogging(numeric_level, logfile):
         # add the handler to the root logger
         logger.addHandler(filehandler)
 
-    logging.info('Logging level set to %s', logging_level(numeric_level))
+    logging.info('Logging level set to %s' % (logging_level(numeric_level),))
 
 #################################
 # Program options
@@ -84,7 +84,7 @@ def createParser():
 
 def restart():
     args = sys.argv[:]
-    logging.info('Re-spawning %s' % ' '.join(args))
+    logging.info('Re-spawning %s', ' '.join(args))
 
     args.insert(0, sys.executable)
 

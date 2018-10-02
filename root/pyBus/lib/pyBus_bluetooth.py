@@ -54,7 +54,7 @@ def find_media_player():
 def init():
     btReadMac()
     disconnect()
-    logging.info('Initialized: Bluetooth ')
+    logging.info('Initialized: Bluetooth')
 
 
 def connect():
@@ -67,11 +67,11 @@ def connect():
         time.sleep(1)
         btMp = find_media_player()
         btMo = bluezutils.get_managed_objects()
-        logging.info('Connection to the Bluetooth device: Connected - %s' % btMacLast)
+        logging.info('Connection to the Bluetooth device: Connected - %s', btMacLast)
 
         return True
     elif btCtl.connect(btMacLast) == False:
-        logging.info('Connection to the Bluetooth device: Device is disabled - %s' % btMacLast)
+        logging.info('Connection to the Bluetooth device: Device is disabled - %s', btMacLast)
         return False
     else:
         logging.error('Connection to the Bluetooth device: Unknown error')
@@ -82,17 +82,16 @@ def end():
     btCtl.disconnect()
 
 
-
 def disconnect():
     global btMacLast
     btReadMac()
     btCtl.disconnect(btMacLast)
-    logging.debug('Disabled bluetooth device: %s' % btMacLast)
+    logging.debug('Disabled bluetooth device: %s', btMacLast)
 
 
 def disconnectMacAddr(mac):
     btCtl.disconnect(mac)
-    logging.debug('Disabled Bluetooth device: %s' % mac)
+    logging.debug('Disabled Bluetooth device: %s', mac)
 
 
 def newConnect(mac):
@@ -102,10 +101,10 @@ def newConnect(mac):
     if btCtl.connect(mac) == True:
         time.sleep(1)
         btWriteMac(mac)
-        logging.info('Connect to a new Bluetooth device: Connected - %s' % mac)
+        logging.info('Connect to a new Bluetooth device: Connected - %s', mac)
         return True
     elif btCtl.connect(mac) == False:
-        logging.info('Connect to a new Bluetooth device: Device is disabled - %s' % mac)
+        logging.info('Connect to a new Bluetooth device: Device is disabled - %s', mac)
         return False
     else:
         logging.error('Connect to a new Bluetooth device: Unknown error')
@@ -115,14 +114,14 @@ def btReadMac():
     global btMacLast
     btMac = open(btMacAddr, 'r+')
     btMacLast = btMac.read()
-    logging.debug('Read the bluetooth address of the last connected device from the temporary file: %s' % btMacLast)
+    logging.debug('Read the bluetooth address of the last connected device from the temporary file: %s', btMacLast)
     btMac.close()
 
 
 def btWriteMac(mac):
     btMac = open(btMacAddr, 'r+')
     btMac.write(mac)
-    logging.debug('Write the bluetooth address of the last connected device to a temporary file' % mac)
+    logging.debug('Write the bluetooth address of the last connected device to a temporary file', mac)
     btMac.close()
 
 
@@ -142,7 +141,7 @@ def scanDevices():
 
 def removeMac(mac):
     btCtl.remove(mac)
-    logging.debug('Removed bluetooth device: %s' % mac)
+    logging.debug('Removed bluetooth device: %s', mac)
 
 ############################################################################
 # FUNCTIONS PLAYER

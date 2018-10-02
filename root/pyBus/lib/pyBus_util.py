@@ -51,12 +51,12 @@ def enableFunc(funcName, interval, count=0):
                 revive, [funcName]
             )
         }
-        logging.debug('Enabling New Thread: %s %s' % (funcName, FUNC_STACK[funcName]))
+        logging.debug('Enabling New Thread: %s %s', funcName, FUNC_STACK[funcName])
         worker_func = getattr(sys.modules[__name__], funcName)
         worker_func()
         FUNC_STACK[funcName]['THREAD'].start()
     else:
-        logging.warning('No function found (%s)' % funcName)
+        logging.warning('No function found (%s)', funcName)
 
 
 def disableFunc(funcName):

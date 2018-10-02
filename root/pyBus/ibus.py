@@ -31,7 +31,7 @@ class Logger(object):
     def log(self, message):
         if not self.enable_logfile:
             return
-        self.logger.info('%s' % message)
+        self.logger.info('%s', message)
 
 
 LOGGER = Logger()
@@ -110,10 +110,7 @@ class IBusHandler(object):
         # FIXME Log message doesn't match ``if`` condition.
         # 
         if waiting >= timeout:
-            log(
-                'Error: Waiting Time (%sms) is bigger than Timeout Time (%sms)'
-                % (waiting, timeout)
-            )
+            log('Error: Waiting Time (%sms) is bigger than Timeout Time (%sms)' % (waiting, timeout))
             return False
 
         for _ in xrange(timeout):
@@ -145,10 +142,7 @@ class IBusHandler(object):
                     self.cts_counter = 0.0
                     self.serial_port.flush()
                     self.cts_counter = 0.0
-                    log(
-                        '\033[1;33;40mWRITE:\033[0m %s'
-                        % ' '.join('%02X' % i for i in data)
-                    )
+                    log('\033[1;33;40mWRITE:\033[0m %s' % ' '.join('%02X' % i for i in data))
                 except serial.SerialException:
                     self.write_buffer.put((prio, write_counter, data))
             except Empty:
@@ -221,10 +215,8 @@ class IBusHandler(object):
 
         if self._calculate_checksum(message) == 0:
             if self.read_error_container:
-                error_hex_string = ' '.join(
-                    '%02X' % i for i in self.read_error_container
-                )
-                log('READ-ERR: %s' % error_hex_string)
+                error_hex_string = ' '.join('%02X' % i for i in self.read_error_container)
+                log('READ-ERR: %s', error_hex_string)
                 self.read_error_counter += len(self.read_error_container)
                 self.read_error_container = []
 
@@ -293,8 +285,7 @@ class InputThread(Thread):
                     self.finished = True
                 elif input == "w":
                     self.write = True
-                    log(
-                        "\033[1;33;40mType Message for writing to IBus (example:F0 LL 68 01 CK) <- type 'LL' or 'CK' if unknown:\033[0m")
+                    log("\033[1;33;40mType Message for writing to IBus (example:F0 LL 68 01 CK) <- type 'LL' or 'CK' if unknown:\033[0m")
                     while self.write:
                         input = raw_input()
                         if input == '\x1b':

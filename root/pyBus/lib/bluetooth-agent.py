@@ -60,7 +60,7 @@ class Agent(dbus.service.Object):
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='os', out_signature='')
     def AuthorizeService(self, device, uuid):
-        print('AuthorizeService (%s, %s)' % (device, uuid))
+        print('AuthorizeService (%s, %s)', device, uuid)
         authorize = 'yes'
         if (authorize == 'yes'):
             return
@@ -68,28 +68,28 @@ class Agent(dbus.service.Object):
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='o', out_signature='s')
     def RequestPinCode(self, device):
-        print('RequestPinCode (%s)' % (device))
+        print('RequestPinCode (%s)', device)
         set_trusted(device)
         return '0000'
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='o', out_signature='u')
     def RequestPasskey(self, device):
-        print('RequestPasskey (%s)' % (device))
+        print('RequestPasskey (%s)', device)
         set_trusted(device)
         passkey = ask('Enter passkey: ')
         return dbus.UInt32(passkey)
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='ouq', out_signature='')
     def DisplayPasskey(self, device, passkey, entered):
-        print('DisplayPasskey (%s, %06u entered %u)' % (device, passkey, entered))
+        print('DisplayPasskey (%s, %06u entered %u)', device, passkey, entered)
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='os', out_signature='')
     def DisplayPinCode(self, device, pincode):
-        print('DisplayPinCode (%s, %s)' % (device, pincode))
+        print('DisplayPinCode (%s, %s)', device, pincode)
 
     @dbus.service.method(AGENT_INTERFACE, in_signature="ou", out_signature="")
     def RequestConfirmation(self, device, passkey):
-        print('RequestConfirmation (%s, %06d)' % (device, passkey))
+        print('RequestConfirmation (%s, %06d)', device, passkey)
         # confirm = ask("Confirm passkey (yes/no): ")
         # if (confirm == "yes"):
         #	set_trusted(device)
@@ -99,7 +99,7 @@ class Agent(dbus.service.Object):
 
     @dbus.service.method(AGENT_INTERFACE, in_signature='o', out_signature='')
     def RequestAuthorization(self, device):
-        print('RequestAuthorization (%s)' % (device))
+        print('RequestAuthorization (%s)', device)
         auth = 'yes'
         if (auth == 'yes'):
             return
@@ -123,7 +123,7 @@ def pair_error(error):
         print('Timed out. Cancelling pairing')
         device_obj.CancelPairing()
     else:
-        print('Creating device failed: %s' % (error))
+        print('Creating device failed: %s', error)
 
     mainloop.quit()
 

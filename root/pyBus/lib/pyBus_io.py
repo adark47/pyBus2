@@ -209,12 +209,12 @@ class DisplayIO(threading.Thread):
 
             elif menuLevel == 'btMain':                 # Bluetooth Main
                 displayF(
-                    titleT0='%s - %s' % (pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
+                    titleT0=('%s - %s', pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
                     titleT1='',
                     titleT2='OK',
                     titleT3=versionPB,
                     titleT4='',
-                    titleT5='%s' % pB_audio.getTrackInfo().get('status'),
+                    titleT5=('%s', pB_audio.getTrackInfo().get('status')),
                     titleT6='Bluetooth',
 
                     indexF0='<-- Back --',
@@ -359,28 +359,28 @@ class ButtonIO:
         if menuLevel == 'homeMain':                             # Home
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'vlmMain'                           # Home -> Volumio Main
-                logging.debug('Set menu level: %s' % menuLevel)
+                logging.debug('Set menu level: %s', menuLevel)
                 updateIndex = True
             else:
                 id = 01
                 error(id)
-                logging.error('ERROR: %s' % id)
+                logging.error('ERROR: %s', id)
         elif menuLevel == 'btMain':                             # <-- Back --
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'homeMain'                          # Bluetooth Main -> Home
-                logging.debug('Set menu level: %s' % menuLevel)
+                logging.debug('Set menu level: %s', menuLevel)
                 updateIndex = True
             else:
                 id = 04
                 error(id)
-                logging.error('ERROR: %s' % id)
+                logging.error('ERROR: %s', id)
         elif menuLevel == 'btSelectDevice':                     # <-- Back --
             menuLevel = 'btMain'                                # Select device -> Bluetooth Main
-            logging.debug('Set menu level: %s' % menuLevel)
+            logging.debug('Set menu level: %s', menuLevel)
             updateIndex = True
         elif menuLevel == 'btNewDevice':                        # <-- Back --
             menuLevel = 'btSelectDevice'                        # Add a new device -> Select device
-            logging.debug('Set menu level: %s' % menuLevel)
+            logging.debug('Set menu level: %s', menuLevel)
             updateIndex = True
 
     def slctIndexF1(self):
@@ -389,15 +389,15 @@ class ButtonIO:
         if menuLevel == 'homeMain':                             # Home
             if pB_audio.setClient('bt') is True:                # Set client Bluetooth
                 menuLevel = 'btMain'
-                logging.debug('Set menu level: %s' % menuLevel)
+                logging.debug('Set menu level: %s', menuLevel)
                 updateIndex = True
             else:
                 id = 02
                 error(id)
-                logging.error('ERROR: %s' % id)
+                logging.error('ERROR: %s', id)
         elif menuLevel == 'btSelectDevice':
             menuLevel = 'btSelectDevice'                        # Bluetooth -> Select device
-            logging.debug('Set menu level: %s' % menuLevel)
+            logging.debug('Set menu level: %s', menuLevel)
             updateIndex = True
         elif menuLevel == 'btSelectDevice':
             updateIndex = True
@@ -408,15 +408,15 @@ class ButtonIO:
         if menuLevel == 'homeMain':                             # Home
             if pB_audio.setClient('ap') is True:                # Set client AirPlay
                 menuLevel = 'apMain'                            # Home -> AirPlay Main
-                logging.debug('Set menu level: %s' % menuLevel)
+                logging.debug('Set menu level: %s', menuLevel)
                 updateIndex = True
             else:
                 id = 03
                 error(id)
-                logging.error('ERROR: %s' % id)
+                logging.error('ERROR: %s', id)
         elif menuLevel == 'btMain':
             menuLevel = 'btNewDevice'                           # Bluetooth Main -> Add a new device
-            logging.debug('Set menu level: %s' % menuLevel)
+            logging.debug('Set menu level: %s', menuLevel)
             updateIndex = True
         elif menuLevel == 'btNewDevice':
             updateIndex = True

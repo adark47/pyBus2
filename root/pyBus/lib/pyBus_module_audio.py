@@ -39,7 +39,7 @@ def init():
     vlm.init()
 #    mpd.init()
     CLIENT = 'vlm'
-    logging.info('Аudio client assigned: ', CLIENT)
+    logging.info('Аudio client assigned: s%', CLIENT)
 
 
 
@@ -72,25 +72,25 @@ def setClient(client):
         bt.disconnect()
         time.sleep(1)
         CLIENT = client
-        logging.debug('Control the player assigned: ', CLIENT)
+        logging.debug('Control the player assigned: s%', CLIENT)
 
     elif client == 'vlm':
         vlm.Stop()
         time.sleep(1)
         CLIENT = client
-        logging.debug('Control the player assigned: ', CLIENT)
+        logging.debug('Control the player assigned: s%', CLIENT)
 
     elif client == 'airplay':
         ap.Stop()
         time.sleep(1)
         CLIENT = client
-        logging.debug('Control the player assigned: ', CLIENT)
+        logging.debug('Control the player assigned: s%', CLIENT)
 
     elif client == 'mpd':
         mpd.Stop()
         time.sleep(1)
         CLIENT = client
-        logging.debug('Control the player assigned: ', CLIENT)
+        logging.debug('Control the player assigned: s%', CLIENT)
 
     else:
         CLIENT = None
@@ -110,7 +110,7 @@ def Play():
 #    elif CLIENT == 'mpd':
 #        mpd.Play()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def PlayN(n):
@@ -118,7 +118,7 @@ def PlayN(n):
         vlm.PlayN(n)
 #        socketIO.emit('play', {"value": n})
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def Stop():
@@ -131,7 +131,7 @@ def Stop():
 #    elif CLIENT == 'mpd':
 #        mpd.Stop()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def Pause():
@@ -144,7 +144,7 @@ def Pause():
 #    elif CLIENT == 'mpd':
 #        mpd.Pause()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def Next():
@@ -157,7 +157,7 @@ def Next():
 #    elif CLIENT == 'mpd':
 #        mpd.Next()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def Prev():
@@ -170,7 +170,7 @@ def Prev():
 #    elif CLIENT == 'mpd':
 #        mpd.Prev()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def RewindPrev():
@@ -183,7 +183,7 @@ def RewindPrev():
 #    elif CLIENT == 'mpd':
 #        pass
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def RewindNext():
@@ -196,14 +196,14 @@ def RewindNext():
 #    elif CLIENT == 'mpd':
 #        pass
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def RewindPlayResume():
     if CLIENT == 'airplay':
         ap.RewindPlayResume()
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 def Repeat():
@@ -218,7 +218,7 @@ def Random():
 #    elif CLIENT == 'mpd':
 #        pass
     else:
-        logging.debug('not supported service:', CLIENT)
+        logging.debug('not supported service: s%', CLIENT)
 
 
 ############################################################################
