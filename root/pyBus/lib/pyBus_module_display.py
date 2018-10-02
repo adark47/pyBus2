@@ -159,16 +159,39 @@ class busWriter:
     # Index fields 9 - 23 characters
     # <68 xx 3B> <21 60 00> <49> <Text in ASCII Hex>
     def writeIndexF9(self, string):
-        self.IBUS.writeBusPacket('18', '68', _hexText(string, ['21', '60', '00', '49'], 23))
+        self.IBUS.writeBusPacket('68', '68', _hexText(string, ['21', '60', '00', '49'], 23))
         logging.debug('MK4 - write IndexF9: %s' % string)
+
+# MK4 - ############################################################################
 
     # To refresh the index fields
     # <68 06 3B> <A5 60 01 00 91>
     def refreshIndex(self):
-        self.IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00', '91'])
+        self.IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00'])
         logging.debug('MK4 - refresh Index')
+
+    def updateScreen(self):
+        self.IBUS.writeBusPacket('68', '3B', ['A5', '62', '01'])
+        logging.debug('MK4 - update Screen')
 
     def clearScreen(self):
         self.IBUS.writeBusPacket('68', '3B', ['46', '0C'])
         logging.debug('MK4 - clear Screen')
+
+    def radioMenuDisable(self):
+        self.IBUS.writeBusPacket('3B', '68', ['45', '02'])
+        logging.debug('MK4 - radio menu disable')
+
+    def radioMenuEnable(self):
+        self.IBUS.writeBusPacket('3B', '68', ['45', '00'])
+        logging.debug('MK4 - radio menu enable')
+
+    def screenSwitchedNav(self):
+        self.IBUS.writeBusPacket('68', '3B', ['46', '01'])
+        logging.debug('MK4 - screen switched Nav')
+
+    def screenSwitchedRadio(self):
+        self.IBUS.writeBusPacket('68', '3B', ['46', '02'])
+        logging.debug('MK4 - screen switched Radio')
+
 ############################################################################

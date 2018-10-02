@@ -20,7 +20,7 @@ except ImportError:
     import gobject as GObject
 
 
-BLUETOOTH = False # systemctl disable bluetooth-agent
+BLUETOOTH = False   # systemctl disable bluetooth-agent
 btMp = None
 btMo = None
 btMacLast = None
@@ -90,14 +90,15 @@ def disconnect():
     logging.debug('Disabled bluetooth device: %s' % btMacLast)
 
 
-def disconnectMac(mac):
+def disconnectMacAddr(mac):
     btCtl.disconnect(mac)
-    logging.debug('Disabled bluetooth device: %s' % mac)
+    logging.debug('Disabled Bluetooth device: %s' % mac)
 
 
 def newConnect(mac):
     global btMacLast
     disconnect()
+    btCtl.get_available_devices()
     if btCtl.connect(mac) == True:
         time.sleep(1)
         btWriteMac(mac)
@@ -114,12 +115,14 @@ def btReadMac():
     global btMacLast
     btMac = open(btMacAddr, 'r+')
     btMacLast = btMac.read()
+    logging.debug('Read the bluetooth address of the last connected device from the temporary file: %s' % btMacLast)
     btMac.close()
 
 
 def btWriteMac(mac):
     btMac = open(btMacAddr, 'r+')
     btMac.write(mac)
+    logging.debug('Write the bluetooth address of the last connected device to a temporary file' % mac)
     btMac.close()
 
 

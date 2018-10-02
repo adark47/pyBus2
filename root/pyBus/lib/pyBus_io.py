@@ -19,6 +19,7 @@ import pyBus_module_display as pB_display
 import pyBus_module_audio as pB_audio
 import pyBus_util as pB_util
 import pyBus_cdc as pB_cdc
+import pyBus_bluetooth as bt
 
 ############################################################################
 # CONFIG
@@ -31,7 +32,7 @@ display = None
 displayThread = None
 ERROR = None
 TrackInfo = None
-TICK = 0.1  # sleep interval in seconds used after displaying a string (default 1)
+TICK = 0.05  # sleep interval in seconds used after displaying a string (default 0.1)
 
 
 ############################################################################
@@ -104,72 +105,71 @@ class TextScroller:
 def displayF(titleT0=None, titleT1=None, titleT2=None, titleT3=None, titleT4=None, titleT5=None, titleT6=None,
              indexF0=None, indexF1=None, indexF2=None, indexF3=None, indexF4=None,
              indexF5=None, indexF6=None, indexF7=None, indexF8=None, indexF9=None,
-             clearScreen=True, refreshIndex=False):
+             clearScreen=False, refreshIndex=False):
 
+    time.sleep(TICK)
     if clearScreen is True:
         display.clearScreen()
-
+    time.sleep(TICK)
     if titleT0 is not None:
         display.writeTitleT0(titleT0)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if titleT1 is not None:
         display.writeTitleT1(titleT1)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if titleT3 is not None:
         display.writeTitleT3(titleT3)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if titleT4 is not None:
         display.writeTitleT4(titleT4)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if titleT6 is not None:
         display.writeTitleT6(titleT6)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if ERROR is None:
         if titleT5 is not None:
             display.writeTitleT5(titleT5)
-            time.sleep(TICK)
-        if titleT5 is not None:
+        if titleT2 is not None:
             display.writeTitleT2(titleT2)
-            time.sleep(TICK)
     else:
         display.writeTitleT5('Error:')
-        time.sleep(TICK)
         display.writeTitleT2(ERROR)
-        time.sleep(TICK)
+    time.sleep(TICK)
 
-    #if refreshIndex is True:
-    #    display.refreshIndex()
-
+    time.sleep(TICK)
+    if refreshIndex is True:
+        display.refreshIndex()
+    time.sleep(TICK)
     if indexF0 is not None:
         display.writeIndexF0(indexF0)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF1 is not None:
         display.writeIndexF1(indexF1)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF2 is not None:
         display.writeIndexF2(indexF2)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF3 is not None:
         display.writeIndexF3(indexF3)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF4 is not None:
         display.writeIndexF4(indexF4)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF5 is not None:
         display.writeIndexF5(indexF5)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF6 is not None:
         display.writeIndexF6(indexF6)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF7 is not None:
         display.writeIndexF7(indexF7)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF8 is not None:
         display.writeIndexF8(indexF8)
-        time.sleep(TICK)
+    time.sleep(TICK)
     if indexF9 is not None:
         display.writeIndexF9(indexF9)
-        time.sleep(TICK)
+    time.sleep(TICK)
 
 
 class DisplayIO(threading.Thread):
@@ -445,7 +445,7 @@ class ButtonIO:
         pass
 
     def wheelRT(self):
-        pass
+        bt.connect()
 
     def wheelVoiceP(self):
         pass

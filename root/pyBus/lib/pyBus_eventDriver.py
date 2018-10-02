@@ -61,6 +61,7 @@ DIRECTIVES = {
 #            '3100134B': '',                     # Mode button released
 #        }
 #    },
+
     '80': {
         'BF': {
             'ALL': 'd_custom_IKE'               # Use ALL to send all data to a particular function
@@ -88,6 +89,7 @@ DIRECTIVES = {
 #            '380801': 'd_cdRandom'              # 68 05 18 38 08 01 - Random On press
         }
     },
+
     'F0': {                                     # MK4
         '68':{
 #            '4807': 'infoP',                    # F0 05 68 48 07 - Info press
@@ -132,27 +134,31 @@ DIRECTIVES = {
 #            '4845': '',                         # F0 04 3B 48 45 - right nob hold
 #            '4885': ''                          # F0 04 3B 48 85 - right nob released
         }
-
     },
+
     '3B': {                                     # MK4 - Index fields
         '68': {
-            '23623040': 'slctIndexF0',          # 3B 06 68 23 62 30 40 - selected Index fields 0
-            '23623041': 'slctIndexF1',          # 3B 06 68 23 62 30 41 - selected Index fields 1
-            '23623042': 'slctIndexF2',          # 3B 06 68 23 62 30 42 - selected Index fields 2
-            '23623043': 'slctIndexF3',          # 3B 06 68 23 62 30 43 - selected Index fields 3
-            '23623044': 'slctIndexF4',          # 3B 06 68 23 62 30 44 - selected Index fields 4
-            '23623045': 'slctIndexF5',          # 3B 06 68 23 62 30 45 - selected Index fields 5
-            '23623046': 'slctIndexF6',          # 3B 06 68 23 62 30 46 - selected Index fields 6
-            '23623047': 'slctIndexF7',          # 3B 06 68 23 62 30 47 - selected Index fields 7
-            '23623048': 'slctIndexF8',          # 3B 06 68 23 62 30 48 - selected Index fields 8
-            '23623049': 'slctIndexF9'           # 3B 06 68 23 62 30 49 - selected Index fields 9
-
+            '23': {
+                '62': {
+                    '3040': 'slctIndexF0',          # 3B 06 68 23 62 30 40 - selected Index fields 0
+                    '3041': 'slctIndexF1',          # 3B 06 68 23 62 30 41 - selected Index fields 1
+                    '3042': 'slctIndexF2',          # 3B 06 68 23 62 30 42 - selected Index fields 2
+                    '3043': 'slctIndexF3',          # 3B 06 68 23 62 30 43 - selected Index fields 3
+                    '3044': 'slctIndexF4',          # 3B 06 68 23 62 30 44 - selected Index fields 4
+                    '3045': 'slctIndexF5',          # 3B 06 68 23 62 30 45 - selected Index fields 5
+                    '3046': 'slctIndexF6',          # 3B 06 68 23 62 30 46 - selected Index fields 6
+                    '3047': 'slctIndexF7',          # 3B 06 68 23 62 30 47 - selected Index fields 7
+                    '3048': 'slctIndexF8',          # 3B 06 68 23 62 30 48 - selected Index fields 8
+                    '3049': 'slctIndexF9'           # 3B 06 68 23 62 30 49 - selected Index fields 9
+                }
+            }
         }
     },
+
     '50': {
         'C8': {                                 # Multifunction steering wheel phone buttons
             '01':   'd_cdPollResponse',         # This can happen via RT button or ignition
-#            '3B40': 'wheelRT',                  # 50 04 C8 3B 40    - R/T
+            '3B40': 'wheelRT',                  # 50 04 C8 3B 40    - R/T
 #            '3B80': 'wheelVoiceP',              # 50 04 C8 3B 80 27 - voice press
 #            '3B90': 'wheelVoiceH',              # 50 04 C8 3B 90 37 - voice hold
 #            '3BA0': 'wheelVoiceR'               # 50 04 C8 3B A0 07 - voice release
@@ -290,13 +296,14 @@ def timePollResponse(difference):
 
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    pB_cdc.disableFunc('announce')                  # stop announcing
-    if timePollResponse(15) is True:                # 15 for test
+    pB_cdc.disableFunc('announce')                          # stop announcing
+    if timePollResponse(30) is True:
+        WRITER.writeBusPacket('18', 'FF', ['02', '00'])
         pB_cdc.disableFunc('pollResponse')
-        pB_cdc.enableFunc('pollResponse', 10)       # default 30 (not worked)
+        pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
     else:
-        pB_cdc.enableFunc("announce", 10)           # default 30 (not worked)
-    WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])   # for test
+        pB_cdc.enableFunc("announce", 10)                   # default 30 (not worked)
+    WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 
 def d_cdStatusPlaying(packet):

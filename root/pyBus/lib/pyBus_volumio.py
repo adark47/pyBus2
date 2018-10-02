@@ -18,7 +18,7 @@ from socketIO_client import SocketIO, LoggingNamespace
 HOST = 'localhost'
 PORT = '3000'
 PASSWORD = False
-VOLUME = 85
+VOLUME = 50
 socketIO = None
 dictTrack = None
 
