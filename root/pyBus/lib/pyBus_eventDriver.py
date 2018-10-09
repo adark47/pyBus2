@@ -200,9 +200,7 @@ def init(writer):
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
 
-    WRITER.writeBusPacket('18', 'FF', ['02', '01'])
-    logging.debug('CDC sent the status: Start')
-    #pB_cdc.enableFunc("announce", 10)              # default 30 (not worked)
+    pB_cdc.enableFunc("announce", 10)              # default 30 (not worked)
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
@@ -282,11 +280,9 @@ def d_custom_IKE(packet):
 
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    #pB_cdc.disableFunc('announce')                          # stop announcing
-    WRITER.writeBusPacket('18', 'FF', ['02', '00'])
-    logging.debug('CDC sent the status: Alive')
-    #pB_cdc.disableFunc('pollResponse')
-    #pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
+    pB_cdc.disableFunc('announce')                          # stop announcing
+    pB_cdc.disableFunc('pollResponse')
+    pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
     WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 

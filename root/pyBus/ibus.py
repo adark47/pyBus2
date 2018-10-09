@@ -17,8 +17,9 @@ __version__ = '0.5'
 
 #
 # TODO Use `logging` framework in a more idiomatic way.
-# 
+#
 class Logger(object):
+
     def __init__(self):
         self.enable_logfile = False
         self.logger = None
@@ -31,7 +32,7 @@ class Logger(object):
     def log(self, message):
         if not self.enable_logfile:
             return
-        self.logger.info('%s', message)
+        self.logger.info('%s' % message)
 
 
 LOGGER = Logger()
@@ -47,6 +48,7 @@ def log(string):
 
 
 class IBusHandler(object):
+
     def __init__(self):
 
         self.serial_port = serial.Serial()
@@ -106,11 +108,14 @@ class IBusHandler(object):
             self.read_buffer = self.read_buffer[offset:]
 
     def _wait_free_bus(self, waiting=17, timeout=1000):
-        # 
+        #
         # FIXME Log message doesn't match ``if`` condition.
-        # 
+        #
         if waiting >= timeout:
-            log('Error: Waiting Time (%sms) is bigger than Timeout Time (%sms)' % (waiting, timeout))
+            log(
+                'Error: Waiting Time (%sms) is bigger than Timeout Time (%sms)'
+                % (waiting, timeout)
+            )
             return False
 
         for _ in xrange(timeout):
@@ -142,7 +147,10 @@ class IBusHandler(object):
                     self.cts_counter = 0.0
                     self.serial_port.flush()
                     self.cts_counter = 0.0
-                    log('\033[1;33;40mWRITE:\033[0m %s' % ' '.join('%02X' % i for i in data))
+                    log(
+                        '\033[1;33;40mWRITE:\033[0m %s'
+                        % ' '.join('%02X' % i for i in data)
+                    )
                 except serial.SerialException:
                     self.write_buffer.put((prio, write_counter, data))
             except Empty:
@@ -155,10 +163,10 @@ class IBusHandler(object):
                 time.sleep(0.0001)
             else:
                 self.cts_counter = 0.0
-                # 
+                #
                 # TODO Maybe sleeping a little or move the `sleep()`
                 #   in the ``if`` branch after the ``if``/``else``?
-                # 
+                #
 
         log('CTS Thread finished')
 
@@ -216,7 +224,7 @@ class IBusHandler(object):
         if self._calculate_checksum(message) == 0:
             if self.read_error_container:
                 error_hex_string = ' '.join('%02X' % i for i in self.read_error_container)
-                log('READ-ERR: %s', error_hex_string)
+                log('READ-ERR: %s' % error_hex_string)
                 self.read_error_counter += len(self.read_error_container)
                 self.read_error_container = []
 
@@ -235,11 +243,11 @@ class IBusHandler(object):
     def write_bus_packet(
             self, src, dst, data, highprio=False, veryhighprio=False, repeat=1
     ):
-        # 
+        #
         # FIXME The ``except`` needs explicit exceptions because it is
         #   unclear under what circumstances the ``except`` is a proper
         #   handling of the exception.
-        # 
+        #
         try:
             packet = [src, len(data) + 2, dst]
             packet.extend(data)
@@ -337,11 +345,11 @@ def start_ibus(device='/dev/ttyUSB0'):
     IBUS.set_port(device)
 
     log('Connecting')
-    # 
+    #
     # TODO Narrow exception handling so the `IBusHandler` instance can be
     #   used with the ``with`` keyword instead of using
     #   ``try``/``finally``.
-    # 
+    #
     try:
         IBUS.connect()
     except:
