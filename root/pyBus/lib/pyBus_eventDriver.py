@@ -137,18 +137,19 @@ DIRECTIVES = {
 
     '3B': {                                     # MK4 - Index fields
         '68': {
-            '23': {
-                '62': {
-                    '3040': 'slctIndexF0',          # 3B 06 68 23 62 30 40 - selected Index fields 0
-                    '3041': 'slctIndexF1',          # 3B 06 68 23 62 30 41 - selected Index fields 1
-                    '3042': 'slctIndexF2',          # 3B 06 68 23 62 30 42 - selected Index fields 2
-                    '3043': 'slctIndexF3',          # 3B 06 68 23 62 30 43 - selected Index fields 3
-                    '3044': 'slctIndexF4',          # 3B 06 68 23 62 30 44 - selected Index fields 4
-                    '3045': 'slctIndexF5',          # 3B 06 68 23 62 30 45 - selected Index fields 5
-                    '3046': 'slctIndexF6',          # 3B 06 68 23 62 30 46 - selected Index fields 6
-                    '3047': 'slctIndexF7',          # 3B 06 68 23 62 30 47 - selected Index fields 7
-                    '3048': 'slctIndexF8',          # 3B 06 68 23 62 30 48 - selected Index fields 8
-                    '3049': 'slctIndexF9'           # 3B 06 68 23 62 30 49 - selected Index fields 9
+            '01':     'd_cdPollResponse',       # "I'm alive" message
+            '31': {
+                '60': {
+                    '0040': 'slctIndexF0',          # 3B 06 68 31 60 00 40 - selected Index fields 0
+                    '0041': 'slctIndexF1',          # 3B 06 68 31 60 00 41 - selected Index fields 1
+                    '0042': 'slctIndexF2',          # 3B 06 68 31 60 00 42 - selected Index fields 2
+                    '0043': 'slctIndexF3',          # 3B 06 68 31 60 00 43 - selected Index fields 3
+                    '0044': 'slctIndexF4',          # 3B 06 68 31 60 00 44 - selected Index fields 4
+                    '0045': 'slctIndexF5',          # 3B 06 68 31 60 00 45 - selected Index fields 5
+                    '0046': 'slctIndexF6',          # 3B 06 68 31 60 00 46 - selected Index fields 6
+                    '0047': 'slctIndexF7',          # 3B 06 68 31 60 00 47 - selected Index fields 7
+                    '0048': 'slctIndexF8',          # 3B 06 68 31 60 00 48 - selected Index fields 8
+                    '0049': 'slctIndexF9'           # 3B 06 68 31 60 00 49 - selected Index fields 9
                 }
             }
         }
@@ -200,7 +201,8 @@ def init(writer):
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
 
-    pB_cdc.enableFunc("announce", 10)              # default 30 (not worked)
+    pB_cdc.enableFunc("announce", 10)               # default 30 (not worked)
+    pB_cdc.enableFunc('pollResponse', 10)           # test
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
@@ -267,11 +269,13 @@ def d_custom_IKE(packet):
         speed = int(packet_data[1], 16) * 2
         revs = int(packet_data[2], 16) * 10000
         customState = {'speed': speed, 'revs': revs}
+        logging.debug('IKE - (%s)', customState)
     # 19 = Temperature
     elif packet_data[0] == '19':
         extTemp = int(packet_data[1], 16)
         oilTemp = int(packet_data[2], 16)
         customState = {'extTemp': extTemp, 'oilTemp': oilTemp}
+        logging.debug('IKE - (%s)', customState)
 
 
 ############################################################################
@@ -460,7 +464,7 @@ def ArrowR(packet):
 
 
 def modeP(packet):
-    logging.debug('MK4 -  MODE press (%s)', packet)
+    logging.debug('MK4 - MODE press (%s)', packet)
     buttonIO.modeP()
 
 
