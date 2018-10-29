@@ -183,6 +183,8 @@ class DisplayIO(threading.Thread):
         global versionPB
         global display
         logging.info('Display thread initialized')
+        display.clearScreen()
+        display.radioMenuDisable()
 
         while True:
             if menuLevel == 'homeMain':             # HOME
@@ -204,7 +206,8 @@ class DisplayIO(threading.Thread):
                     indexF6='Shutdown',
                     indexF7='',
                     indexF8='',
-                    indexF9=''
+                    indexF9='',
+                    refreshIndex=True
                     )
 
             elif menuLevel == 'btMain':                 # Bluetooth Main
@@ -226,7 +229,8 @@ class DisplayIO(threading.Thread):
                     indexF6='',
                     indexF7='',
                     indexF8='',
-                    indexF9=''
+                    indexF9='',
+                    refreshIndex=True
                     )
 
             elif menuLevel == 'btSelectDevice':         # Bluetooth -> Select device
@@ -354,13 +358,11 @@ class ButtonIO:
         pass
 
     def slctIndexF0(self):
-        global updateIndex
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'vlmMain'                           # Home -> Volumio Main
                 logging.debug('Set menu level: %s', menuLevel)
-                updateIndex = True
             else:
                 id = 01
                 error(id)
@@ -369,7 +371,6 @@ class ButtonIO:
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'homeMain'                          # Bluetooth Main -> Home
                 logging.debug('Set menu level: %s', menuLevel)
-                updateIndex = True
             else:
                 id = 04
                 error(id)
@@ -377,11 +378,9 @@ class ButtonIO:
         elif menuLevel == 'btSelectDevice':                     # <-- Back --
             menuLevel = 'btMain'                                # Select device -> Bluetooth Main
             logging.debug('Set menu level: %s', menuLevel)
-            updateIndex = True
         elif menuLevel == 'btNewDevice':                        # <-- Back --
             menuLevel = 'btSelectDevice'                        # Add a new device -> Select device
             logging.debug('Set menu level: %s', menuLevel)
-            updateIndex = True
 
     def slctIndexF1(self):
         global updateIndex
@@ -390,7 +389,6 @@ class ButtonIO:
             if pB_audio.setClient('bt') is True:                # Set client Bluetooth
                 menuLevel = 'btMain'
                 logging.debug('Set menu level: %s', menuLevel)
-                updateIndex = True
             else:
                 id = 02
                 error(id)
@@ -398,9 +396,8 @@ class ButtonIO:
         elif menuLevel == 'btSelectDevice':
             menuLevel = 'btSelectDevice'                        # Bluetooth -> Select device
             logging.debug('Set menu level: %s', menuLevel)
-            updateIndex = True
         elif menuLevel == 'btSelectDevice':
-            updateIndex = True
+            pass
 
     def slctIndexF2(self):
         global updateIndex
@@ -409,7 +406,6 @@ class ButtonIO:
             if pB_audio.setClient('ap') is True:                # Set client AirPlay
                 menuLevel = 'apMain'                            # Home -> AirPlay Main
                 logging.debug('Set menu level: %s', menuLevel)
-                updateIndex = True
             else:
                 id = 03
                 error(id)
@@ -417,9 +413,8 @@ class ButtonIO:
         elif menuLevel == 'btMain':
             menuLevel = 'btNewDevice'                           # Bluetooth Main -> Add a new device
             logging.debug('Set menu level: %s', menuLevel)
-            updateIndex = True
         elif menuLevel == 'btNewDevice':
-            updateIndex = True
+            pass
 
     def slctIndexF3(self):
         pass

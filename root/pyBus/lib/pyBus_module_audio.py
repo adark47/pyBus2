@@ -220,5 +220,10 @@ def Random():
     else:
         logging.debug('not supported service: s%', CLIENT)
 
+def Shutdown():
+    vlm.Shutdown()
+
+def Reboot():
+    vlm.Reboot()
 
 ############################################################################
