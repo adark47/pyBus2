@@ -94,33 +94,43 @@ DIRECTIVES = {
 #            '4807': 'infoP',                    # F0 05 68 48 07 - Info press
 #            '4844': 'infoH',                    # F0 05 68 48 44 - Info hold
 #            '4887': 'infoR',                    # F0 05 68 48 87 - Info released
+
             '4811': 'button1p',                 # F0 04 68 48 11 - Button 1 press
 #            '4851': 'button1H',                 # F0 04 68 48 51 - Button 1 hold
 #            '4891': 'button1R',                 # F0 05 68 48 91 - Button 1 released
+
             '4801': 'button2p',                 # F0 04 68 48 01 - Button 2 press
 #            '4841': 'button2H',                 # F0 04 68 48 41 - Button 2 hold
 #            '4881': 'button2R',                 # F0 05 68 48 81 - Button 2 released
+
             '4812': 'button3p',                 # F0 04 68 48 12 - Button 3 press
 #            '4852': 'button3H',                 # F0 04 68 48 52 - Button 3 hold
 #            '4892': 'button3R',                 # F0 05 68 48 92 - Button 3 released
+
             '4802': 'button4p',                 # F0 04 68 48 02 - Button 4 press
 #            '4842': 'button4H',                 # F0 04 68 48 42 - Button 4 hold
 #            '4882': 'button4R',                 # F0 05 68 48 82 - Button 4 released
+
             '4813': 'button5p',                 # F0 04 68 48 13 - Button 5 press
 #            '4853': 'button5H',                 # F0 04 68 48 53 - Button 5 hold
 #            '4893': 'button5R',                 # F0 05 68 48 93 - Button 5 released
+
             '4803': 'button6p',                 # F0 04 68 48 03 - Button 6 press
 #            '4843': 'button6H',                 # F0 04 68 48 43 - Button 6 hold
 #            '4883': 'button6R',                 # F0 05 68 48 83 - Button 6 released
+
 #            '4810': 'ArrowLP',                  # F0 04 68 48 10 - "<" ArrowLeft press
 #            '4850': 'ArrowLH',                  # F0 04 68 48 50 - "<" ArrowLeft hold
 #            '4890': 'ArrowLR',                  # F0 05 68 48 90 - "<" ArrowLeft released
+
 #            '4800': 'ArrowRP',                  # F0 04 68 48 00 - ">" ArrowRight press
 #            '4840': 'ArrowRH',                  # F0 04 68 48 40 - ">" ArrowRight hold
 #            '4880': 'ArrowRR',                  # F0 05 68 48 80 - ">" ArrowRight released
+
 #            '4814': 'ArrowP',                   # F0 04 68 48 14 - "<>" Arrow press
 #            '4854': 'ArrowH',                   # F0 04 68 48 54 - "<>" Arrow hold
 #            '4894': 'ArrowR',                   # F0 05 68 48 94 - "<>" Arrow released
+
 #            '4823': 'modeP',                    # F0 04 68 48 23 - MODE press
 #            '4863': 'modeH',                    # F0 04 68 48 63 - MODE hold
 #            '48A3':'modeR'                      # F0 05 68 48 A3 - MODE released
@@ -137,19 +147,47 @@ DIRECTIVES = {
 
     '3B': {                                     # MK4 - Index fields
         '68': {
-            '01':     'd_cdPollResponse',       # "I'm alive" message
             '31': {
                 '60': {
-                    '0040': 'slctIndexF0',          # 3B 06 68 31 60 00 40 - selected Index fields 0
-                    '0041': 'slctIndexF1',          # 3B 06 68 31 60 00 41 - selected Index fields 1
-                    '0042': 'slctIndexF2',          # 3B 06 68 31 60 00 42 - selected Index fields 2
-                    '0043': 'slctIndexF3',          # 3B 06 68 31 60 00 43 - selected Index fields 3
-                    '0044': 'slctIndexF4',          # 3B 06 68 31 60 00 44 - selected Index fields 4
-                    '0045': 'slctIndexF5',          # 3B 06 68 31 60 00 45 - selected Index fields 5
-                    '0046': 'slctIndexF6',          # 3B 06 68 31 60 00 46 - selected Index fields 6
-                    '0047': 'slctIndexF7',          # 3B 06 68 31 60 00 47 - selected Index fields 7
-                    '0048': 'slctIndexF8',          # 3B 06 68 31 60 00 48 - selected Index fields 8
-                    '0049': 'slctIndexF9'           # 3B 06 68 31 60 00 49 - selected Index fields 9
+                    '0000': 'slctIndexF0',      # Index fields 0 press      # 3B 06 68 31 60 00 00
+#                    '0020': '',                 # Index fields 0 hold       # 3B 06 68 31 60 00 20
+#                    '0040': '',                 # Index fields 0 released   # 3B 06 68 31 60 00 40
+
+                    '0001': 'slctIndexF1',      # Index fields 1 press      # 3B 06 68 31 60 00 01
+#                    '0021': '',                 # Index fields 1 hold       # 3B 06 68 31 60 00 21
+#                    '0041': '',                 # Index fields 1 released   # 3B 06 68 31 60 00 41
+
+                    '0002': 'slctIndexF2',      # Index fields 2 press      # 3B 06 68 31 60 00 02
+#                    '0022': '',                 # Index fields 2 hold       # 3B 06 68 31 60 00 22
+#                    '0042': '',                 # Index fields 2 released   # 3B 06 68 31 60 00 42
+
+                    '0003': 'slctIndexF3',      # Index fields 3 press      # 3B 06 68 31 60 00 03
+#                    '0023': '',                 # Index fields 3 hold       # 3B 06 68 31 60 00 23
+#                    '0043': '',                 # Index fields 3 released   # 3B 06 68 31 60 00 43
+
+                    '0004': 'slctIndexF4',      # Index fields 4 press      # 3B 06 68 31 60 00 04
+#                    '0024': '',                 # Index fields 4 hold       # 3B 06 68 31 60 00 24
+#                    '0044': '',                 # Index fields 4 released   # 3B 06 68 31 60 00 44
+
+                    '0005': 'slctIndexF5',      # Index fields 5 press      # 3B 06 68 31 60 00 05
+#                    '0025': '',                 # Index fields 5 hold       # 3B 06 68 31 60 00 25
+#                    '0045': '',                 # Index fields 5 released   # 3B 06 68 31 60 00 45
+
+                    '0006': 'slctIndexF6',      # Index fields 6 press      # 3B 06 68 31 60 00 06
+#                    '0026': '',                 # Index fields 6 hold       # 3B 06 68 31 60 00 26
+#                    '0046': '',                 # Index fields 6 released   # 3B 06 68 31 60 00 46
+
+                    '0007': 'slctIndexF7',      # Index fields 7 press      # 3B 06 68 31 60 00 07
+#                    '0027': '',                 # Index fields 7 hold       # 3B 06 68 31 60 00 27
+#                    '0047': '',                 # Index fields 7 released   # 3B 06 68 31 60 00 47
+
+                    '0008': 'slctIndexF8',      # Index fields 8 press      # 3B 06 68 31 60 00 08
+#                    '0028': '',                 # Index fields 8 hold       # 3B 06 68 31 60 00 28
+#                    '0048': '',                 # Index fields 8 released   # 3B 06 68 31 60 00 48
+
+                    '0009': 'slctIndexF9',      # Index fields 9 press      # 3B 06 68 31 60 00 09
+#                    '0029': '',                 # Index fields 9 hold       # 3B 06 68 31 60 00 29
+#                    '0049': ''                  # Index fields 9 released   # 3B 06 68 31 60 00 49
                 }
             }
         }
@@ -159,6 +197,7 @@ DIRECTIVES = {
         'C8': {                                 # Multifunction steering wheel phone buttons
             '01':   'd_cdPollResponse',         # This can happen via RT button or ignition
             '3B40': 'wheelRT',                  # 50 04 C8 3B 40    - R/T
+
 #            '3B80': 'wheelVoiceP',              # 50 04 C8 3B 80 27 - voice press
 #            '3B90': 'wheelVoiceH',              # 50 04 C8 3B 90 37 - voice hold
 #            '3BA0': 'wheelVoiceR'               # 50 04 C8 3B A0 07 - voice release
@@ -202,7 +241,6 @@ def init(writer):
     pB_util.init(WRITER)
 
     pB_cdc.enableFunc("announce", 10)               # default 30 (not worked)
-    pB_cdc.enableFunc('pollResponse', 10)           # test
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
