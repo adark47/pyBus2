@@ -159,7 +159,7 @@ class busWriter:
     # Index fields 9 - 23 characters
     # <68 xx 3B> <21 60 00> <49> <Text in ASCII Hex>
     def writeIndexF9(self, string):
-        self.IBUS.writeBusPacket('68', '68', _hexText(string, ['21', '60', '00', '49'], 23))
+        self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['21', '60', '00', '49'], 23))
         logging.debug('MK4 - write IndexF9: %s', string)
 
 # MK4 - ############################################################################
