@@ -56,12 +56,16 @@ class busWriter:
         logging.debug('Immediate text - Clear')
 
 # MK4 - Title ######################################################################
+    # Title field - 11 characters
+    # <68 xx 3B> <23 62 10> <Text in ASCII Hex>
+    def writeTitle(self, string):
+        self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['23', '62', '10'], 11))
+        logging.debug('MK4 - write Title: %s', string)
 
     # Title field T0 - 11 characters
     # <68 xx 3B> <23 62 30> <Text in ASCII Hex>
     def writeTitleT0(self, string):
         self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['23', '62', '30'], 11))
-        #self.IBUS.writeBusPacket('68', '3B', _hexText(string, ['23', '62', '10'], 11))
         logging.debug('MK4 - write TitleT0: %s', string)
 
     # Title field T1 - 4 characters

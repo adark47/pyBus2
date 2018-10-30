@@ -105,11 +105,13 @@ class TextScroller:
 def displayF(titleT0=None, titleT1=None, titleT2=None, titleT3=None, titleT4=None, titleT5=None, titleT6=None,
              indexF0=None, indexF1=None, indexF2=None, indexF3=None, indexF4=None,
              indexF5=None, indexF6=None, indexF7=None, indexF8=None, indexF9=None,
-             clearScreen=False, refreshIndex=False):
+             clearScreen=False, updateScreen=False, refreshIndex=False):
 
     time.sleep(TICK)
     if clearScreen is True:
         display.clearScreen()
+    if updateScreen is True:
+        display.updateScreen()
     time.sleep(TICK)
     if titleT0 is not None:
         display.writeTitleT0(titleT0)
@@ -191,11 +193,10 @@ class DisplayIO(threading.Thread):
                 displayF(
                     titleT0='BMW-MULTIMEDIA',
                     titleT1='',
-                    titleT2='OK',
                     titleT3=versionPB,
                     titleT4='',
                     titleT5='Status:',
-                    titleT6='<======>',
+                    titleT6='          ',
 
                     indexF0='Volumio',
                     indexF1='Bluetooth',
@@ -214,7 +215,6 @@ class DisplayIO(threading.Thread):
                 displayF(
                     titleT0=('%s - %s', pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
                     titleT1='',
-                    titleT2='OK',
                     titleT3=versionPB,
                     titleT4='',
                     titleT5=('%s', pB_audio.getTrackInfo().get('status')),
@@ -250,6 +250,8 @@ class DisplayIO(threading.Thread):
 
     def stop(self):
         logging.info('Display shutdown')
+        display.clearScreen()
+        display.radioMenuEnable()
         self._Thread__stop()
 
 
@@ -360,6 +362,7 @@ class ButtonIO:
     def slctIndexF0(self):
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
+            display.clearScreen()
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'vlmMain'                           # Home -> Volumio Main
                 logging.debug('Set menu level: %s', menuLevel)
@@ -368,6 +371,7 @@ class ButtonIO:
                 error(id)
                 logging.error('ERROR: %s', id)
         elif menuLevel == 'btMain':                             # <-- Back --
+            display.clearScreen()
             if pB_audio.setClient('vlm') is True:               # Set client Volumio
                 menuLevel = 'homeMain'                          # Bluetooth Main -> Home
                 logging.debug('Set menu level: %s', menuLevel)
@@ -376,16 +380,18 @@ class ButtonIO:
                 error(id)
                 logging.error('ERROR: %s', id)
         elif menuLevel == 'btSelectDevice':                     # <-- Back --
+            display.clearScreen()
             menuLevel = 'btMain'                                # Select device -> Bluetooth Main
             logging.debug('Set menu level: %s', menuLevel)
         elif menuLevel == 'btNewDevice':                        # <-- Back --
+            display.clearScreen()
             menuLevel = 'btSelectDevice'                        # Add a new device -> Select device
             logging.debug('Set menu level: %s', menuLevel)
 
     def slctIndexF1(self):
-        global updateIndex
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
+            display.clearScreen()
             if pB_audio.setClient('bt') is True:                # Set client Bluetooth
                 menuLevel = 'btMain'
                 logging.debug('Set menu level: %s', menuLevel)
@@ -394,15 +400,17 @@ class ButtonIO:
                 error(id)
                 logging.error('ERROR: %s', id)
         elif menuLevel == 'btSelectDevice':
+            display.clearScreen()
             menuLevel = 'btSelectDevice'                        # Bluetooth -> Select device
             logging.debug('Set menu level: %s', menuLevel)
         elif menuLevel == 'btSelectDevice':
-            pass
+            display.clearScreen()
 
     def slctIndexF2(self):
         global updateIndex
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
+            display.clearScreen()
             if pB_audio.setClient('ap') is True:                # Set client AirPlay
                 menuLevel = 'apMain'                            # Home -> AirPlay Main
                 logging.debug('Set menu level: %s', menuLevel)
@@ -411,10 +419,11 @@ class ButtonIO:
                 error(id)
                 logging.error('ERROR: %s', id)
         elif menuLevel == 'btMain':
+            display.clearScreen()
             menuLevel = 'btNewDevice'                           # Bluetooth Main -> Add a new device
             logging.debug('Set menu level: %s', menuLevel)
         elif menuLevel == 'btNewDevice':
-            pass
+            display.clearScreen()
 
     def slctIndexF3(self):
         pass

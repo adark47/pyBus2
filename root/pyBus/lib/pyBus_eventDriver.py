@@ -305,7 +305,7 @@ def d_custom_IKE(packet):
     # 18 : speed and RPM
     if packet_data[0] == '18':
         speed = int(packet_data[1], 16) * 2
-        revs = int(packet_data[2], 16) * 10000
+        revs = int(packet_data[2], 16) * 100
         customState = {'speed': speed, 'revs': revs}
         logging.debug('IKE - (%s)', customState)
     # 19 = Temperature
