@@ -48,12 +48,12 @@ class busWriter:
     # Text IKEConsole LCD - 12 characters
     def textIKE(self, string):
         self.IBUS.writeBusPacket('C8', '80', _hexText(string, ['23', '42', '01'], 12))
-        logging.debug('Immediate text - write Text: %s', string)
+        logging.debug('IKE text - write Text: %s', string)
 
     # Clear IKEConsole LCD
     def clearIKE(self):
         self.IBUS.writeBusPacket('c8', '80', ['23', '42', '32', '1e'])
-        logging.debug('Immediate text - Clear')
+        logging.debug('IKE text - Clear')
 
 # MK4 - Title ######################################################################
     # Title field - 11 characters
