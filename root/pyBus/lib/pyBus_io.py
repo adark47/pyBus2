@@ -48,6 +48,7 @@ def init(writer):
     display = pB_display.busWriter(WRITER)
     displayThread = DisplayIO()
     displayThread.start()
+#    displayThread.isAlive()
 
 
 def end():
@@ -208,7 +209,6 @@ class DisplayIO(threading.Thread):
                     indexF7='',
                     indexF8='',
                     indexF9='',
-                    refreshIndex=True
                     )
 
             elif menuLevel == 'btMain':                 # Bluetooth Main
@@ -230,7 +230,6 @@ class DisplayIO(threading.Thread):
                     indexF7='',
                     indexF8='',
                     indexF9='',
-                    refreshIndex=True
                     )
 
             elif menuLevel == 'btSelectDevice':         # Bluetooth -> Select device
@@ -260,6 +259,7 @@ class DisplayIO(threading.Thread):
 ############################################################################
 
 class ButtonIO:
+# Info #####################################################################
     def infoP(self):
         pass
 
@@ -269,6 +269,8 @@ class ButtonIO:
     def infoR(self):
         pass
 
+
+# Button 1 #################################################################
     def button1P(self):
         pass
 
@@ -278,6 +280,8 @@ class ButtonIO:
     def button1R(self):
         pass
 
+
+# Button 2 #################################################################
     def button2P(self):
         pass
 
@@ -287,6 +291,8 @@ class ButtonIO:
     def button2R(self):
         pass
 
+
+# Button 3 #################################################################
     def button3P(self):
         pass
 
@@ -296,6 +302,8 @@ class ButtonIO:
     def button3R(self):
         pass
 
+
+# Button 4 #################################################################
     def button4P(self):
         pass
 
@@ -305,6 +313,8 @@ class ButtonIO:
     def button4R(self):
         pass
 
+
+# Button 5 #################################################################
     def button5P(self):
         pass
 
@@ -314,6 +324,8 @@ class ButtonIO:
     def button5R(self):
         pass
 
+
+# Button 6 #################################################################
     def button6P(self):
         pass
 
@@ -323,33 +335,41 @@ class ButtonIO:
     def button6R(self):
         pass
 
-    def ArrowLP(self):
+
+# "<" Arrow Left ###########################################################
+    def arrowLP(self):
         pass
 
-    def ArrowLH(self):
+    def arrowLH(self):
         pass
 
-    def ArrowLR(self):
+    def arrowLR(self):
         pass
 
-    def ArrowRP(self):
+
+# ">" Arrow Left ###########################################################
+    def arrowRP(self):
         pass
 
-    def ArrowRH(self):
+    def arrowRH(self):
         pass
 
-    def ArrowRR(self):
+    def arrowRR(self):
         pass
 
-    def ArrowP(self):
+
+# "<>" Arrow Left ##########################################################
+    def arrowP(self):
         pass
 
-    def ArrowH(self):
+    def arrowH(self):
         pass
 
-    def ArrowR(self):
+    def arrowR(self):
         pass
 
+
+# MODE #####################################################################
     def modeP(self):
         pass
 
@@ -359,7 +379,9 @@ class ButtonIO:
     def modeR(self):
         pass
 
-    def slctIndexF0(self):
+
+# IndexF0 ##################################################################
+    def indexF0P(self):
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
             display.clearScreen()
@@ -388,7 +410,15 @@ class ButtonIO:
             menuLevel = 'btSelectDevice'                        # Add a new device -> Select device
             logging.debug('Set menu level: %s', menuLevel)
 
-    def slctIndexF1(self):
+    def indexF0H(self):
+        pass
+
+    def indexF0R(self):
+        pass
+
+
+# IndexF1 ##################################################################
+    def indexF1P(self):
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
             display.clearScreen()
@@ -406,7 +436,15 @@ class ButtonIO:
         elif menuLevel == 'btSelectDevice':
             display.clearScreen()
 
-    def slctIndexF2(self):
+    def indexF1H(self):
+        pass
+
+    def indexF1R(self):
+        pass
+
+
+# IndexF2 ##################################################################
+    def indexF2P(self):
         global updateIndex
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
@@ -425,32 +463,98 @@ class ButtonIO:
         elif menuLevel == 'btNewDevice':
             display.clearScreen()
 
-    def slctIndexF3(self):
+    def indexF2H(self):
         pass
 
-    def slctIndexF4(self):
+    def indexF2R(self):
         pass
 
-    def slctIndexF5(self):
+
+# IndexF3 ##################################################################
+    def indexF3P(self):
+        pass
+
+    def indexF3H(self):
+        pass
+
+    def indexF3R(self):
+        pass
+
+
+# IndexF4 ##################################################################
+    def indexF4P(self):
+        pass
+
+    def indexF4H(self):
+        pass
+
+    def indexF4R(self):
+        pass
+
+
+# IndexF5 ##################################################################
+    def indexF5P(self):
         if menuLevel == 'homeMain':
             pB_audio.Reboot()
 
-    def slctIndexF6(self):
+    def indexF5H(self):
+        pass
+
+    def indexF5R(self):
+        pass
+
+
+# IndexF6 ##################################################################
+    def indexF6P(self):
         if menuLevel == 'homeMain':
             pB_audio.Shutdown()
 
-    def slctIndexF7(self):
+    def indexF6H(self):
         pass
 
-    def slctIndexF8(self):
+    def indexF6R(self):
         pass
 
-    def slctIndexF9(self):
+
+# IndexF7 ##################################################################
+    def indexF7P(self):
         pass
 
+    def indexF7H(self):
+        pass
+
+    def indexF7R(self):
+        pass
+
+
+# IndexF8 ##################################################################
+    def indexF8P(self):
+        pass
+
+    def indexF8H(self):
+        pass
+
+    def indexF8R(self):
+        pass
+
+
+# IndexF9 ##################################################################
+    def indexF9P(self):
+        pass
+
+    def indexF9H(self):
+        pass
+
+    def indexF9R(self):
+        pass
+
+
+# Wheel R/T ################################################################
     def wheelRT(self):
         bt.connect()
 
+
+# Wheel voice ##############################################################
     def wheelVoiceP(self):
         pass
 
@@ -460,6 +564,8 @@ class ButtonIO:
     def wheelVoiceR(self):
         pass
 
+
+# Wheel ">" ################################################################
     def wheelArrowUP(self):
         pass
 
@@ -469,6 +575,8 @@ class ButtonIO:
     def wheelArrowUR(self):
         pass
 
+
+# Wheel "<" ################################################################
     def wheelArrowDP(self):
         pass
 

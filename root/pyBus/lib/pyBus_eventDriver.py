@@ -27,190 +27,170 @@ import pyBus_io as pB_io
 # third level is data : function name
 
 DIRECTIVES = {
-#    '00': {
-#        'BF': {
-#            '0200B9': '',                       # Unlocked via key
-#            '7212DB': '',                       # Locked via key
-#            '7A1000': '',                       # passenger door opened, probably
-#            '7A5202': '',                       # passenger door closed, probably
-#            '7A5020': '',                       # driver window popped up after closing door
-#            '7A5021': '',                       # driver door closed
-#            '7A5120': '',                       # driver window popped down before opening door
-#            '7A5121': ''                        # driver door opened
-#        }
-#    },
-#    '3F': {
-#        '00': {
-#            '0C3401': '',                       # All doors unlocked
-#            '0C4601': '',                       # Passenger Door Locked
-#            '0C4701': ''                        # Driver Door Locked
-#        }
-#    },
-#    '44': {
-#        'BF': {
-#            '740400': ''                        # Ignition key in
-#            '7401FF': '',                       # Ignition key position 1
-#            '740401': '',                       # Ignition key position 2
-#            '7400FF': ''                        # Ignition key removed
-#        }
-#    },
-#    'C0': {
-#        '68': {
-#            '3100000B': '',                     # Mode button pressed
-#            '3100134B': '',                     # Mode button released
-#        }
-#    },
 
-    '80': {
-        'BF': {
-            'ALL': 'd_custom_IKE'               # Use ALL to send all data to a particular function
-        }
-    },
     '68': {                                     # CD53
         '18': {
             '01':     'd_cdPollResponse',       # "I'm alive" message
-            '380000': 'd_cdStatusPlaying',      # 68 05 18 38 00 00 - CD status Req
-            '380100': 'd_cdStop',               # 68 05 18 38 01 00 - Stop press
-            '380300': 'd_cdPlay',               # 68 05 18 38 03 00 - Play press
-            '380A00': 'd_cdNext',               # 68 05 18 38 0A 00 - Skip forward
-            '380A01': 'd_cdPrev',               # 68 05 18 38 0A 01 - Skip Backward
-#            '380700': '',                       # 68 05 18 38 07 00 - Scan Off press
-#            '380701': '',                       # 68 05 18 38 07 01 - Scan On press
-            '380601': 'd_cdPlay',               # 68 05 18 38 06 01 - CD Button 1 press
-            '380602': 'd_cdStop',               # 68 05 18 38 06 02 - CD Button 2 press
-#            '380603': '',                       # 68 05 18 38 06 03 - CD Button 3 press
-#            '380604': '',                       # 68 05 18 38 06 04 - CD Button 4 press
-#            '380605': '',                       # 68 05 18 38 06 05 - CD Button 5 press
-#            '380606': '',                       # 68 05 18 38 06 06 - CD Button 6 press
-#            '380400': '',                       # 68 05 18 38 04 00 - Fast Rwd press
-#            '380401': '',                       # 68 05 18 38 04 01 - Fast Fwd press
-#            '380800': 'd_cdRandom',             # 68 05 18 38 08 00 - Random Off press
-#            '380801': 'd_cdRandom'              # 68 05 18 38 08 01 - Random On press
+            '380000': 'd_cdStatusPlaying',      # CD status Req         # 68 05 18 38 00 00
+            '380100': 'd_cdStop',               # Stop press            # 68 05 18 38 01 00
+            '380300': 'd_cdPlay',               # Play press            # 68 05 18 38 03 00
+            '380A00': 'd_cdNext',               # Skip forward          # 68 05 18 38 0A 00
+            '380A01': 'd_cdPrev',               # Skip Backward         # 68 05 18 38 0A 01
+            '380700': '',                       # Scan Off press        # 68 05 18 38 07 00
+            '380701': '',                       # Scan On press         # 68 05 18 38 07 01
+            '380601': '',                       # CD Button 1 press     # 68 05 18 38 06 01
+            '380602': '',                       # CD Button 2 press     # 68 05 18 38 06 02
+            '380603': '',                       # CD Button 3 press     # 68 05 18 38 06 03
+            '380604': '',                       # CD Button 4 press     # 68 05 18 38 06 04
+            '380605': '',                       # CD Button 5 press     # 68 05 18 38 06 05
+            '380606': '',                       # CD Button 6 press     # 68 05 18 38 06 06
+            '380400': '',                       # Fast Rwd press        # 68 05 18 38 04 00
+            '380401': '',                       # Fast Fwd press        # 68 05 18 38 04 01
+            '380800': 'd_cdRandom',             # Random Off press      # 68 05 18 38 08 00
+            '380801': 'd_cdRandom'              # Random On press       # 68 05 18 38 08 01
         }
     },
 
-    'F0': {                                     # MK4
-        '68':{
-#            '4807': 'infoP',                    # F0 05 68 48 07 - Info press
-#            '4844': 'infoH',                    # F0 05 68 48 44 - Info hold
-#            '4887': 'infoR',                    # F0 05 68 48 87 - Info released
-
-            '4811': 'button1p',                 # F0 04 68 48 11 - Button 1 press
-#            '4851': 'button1H',                 # F0 04 68 48 51 - Button 1 hold
-#            '4891': 'button1R',                 # F0 05 68 48 91 - Button 1 released
-
-            '4801': 'button2p',                 # F0 04 68 48 01 - Button 2 press
-#            '4841': 'button2H',                 # F0 04 68 48 41 - Button 2 hold
-#            '4881': 'button2R',                 # F0 05 68 48 81 - Button 2 released
-
-            '4812': 'button3p',                 # F0 04 68 48 12 - Button 3 press
-#            '4852': 'button3H',                 # F0 04 68 48 52 - Button 3 hold
-#            '4892': 'button3R',                 # F0 05 68 48 92 - Button 3 released
-
-            '4802': 'button4p',                 # F0 04 68 48 02 - Button 4 press
-#            '4842': 'button4H',                 # F0 04 68 48 42 - Button 4 hold
-#            '4882': 'button4R',                 # F0 05 68 48 82 - Button 4 released
-
-            '4813': 'button5p',                 # F0 04 68 48 13 - Button 5 press
-#            '4853': 'button5H',                 # F0 04 68 48 53 - Button 5 hold
-#            '4893': 'button5R',                 # F0 05 68 48 93 - Button 5 released
-
-            '4803': 'button6p',                 # F0 04 68 48 03 - Button 6 press
-#            '4843': 'button6H',                 # F0 04 68 48 43 - Button 6 hold
-#            '4883': 'button6R',                 # F0 05 68 48 83 - Button 6 released
-
-#            '4810': 'ArrowLP',                  # F0 04 68 48 10 - "<" ArrowLeft press
-#            '4850': 'ArrowLH',                  # F0 04 68 48 50 - "<" ArrowLeft hold
-#            '4890': 'ArrowLR',                  # F0 05 68 48 90 - "<" ArrowLeft released
-
-#            '4800': 'ArrowRP',                  # F0 04 68 48 00 - ">" ArrowRight press
-#            '4840': 'ArrowRH',                  # F0 04 68 48 40 - ">" ArrowRight hold
-#            '4880': 'ArrowRR',                  # F0 05 68 48 80 - ">" ArrowRight released
-
-#            '4814': 'ArrowP',                   # F0 04 68 48 14 - "<>" Arrow press
-#            '4854': 'ArrowH',                   # F0 04 68 48 54 - "<>" Arrow hold
-#            '4894': 'ArrowR',                   # F0 05 68 48 94 - "<>" Arrow released
-
-#            '4823': 'modeP',                    # F0 04 68 48 23 - MODE press
-#            '4863': 'modeH',                    # F0 04 68 48 63 - MODE hold
-#            '48A3':'modeR'                      # F0 05 68 48 A3 - MODE released
-#        },
-#        '3B':{
-#            '4981': '',                         # F0 04 3B 49 81 - right nob Left turn
-#            '4901': '',                         # F0 04 3B 49 01 - right nob Right turn
-#
-#            '4805': '',                         # F0 04 3B 48 05 - right nob push
-#            '4845': '',                         # F0 04 3B 48 45 - right nob hold
-#            '4885': ''                          # F0 04 3B 48 85 - right nob released
-        }
-    },
-
-    '3B': {                                     # MK4 - Index fields
+    'F0': {
         '68': {
-            '31': {
-                '60': {
-                    '0000': 'slctIndexF0',      # Index fields 0 press      # 3B 06 68 31 60 00 00
-#                    '0020': '',                 # Index fields 0 hold       # 3B 06 68 31 60 00 20
-#                    '0040': '',                 # Index fields 0 released   # 3B 06 68 31 60 00 40
+            '4807': 'infoP',            # Info press                # F0 04 68 48 07
+            '4844': 'infoH',            # Info hold                 # F0 04 68 48 44
+            '4887': 'infoR',            # Info released             # F0 04 68 48 87
 
-                    '0001': 'slctIndexF1',      # Index fields 1 press      # 3B 06 68 31 60 00 01
-#                    '0021': '',                 # Index fields 1 hold       # 3B 06 68 31 60 00 21
-#                    '0041': '',                 # Index fields 1 released   # 3B 06 68 31 60 00 41
+            '4811': 'button1p',         # Button 1 press            # F0 04 68 48 11
+            '4851': 'button1H',         # Button 1 hold             # F0 04 68 48 51
+            '4891': 'button1R',         # Button 1 released         # F0 04 68 48 91
 
-                    '0002': 'slctIndexF2',      # Index fields 2 press      # 3B 06 68 31 60 00 02
-#                    '0022': '',                 # Index fields 2 hold       # 3B 06 68 31 60 00 22
-#                    '0042': '',                 # Index fields 2 released   # 3B 06 68 31 60 00 42
+            '4801': 'button2p',         # Button 2 press            # F0 04 68 48 01
+            '4841': 'button2H',         # Button 2 hold             # F0 04 68 48 41
+            '4881': 'button2R',         # Button 2 released         # F0 04 68 48 81
 
-                    '0003': 'slctIndexF3',      # Index fields 3 press      # 3B 06 68 31 60 00 03
-#                    '0023': '',                 # Index fields 3 hold       # 3B 06 68 31 60 00 23
-#                    '0043': '',                 # Index fields 3 released   # 3B 06 68 31 60 00 43
+            '4812': 'button3p',         # Button 3 press            # F0 04 68 48 12
+            '4852': 'button3H',         # Button 3 hold             # F0 04 68 48 52
+            '4892': 'button3R',         # Button 3 released         # F0 04 68 48 92
 
-                    '0004': 'slctIndexF4',      # Index fields 4 press      # 3B 06 68 31 60 00 04
-#                    '0024': '',                 # Index fields 4 hold       # 3B 06 68 31 60 00 24
-#                    '0044': '',                 # Index fields 4 released   # 3B 06 68 31 60 00 44
+            '4802': 'button4p',         # Button 4 press            # F0 04 68 48 02
+            '4842': 'button4H',         # Button 4 hold             # F0 04 68 48 42
+            '4882': 'button4R',         # Button 4 released         # F0 04 68 48 82
 
-                    '0005': 'slctIndexF5',      # Index fields 5 press      # 3B 06 68 31 60 00 05
-#                    '0025': '',                 # Index fields 5 hold       # 3B 06 68 31 60 00 25
-#                    '0045': '',                 # Index fields 5 released   # 3B 06 68 31 60 00 45
+            '4813': 'button5p',         # Button 5 press            # F0 04 68 48 13
+            '4853': 'button5H',         # Button 5 hold             # F0 04 68 48 53
+            '4893': 'button5R',         # Button 5 released         # F0 04 68 48 93
 
-                    '0006': 'slctIndexF6',      # Index fields 6 press      # 3B 06 68 31 60 00 06
-#                    '0026': '',                 # Index fields 6 hold       # 3B 06 68 31 60 00 26
-#                    '0046': '',                 # Index fields 6 released   # 3B 06 68 31 60 00 46
+            '4803': 'button6p',         # Button 6 press            # F0 04 68 48 03
+            '4843': 'button6H',         # Button 6 hold             # F0 04 68 48 43
+            '4883': 'button6R',         # Button 6 released         # F0 04 68 48 83
 
-                    '0007': 'slctIndexF7',      # Index fields 7 press      # 3B 06 68 31 60 00 07
-#                    '0027': '',                 # Index fields 7 hold       # 3B 06 68 31 60 00 27
-#                    '0047': '',                 # Index fields 7 released   # 3B 06 68 31 60 00 47
+            '4810': 'arrowLP',          # "<" ArrowLeft press       # F0 04 68 48 10
+            '4850': 'arrowLH',          # "<" ArrowLeft hold        # F0 04 68 48 50
+            '4890': 'arrowLR',          # "<" ArrowLeft released    # F0 04 68 48 90
 
-                    '0008': 'slctIndexF8',      # Index fields 8 press      # 3B 06 68 31 60 00 08
-#                    '0028': '',                 # Index fields 8 hold       # 3B 06 68 31 60 00 28
-#                    '0048': '',                 # Index fields 8 released   # 3B 06 68 31 60 00 48
+            '4800': 'arrowRP',          # ">" ArrowRight press      # F0 04 68 48 00
+            '4840': 'arrowRH',          # ">" ArrowRight hold       # F0 04 68 48 40
+            '4880': 'arrowRR',          # ">" ArrowRight released   # F0 04 68 48 80
 
-                    '0009': 'slctIndexF9',      # Index fields 9 press      # 3B 06 68 31 60 00 09
-#                    '0029': '',                 # Index fields 9 hold       # 3B 06 68 31 60 00 29
-#                    '0049': ''                  # Index fields 9 released   # 3B 06 68 31 60 00 49
-                }
-            }
+            '4814': 'arrowP',           # "<>" Arrow press          # F0 04 68 48 14
+            '4854': 'arrowH',           # "<>" Arrow hold           # F0 04 68 48 54
+            '4894': 'arrowR',           # "<>" Arrow released       # F0 04 68 48 94
+
+            '4823': 'modeP',            # MODE press                # F0 04 68 48 23
+            '4863': 'modeH',            # MODE hold                 # F0 04 68 48 63
+            '48A3': 'modeR',            # MODE released             # F0 04 68 48 A3
+
+            '4808': '',                 # TELEPHONE pressed         # F0 04 68 48 08
+            '4848': '',                 # TELEPHONE hold            # F0 04 68 48 48
+            '4888': '',                 # TELEPHONE released        # F0 04 68 48 88
+
+            '4901': '',                 # right nob Right turn 1 step      # F0 04 3B 49 01
+            '4902': '',                 # right nob Right turn 2 steps     # F0 04 3B 49 02
+            '4903': '',                 # right nob Right turn 3 steps     # F0 04 3B 49 03
+            '4905': '',                 # right nob Left turn 5 steps      # F0 04 3B 49 05
+
+            '4981': '',                 # right nob Left turn 1 step       # F0 04 3B 49 81
+            '4982': '',                 # right nob Left turn 2 steps      # F0 04 3B 49 82
+            '4983': '',                 # right nob Left turn 3 steps      # F0 04 3B 49 83
+            '4985': '',                 # right nob Left turn 5 steps      # F0 04 3B 49 85
+
+            '4805': '',                 # right nob push                   # F0 04 3B 48 05
+            '4845': '',                 # right nob hold                   # F0 04 3B 48 45
+            '4885': ''                  # right nob released                # F0 04 3B 48 85
         }
     },
+
+    '3B': {                              # Index fields
+        '68': {
+            '31600000': 'indexF0P',      # Index fields 0 press      # 3B 06 68 31 60 00 00
+            '31600020': 'indexF0H',      # Index fields 0 hold       # 3B 06 68 31 60 00 20
+            '31600040': 'indexF0R',      # Index fields 0 released   # 3B 06 68 31 60 00 40
+
+            '31600001': 'indexF1P',      # Index fields 1 press      # 3B 06 68 31 60 00 01
+            '31600021': 'indexF1H',      # Index fields 1 hold       # 3B 06 68 31 60 00 21
+            '31600041': 'indexF1R',      # Index fields 1 released   # 3B 06 68 31 60 00 41
+
+            '31600002': 'indexF2P',      # Index fields 2 press      # 3B 06 68 31 60 00 02
+            '31600022': 'indexF2H',      # Index fields 2 hold       # 3B 06 68 31 60 00 22
+            '31600042': 'indexF2R',      # Index fields 2 released   # 3B 06 68 31 60 00 42
+
+            '31600003': 'indexF3P',      # Index fields 3 press      # 3B 06 68 31 60 00 03
+            '31600023': 'indexF3H',      # Index fields 3 hold       # 3B 06 68 31 60 00 23
+            '31600043': 'indexF3R',      # Index fields 3 released   # 3B 06 68 31 60 00 43
+
+            '31600004': 'indexF4P',      # Index fields 4 press      # 3B 06 68 31 60 00 04
+            '31600024': 'indexF4H',      # Index fields 4 hold       # 3B 06 68 31 60 00 24
+            '31600044': 'indexF4R',      # Index fields 4 released   # 3B 06 68 31 60 00 44
+
+            '31600005': 'indexF5P',      # Index fields 5 press      # 3B 06 68 31 60 00 05
+            '31600025': 'indexF5H',      # Index fields 5 hold       # 3B 06 68 31 60 00 25
+            '31600045': 'indexF5R',      # Index fields 5 released   # 3B 06 68 31 60 00 45
+
+            '31600006': 'indexF6P',      # Index fields 6 press      # 3B 06 68 31 60 00 06
+            '31600026': 'indexF6H',      # Index fields 6 hold       # 3B 06 68 31 60 00 26
+            '31600046': 'indexF6R',      # Index fields 6 released   # 3B 06 68 31 60 00 46
+
+            '31600007': 'indexF7P',      # Index fields 7 press      # 3B 06 68 31 60 00 07
+            '31600027': 'indexF7H',      # Index fields 7 hold       # 3B 06 68 31 60 00 27
+            '31600047': 'indexF7R',      # Index fields 7 released   # 3B 06 68 31 60 00 47
+
+            '31600008': 'indexF8P',      # Index fields 8 press      # 3B 06 68 31 60 00 08
+            '31600028': 'indexF8H',      # Index fields 8 hold       # 3B 06 68 31 60 00 28
+            '31600048': 'indexF8R',      # Index fields 8 released   # 3B 06 68 31 60 00 48
+
+            '31600009': 'indexF9P',      # Index fields 9 press      # 3B 06 68 31 60 00 09
+            '31600029': 'indexF9H',      # Index fields 9 hold       # 3B 06 68 31 60 00 29
+            '31600049': 'indexF9R'       # Index fields 9 released   # 3B 06 68 31 60 00 49
+        }
+     },
 
     '50': {
         'C8': {                                 # Multifunction steering wheel phone buttons
             '01':   'd_cdPollResponse',         # This can happen via RT button or ignition
-            '3B40': 'wheelRT',                  # 50 04 C8 3B 40    - R/T
+            '3B40': 'wheelRT',                  #  R/T              # 50 04 C8 3B 40
 
-#            '3B80': 'wheelVoiceP',              # 50 04 C8 3B 80 27 - voice press
-#            '3B90': 'wheelVoiceH',              # 50 04 C8 3B 90 37 - voice hold
-#            '3BA0': 'wheelVoiceR'               # 50 04 C8 3B A0 07 - voice release
+            '3B80': 'wheelVoiceP',              #  voice press      # 50 04 C8 3B 80 27
+            '3B90': 'wheelVoiceH',              #  voice hold       # 50 04 C8 3B 90 37
+            '3BA0': 'wheelVoiceR'               #  voice release    # 50 04 C8 3B A0 07
         },
         '68': {                                 # Multifunction steering wheel buttons
-            '3211': '',                         # 50 04 68 32 11 1F - "+" press
-            '3210': '',                         # 50 04 68 32 10 1E - "-" press
-            '3B01': 'wheelArrowUP',             # 50 04 68 3B 01 06 - ">" press
-            '3B11': 'wheelArrowUH',             # 50 04 68 3B 11 16 - ">" hold
-            '3B21': 'wheelArrowUR',             # 50 04 68 3B 21 26 - ">" release
-            '3B08': 'wheelArrowDP',             # 50 04 68 3B 08 0F - "<" press
-            '3B18': 'wheelArrowDH',             # 50 04 68 3B 18 1F - "<" hold
-            '3B28': 'wheelArrowDR'              # 50 04 68 3B 28 2F - "<" release
+            '3211': '',                         # "+" press         # 50 04 68 32 11 1F
+            '3210': '',                         # "-" press         # 50 04 68 32 10 1E
+            '3B01': 'wheelArrowUP',             # ">" press         # 50 04 68 3B 01 06
+            '3B11': 'wheelArrowUH',             # ">" hold          # 50 04 68 3B 11 16
+            '3B21': 'wheelArrowUR',             # ">" release       # 50 04 68 3B 21 26
+            '3B08': 'wheelArrowDP',             # "<" press         # 50 04 68 3B 08 0F
+            '3B18': 'wheelArrowDH',             # "<" hold          # 50 04 68 3B 18 1F
+            '3B28': 'wheelArrowDR'              # "<" release       # 50 04 68 3B 28 2F
+        }
+    },
+
+    '80': {
+        'BF': {
+            'ALL': 'd_custom_IKE'  # Use ALL to send all data to a particular function
+        }
+    },
+
+    '7F': {
+        '80': {
+            'ALL': 'navi_date'
         }
     }
 }
@@ -315,6 +295,17 @@ def d_custom_IKE(packet):
         customState = {'extTemp': extTemp, 'oilTemp': oilTemp}
         logging.debug('IKE - (%s)', customState)
 
+############################################################################
+# DATA
+############################################################################
+
+def navi_date(packet):
+    packet_data = packet['dat']
+    # # 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
+    if packet_data[0] == '1F' and packet_data[1] == '40':
+        date_n = {'day': int(packet_data[4]), 'month': int(packet_data[6]), 'year': int(packet_data[7, 8])}
+        time_n = {'hour': int(packet_data[2]), 'minute': int(packet_data[3])}
+        logging.debug('DATE - (%s):(%s) (%s).(%s).(%s)', time_n['hour'], time_n['minute'], date_n['day'], date_n['month'], date_n['year'])
 
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
@@ -351,265 +342,322 @@ def d_cdStatusPlaying(packet):
 ############################################################################
 # BUTTON DISPLAY
 ############################################################################
+# Info #####################################################################
 def infoP(packet):
-    logging.debug('MK4 - Info press (%s)', packet)
+    logging.debug('BMBT - Info press (%s)', packet)
     buttonIO.infoP()
 
-
 def infoH(packet):
-    logging.debug('MK4 - Info hold (%s)', packet)
+    logging.debug('BMBT - Info hold (%s)', packet)
     buttonIO.infoH()
 
-
 def infoR(packet):
-    logging.debug('MK4 - Info released (%s)', packet)
+    logging.debug('BMBT - Info released (%s)', packet)
     buttonIO.infoR()
 
 
+# Button 1 #################################################################
 def button1P(packet):
-    logging.debug('MK4 - Button 1 press (%s)', packet)
+    logging.debug('BMBT - Button 1 press (%s)', packet)
     buttonIO.button1P()
 
-
 def button1H(packet):
-    logging.debug('MK4 - Button 1 hold (%s)', packet)
+    logging.debug('BMBT - Button 1 hold (%s)', packet)
     buttonIO.button1H()
 
-
 def button1R(packet):
-    logging.debug('MK4 - Button 1 released (%s)', packet)
+    logging.debug('BMBT - Button 1 released (%s)', packet)
     buttonIO.button1R()
 
 
+# Button 2 #################################################################
 def button2P(packet):
-    logging.debug('MK4 - Button 2 press (%s)', packet)
+    logging.debug('BMBT - Button 2 press (%s)', packet)
     buttonIO.button2P()
 
-
 def button2H(packet):
-    logging.debug('MK4 - Button 2 hold (%s)', packet)
+    logging.debug('BMBT - Button 2 hold (%s)', packet)
     buttonIO.button2H()
 
-
 def button2R(packet):
-    logging.debug('MK4 - Button 2 released (%s)', packet)
+    logging.debug('BMBT - Button 2 released (%s)', packet)
     buttonIO.button2R()
 
 
+# Button 3 #################################################################
 def button3P(packet):
-    logging.debug('MK4 - Button 3 press (%s)', packet)
+    logging.debug('BMBT - Button 3 press (%s)', packet)
     buttonIO.button3P()
 
-
 def button3H(packet):
-    logging.debug('MK4 - Button 3 hold (%s)', packet)
+    logging.debug('BMBT - Button 3 hold (%s)', packet)
     buttonIO.button3H()
 
-
 def button3R(packet):
-    logging.debug('MK4 - Button 3 released (%s)', packet)
+    logging.debug('BMBT - Button 3 released (%s)', packet)
     buttonIO.button3R()
 
 
+# Button 4 #################################################################
 def button4P(packet):
-    logging.debug('MK4 - Button 4 press (%s)', packet)
+    logging.debug('BMBT - Button 4 press (%s)', packet)
     buttonIO.button4P()
 
-
 def button4H(packet):
-    logging.debug('MK4 - Button 4 hold (%s)', packet)
+    logging.debug('BMBT - Button 4 hold (%s)', packet)
     buttonIO.button4H()
 
-
 def button4R(packet):
-    logging.debug('MK4 - Button 4 released (%s)', packet)
+    logging.debug('BMBT - Button 4 released (%s)', packet)
     buttonIO.button4R()
 
 
+# Button 5 #################################################################
 def button5P(packet):
-    logging.debug('MK4 - Button 5 press (%s)', packet)
+    logging.debug('BMBT - Button 5 press (%s)', packet)
     buttonIO.button5P()
 
-
 def button5H(packet):
-    logging.debug('MK4 - Button 5 hold (%s)', packet)
+    logging.debug('BMBT - Button 5 hold (%s)', packet)
     buttonIO.button5H()
 
-
 def button5R(packet):
-    logging.debug('MK4 - Button 5 released (%s)', packet)
+    logging.debug('BMBT - Button 5 released (%s)', packet)
     buttonIO.button5R()
 
 
+# Button 6 #################################################################
 def button6P(packet):
-    logging.debug('MK4 - Button 6 press (%s)', packet)
+    logging.debug('BMBT - Button 6 press (%s)', packet)
     buttonIO.button6P()
 
-
 def button6H(packet):
-    logging.debug('MK4 - Button 6 hold (%s)', packet)
+    logging.debug('BMBT - Button 6 hold (%s)', packet)
     buttonIO.button6H()
 
-
 def button6R(packet):
-    logging.debug('MK4 - Button 6 released (%s)', packet)
+    logging.debug('BMBT - Button 6 released (%s)', packet)
     buttonIO.button6R()
 
 
-def ArrowLP(packet):
-    logging.debug('MK4 - "<" ArrowLeft press (%s)' % (packet,))
-    buttonIO.ArrowLP()
+# "<" Arrow Left ###########################################################
+def arrowLP(packet):
+    logging.debug('BMBT - "<" ArrowLeft press (%s)' % (packet,))
+    buttonIO.arrowLP()
+
+def arrowLH(packet):
+    logging.debug('BMBT - "<" ArrowLeft hold (%s)', packet)
+    buttonIO.arrowLH()
+
+def arrowLR(packet):
+    logging.debug('BMBT - "<" ArrowLeft released (%s)', packet)
+    buttonIO.arrowLR()
 
 
-def ArrowLH(packet):
-    logging.debug('MK4 - "<" ArrowLeft hold (%s)', packet)
-    buttonIO.ArrowLH()
+# ">" Arrow Left ###########################################################
+def arrowRP(packet):
+    logging.debug('BMBT - ">" ArrowRight press (%s)', packet)
+    buttonIO.arrowRP()
+
+def arrowRH(packet):
+    logging.debug('BMBT - ">" ArrowRight hold (%s)', packet)
+    buttonIO.arrowRH()
+
+def arrowRR(packet):
+    logging.debug('BMBT - ">" ArrowRight released (%s)', packet)
+    buttonIO.arrowRR()
 
 
-def ArrowLR(packet):
-    logging.debug('MK4 - "<" ArrowLeft released (%s)', packet)
-    buttonIO.ArrowLR()
+# "<>" Arrow Left ##########################################################
+def arrowP(packet):
+    logging.debug('BMBT - "<>" Arrow press (%s)', packet)
+    buttonIO.arrowP()
+
+def arrowH(packet):
+    logging.debug('BMBT - "<>" Arrow hold (%s)', packet)
+    buttonIO.arrowH()
+
+def arrowR(packet):
+    logging.debug('BMBT - "<>" Arrow released (%s)', packet)
+    buttonIO.arrowR()
 
 
-def ArrowRP(packet):
-    logging.debug('MK4 - ">" ArrowRight press (%s)', packet)
-    buttonIO.ArrowRP()
-
-
-def ArrowRH(packet):
-    logging.debug('MK4 - ">" ArrowRight hold (%s)', packet)
-    buttonIO.ArrowRH()
-
-
-def ArrowRR(packet):
-    logging.debug('MK4 - ">" ArrowRight released (%s)', packet)
-    buttonIO.ArrowRR()
-
-
-def ArrowP(packet):
-    logging.debug('MK4 - "<>" Arrow press (%s)', packet)
-    buttonIO.ArrowP()
-
-
-def ArrowH(packet):
-    logging.debug('MK4 - "<>" Arrow hold (%s)', packet)
-    buttonIO.ArrowH()
-
-
-def ArrowR(packet):
-    logging.debug('MK4 - "<>" Arrow released (%s)', packet)
-    buttonIO.ArrowR()
-
-
+# MODE #####################################################################
 def modeP(packet):
-    logging.debug('MK4 - MODE press (%s)', packet)
+    logging.debug('BMBT - MODE press (%s)', packet)
     buttonIO.modeP()
 
-
 def modeH(packet):
-    logging.debug('MK4 - MODE hold (%s)', packet)
+    logging.debug('BMBT - MODE hold (%s)', packet)
     buttonIO.modeH()
 
-
 def modeR(packet):
-    logging.debug('MK4 - MODE released (%s)', packet)
+    logging.debug('BMBT - MODE released (%s)', packet)
     buttonIO.modeR()
 
 
-def slctIndexF0(packet):
-    logging.debug('MK4 - Index fields 0 (%s)', packet)
+# IndexF0 ##################################################################
+def indexF0P(packet):
+    logging.debug('BMBT - Index fields 0 (%s)', packet)
     buttonIO.slctIndexF0()
 
+def indexF0H(packet):
+    logging.debug('BMBT - Index fields 0 hold (%s)', packet)
 
-def slctIndexF1(packet):
-    logging.debug('MK4 - Index fields 1 (%s)', packet)
-    buttonIO.slctIndexF1()
-
-
-def slctIndexF2(packet):
-    logging.debug('MK4 - Index fields 2 (%s)', packet)
-    buttonIO.slctIndexF2()
+def indexF0R(packet):
+    logging.debug('BMBT - Index fields 0 released (%s)', packet)
 
 
-def slctIndexF3(packet):
-    logging.debug('MK4 - Index fields 3 (%s)', packet)
-    buttonIO.slctIndexF3()
+# IndexF1 ##################################################################
+def indexF1P(packet):
+    logging.debug('BMBT - Index fields 1 press (%s)', packet)
+    buttonIO.indexF1P()
+
+def indexF1H(packet):
+    logging.debug('BMBT - Index fields 1 hold (%s)', packet)
+
+def indexF1R(packet):
+    logging.debug('BMBT - Index fields 1 released (%s)', packet)
 
 
-def slctIndexF4(packet):
-    logging.debug('MK4 - Index fields 4 (%s)', packet)
-    buttonIO.slctIndexF4()
+# IndexF2 ##################################################################
+def indexF2P(packet):
+    logging.debug('BMBT - Index fields 2 press (%s)', packet)
+    buttonIO.indexF2P()
+
+def indexF2H(packet):
+    logging.debug('BMBT - Index fields 2 hold (%s)', packet)
+
+def indexF2R(packet):
+    logging.debug('BMBT - Index fields 2 released (%s)', packet)
 
 
-def slctIndexF5(packet):
-    logging.debug('MK4 - Index fields 5 (%s)', packet)
-    buttonIO.slctIndexF5()
+# IndexF3 ##################################################################
+def indexF3P(packet):
+    logging.debug('BMBT - Index fields 3 press (%s)', packet)
+    buttonIO.indexF3P()
+
+def indexF3H(packet):
+    logging.debug('BMBT - Index fields 3 hold (%s)', packet)
+
+def indexF3R(packet):
+    logging.debug('BMBT - Index fields 3 released (%s)', packet)
 
 
-def slctIndexF6(packet):
-    logging.debug('MK4 - Index fields 6 (%s)', packet)
-    buttonIO.slctIndexF6()
+# IndexF4 ##################################################################
+def indexF4P(packet):
+    logging.debug('BMBT - Index fields 4 press (%s)', packet)
+    buttonIO.indexF4P()
+
+def indexF4H(packet):
+    logging.debug('BMBT - Index fields 4 hold (%s)', packet)
+
+def indexF4R(packet):
+    logging.debug('BMBT - Index fields 4 released (%s)', packet)
 
 
-def slctIndexF7(packet):
-    logging.debug('MK4 - Index fields 7 (%s)', packet)
-    buttonIO.slctIndexF7()
+# IndexF5 ##################################################################
+def indexF5P(packet):
+    logging.debug('BMBT - Index fields 5 press (%s)', packet)
+    buttonIO.indexF5P()
+
+def indexF5H(packet):
+    logging.debug('BMBT - Index fields 5 hold (%s)', packet)
+
+def indexF5R(packet):
+    logging.debug('BMBT - Index fields 5 released (%s)', packet)
 
 
-def slctIndexF8(packet):
-    logging.debug('MK4 - Index fields 8 (%s)', packet)
-    buttonIO.slctIndexF8()
+# IndexF6 ##################################################################
+def indexF6P(packet):
+    logging.debug('BMBT - Index fields 6 press (%s)', packet)
+    buttonIO.indexF6P()
+
+def indexF6H(packet):
+    logging.debug('BMBT - Index fields 6 hold (%s)', packet)
+
+def indexF6R(packet):
+    logging.debug('BMBT - Index fields 6 released (%s)', packet)
 
 
-def slctIndexF9(packet):
-    logging.debug('MK4 - Index fields 9 (%s)', packet)
-    buttonIO.slctIndexF9()
+# IndexF7 ##################################################################
+def indexF7P(packet):
+    logging.debug('BMBT - Index fields 7 press (%s)', packet)
+    buttonIO.indexF7P()
+
+def indexF7H(packet):
+    logging.debug('BMBT - Index fields 7 hold (%s)', packet)
+
+def indexF7R(packet):
+    logging.debug('BMBT - Index fields 7 released (%s)', packet)
 
 
+# IndexF8 ##################################################################
+def indexF8P(packet):
+    logging.debug('BMBT - Index fields 8 press (%s)', packet)
+    buttonIO.indexF8P()
+
+def indexF8H(packet):
+    logging.debug('BMBT - Index fields 8 hold (%s)', packet)
+
+def indexF8R(packet):
+    logging.debug('BMBT - Index fields 8 released (%s)', packet)
+
+
+# IndexF9 ##################################################################
+def indexF9P(packet):
+    logging.debug('BMBT - Index fields 9 press (%s)', packet)
+    buttonIO.indexF9P()
+
+def indexF9H(packet):
+    logging.debug('BMBT - Index fields 9 hold (%s)', packet)
+
+def indexF9R(packet):
+    logging.debug('BMBT - Index fields 9 released (%s)', packet)
+
+
+# Wheel R/T ################################################################
 def wheelRT(packet):
     logging.debug('Multifunction steering wheel - R/T (%s)', packet)
     buttonIO.wheelRT()
 
 
+# Wheel voice ##############################################################
 def wheelVoiceP(packet):
     logging.debug('Multifunction steering wheel - voice press (%s)', packet)
     buttonIO.wheelVoiceP()
 
-
 def wheelVoiceH(packet):
     logging.debug('Multifunction steering wheel - voice hold (%s)', packet)
     buttonIO.wheelVoiceH()
-
 
 def wheelVoiceR(packet):
     logging.debug('Multifunction steering wheel - voice release (%s)', packet)
     buttonIO.wheelVoiceR()
 
 
+# Wheel ">" ################################################################
 def wheelArrowUP(packet):
     logging.debug('Multifunction steering wheel - ">" press (%s)', packet)
     buttonIO.wheelArrowUP()
 
-
 def wheelArrowUH(packet):
     logging.debug('Multifunction steering wheel - ">" hold (%s)', packet)
     buttonIO.wheelArrowUH()
-
 
 def wheelArrowUR(packet):
     logging.debug('Multifunction steering wheel - ">" release (%s)', packet)
     buttonIO.wheelArrowUR()
 
 
+# Wheel "<" ################################################################
 def wheelArrowDP(packet):
     logging.debug('Multifunction steering wheel - "<" press (%s)', packet)
     buttonIO.wheelArrowDP()
 
-
 def wheelArrowDR(packet):
     logging.debug('Multifunction steering wheel - "<" hold (%s)', packet)
     buttonIO.wheelArrowDR()
-
 
 def wheelArrowDR(packet):
     logging.debug('Multifunction steering wheel - "<" release (%s)', packet)

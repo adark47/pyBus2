@@ -44,44 +44,15 @@ IBUS.writeBusPacket('68', '3B', ['46', '01'])
 #screenSwitchedRadio
 IBUS.writeBusPacket('68', '3B', ['46', '02'])
 
+# tail -f /root/pyBus.log | grep READ | grep "'41', '55', '58'"
 # tail -f /root/pyBus.log | grep READ | grep "'3B', '06', '68'"
 
-# Index fields 0 press      # 3B 06 68 31 60 00 00 04
-# Index fields 0 hold       #
-# Index fields 0 released   # 3B 06 68 31 60 00 40 44
+# bit_0 = 0x01;
+# bit_1 = 0x02;
+# bit_2 = 0x04;
+# bit_3 = 0x08;
+# bit_4 = 0x10;
+# bit_5 = 0x20;
+# bit_6 = 0x40;
+# bit_7 = 0x80;
 
-# Index fields 1 press      # 3B 06 68 31 60 00 01 05
-# Index fields 1 hold       #
-# Index fields 1 released   # 3B 06 68 31 60 00 41 45
-
-# Index fields 2 press      #
-# Index fields 2 hold       #
-# Index fields 2 released   #
-
-# Index fields 3 press      #
-# Index fields 3 hold       #
-# Index fields 3 released   #
-
-# Index fields 4 press      #
-# Index fields 4 hold       #
-# Index fields 4 released   #
-
-# Index fields 5 press      #
-# Index fields 5 hold       #
-# Index fields 5 released   #
-
-# Index fields 6 press      #
-# Index fields 6 hold       #
-# Index fields 6 released   #
-
-# Index fields 7 press      #
-# Index fields 7 hold       #
-# Index fields 7 released   #
-
-# Index fields 8 press      #
-# Index fields 8 hold       #
-# Index fields 8 released   #
-
-# Index fields 9 press      #
-# Index fields 9 hold       #
-# Index fields 9 released   #

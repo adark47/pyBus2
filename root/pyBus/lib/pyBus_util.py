@@ -104,7 +104,7 @@ def openTrunk():
     logging.debug('Utilities: Open trunk doors')
 
 
-def windClose(packet):
+def windClose():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '53', '01'])           # 3F 05 00 0C 53 01 - Close window 1 - DF
     WRITER.writeBusPacket('3F', '00', ['0C', '55', '01'])           # 3F 05 00 0C 55 01 - Close window 2 - PF
@@ -114,7 +114,7 @@ def windClose(packet):
     logging.debug('Utilities: Close window')
 
 
-def windOpen(packet):
+def windOpen():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '52', '01'])           # 3F 05 00 0C 52 01 - Open window 1 - DF
     WRITER.writeBusPacket('3F', '00', ['0C', '54', '01'])           # 3F 05 00 0C 54 01 - Open window 2 - PF
@@ -124,26 +124,26 @@ def windOpen(packet):
     logging.debug('Utilities: Open window')
 
 
-def sunRoofClose(packet):
+def sunRoofClose():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '7F', '01'])           # 3F 05 00 0C 7F 01 - Sun Roof Close
     logging.debug('Utilities: Sun Roof Close')
 
 
-def sunRoofOpen(packet):
+def sunRoofOpen():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '7E', '01'])           # 3F 05 00 0C 7E 01 - Sun Roof Open
     logging.debug('Utilities: Sun Roof Open')
 
 
-def mirrorsFold(packet):
+def mirrorsFold():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '01', '31', '01'])     # 3F 06 00 0C 01 31 01 - Mirror Fold - D
     WRITER.writeBusPacket('3F', '00', ['0C', '02', '31', '01'])     # 3F 06 00 0C 02 31 01 - Mirror Fold - P
     logging.debug('Utilities: Mirror Fold')
 
 
-def mirrorsOut(packet):
+def mirrorsOut():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '01', '30', '01'])     # 3F 06 00 0C 01 30 01 - Mirror Out - D
     WRITER.writeBusPacket('3F', '00', ['0C', '02', '30', '01'])     # 3F 06 00 0C 02 30 01 - Mirror Out - P
