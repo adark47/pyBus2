@@ -11,6 +11,7 @@ import logging
 import traceback
 import datetime
 from subprocess import Popen, PIPE
+
 sys.path.append('/root/pyBus/lib/')
 
 # Imports for the project
@@ -28,171 +29,171 @@ import pyBus_io as pB_io
 
 DIRECTIVES = {
 
-    '68': {                                     # CD53
+    '68': {                                 # RADIO
         '18': {
-            '01':     'd_cdPollResponse',       # "I'm alive" message
-            '380000': 'd_cdStatusPlaying',      # CD status Req         # 68 05 18 38 00 00
-            '380100': 'd_cdStop',               # Stop press            # 68 05 18 38 01 00
-            '380300': 'd_cdPlay',               # Play press            # 68 05 18 38 03 00
-            '380A00': 'd_cdNext',               # Skip forward          # 68 05 18 38 0A 00
-            '380A01': 'd_cdPrev',               # Skip Backward         # 68 05 18 38 0A 01
-            '380700': '',                       # Scan Off press        # 68 05 18 38 07 00
-            '380701': '',                       # Scan On press         # 68 05 18 38 07 01
-            '380601': '',                       # CD Button 1 press     # 68 05 18 38 06 01
-            '380602': '',                       # CD Button 2 press     # 68 05 18 38 06 02
-            '380603': '',                       # CD Button 3 press     # 68 05 18 38 06 03
-            '380604': '',                       # CD Button 4 press     # 68 05 18 38 06 04
-            '380605': '',                       # CD Button 5 press     # 68 05 18 38 06 05
-            '380606': '',                       # CD Button 6 press     # 68 05 18 38 06 06
-            '380400': '',                       # Fast Rwd press        # 68 05 18 38 04 00
-            '380401': '',                       # Fast Fwd press        # 68 05 18 38 04 01
-            '380800': 'd_cdRandom',             # Random Off press      # 68 05 18 38 08 00
-            '380801': 'd_cdRandom'              # Random On press       # 68 05 18 38 08 01
+            '01': 'd_cdPollResponse',       # "I'm alive" message
+            '380000': 'd_cdStatusPlaying',  # CD status Req         # 68 05 18 38 00 00
+            '380100': '',                   # Stop press            # 68 05 18 38 01 00
+            '380300': '',                   # Play press            # 68 05 18 38 03 00
+            '380A00': '',                   # Skip forward          # 68 05 18 38 0A 00
+            '380A01': '',                   # Skip Backward         # 68 05 18 38 0A 01
+            '380700': '',                   # Scan Off press        # 68 05 18 38 07 00
+            '380701': '',                   # Scan On press         # 68 05 18 38 07 01
+            '380601': '',                   # CD Button 1 press     # 68 05 18 38 06 01
+            '380602': '',                   # CD Button 2 press     # 68 05 18 38 06 02
+            '380603': '',                   # CD Button 3 press     # 68 05 18 38 06 03
+            '380604': '',                   # CD Button 4 press     # 68 05 18 38 06 04
+            '380605': '',                   # CD Button 5 press     # 68 05 18 38 06 05
+            '380606': '',                   # CD Button 6 press     # 68 05 18 38 06 06
+            '380400': '',                   # Fast Rwd press        # 68 05 18 38 04 00
+            '380401': '',                   # Fast Fwd press        # 68 05 18 38 04 01
+            '380800': 'd_cdRandom',         # Random Off press      # 68 05 18 38 08 00
+            '380801': 'd_cdRandom'          # Random On press       # 68 05 18 38 08 01
         }
     },
 
-    'F0': {
+    'F0': {                         # BMBT Buttons
         '68': {
-            '4807': 'infoP',            # Info press                # F0 04 68 48 07
-            '4844': 'infoH',            # Info hold                 # F0 04 68 48 44
-            '4887': 'infoR',            # Info released             # F0 04 68 48 87
+            '4807': 'infoP',        # Info press                        # F0 04 68 48 07
+            '4844': 'infoH',        # Info hold                         # F0 04 68 48 44
+            '4887': 'infoR',        # Info released                     # F0 04 68 48 87
 
-            '4811': 'button1p',         # Button 1 press            # F0 04 68 48 11
-            '4851': 'button1H',         # Button 1 hold             # F0 04 68 48 51
-            '4891': 'button1R',         # Button 1 released         # F0 04 68 48 91
+            '4811': 'button1p',     # Button 1 press                    # F0 04 68 48 11
+            '4851': 'button1H',     # Button 1 hold                     # F0 04 68 48 51
+            '4891': 'button1R',     # Button 1 released                 # F0 04 68 48 91
 
-            '4801': 'button2p',         # Button 2 press            # F0 04 68 48 01
-            '4841': 'button2H',         # Button 2 hold             # F0 04 68 48 41
-            '4881': 'button2R',         # Button 2 released         # F0 04 68 48 81
+            '4801': 'button2p',     # Button 2 press                    # F0 04 68 48 01
+            '4841': 'button2H',     # Button 2 hold                     # F0 04 68 48 41
+            '4881': 'button2R',     # Button 2 released                 # F0 04 68 48 81
 
-            '4812': 'button3p',         # Button 3 press            # F0 04 68 48 12
-            '4852': 'button3H',         # Button 3 hold             # F0 04 68 48 52
-            '4892': 'button3R',         # Button 3 released         # F0 04 68 48 92
+            '4812': 'button3p',     # Button 3 press                    # F0 04 68 48 12
+            '4852': 'button3H',     # Button 3 hold                     # F0 04 68 48 52
+            '4892': 'button3R',     # Button 3 released                 # F0 04 68 48 92
 
-            '4802': 'button4p',         # Button 4 press            # F0 04 68 48 02
-            '4842': 'button4H',         # Button 4 hold             # F0 04 68 48 42
-            '4882': 'button4R',         # Button 4 released         # F0 04 68 48 82
+            '4802': 'button4p',     # Button 4 press                    # F0 04 68 48 02
+            '4842': 'button4H',     # Button 4 hold                     # F0 04 68 48 42
+            '4882': 'button4R',     # Button 4 released                 # F0 04 68 48 82
 
-            '4813': 'button5p',         # Button 5 press            # F0 04 68 48 13
-            '4853': 'button5H',         # Button 5 hold             # F0 04 68 48 53
-            '4893': 'button5R',         # Button 5 released         # F0 04 68 48 93
+            '4813': 'button5p',     # Button 5 press                    # F0 04 68 48 13
+            '4853': 'button5H',     # Button 5 hold                     # F0 04 68 48 53
+            '4893': 'button5R',     # Button 5 released                 # F0 04 68 48 93
 
-            '4803': 'button6p',         # Button 6 press            # F0 04 68 48 03
-            '4843': 'button6H',         # Button 6 hold             # F0 04 68 48 43
-            '4883': 'button6R',         # Button 6 released         # F0 04 68 48 83
+            '4803': 'button6p',     # Button 6 press                    # F0 04 68 48 03
+            '4843': 'button6H',     # Button 6 hold                     # F0 04 68 48 43
+            '4883': 'button6R',     # Button 6 released                 # F0 04 68 48 83
 
-            '4810': 'arrowLP',          # "<" ArrowLeft press       # F0 04 68 48 10
-            '4850': 'arrowLH',          # "<" ArrowLeft hold        # F0 04 68 48 50
-            '4890': 'arrowLR',          # "<" ArrowLeft released    # F0 04 68 48 90
+            '4810': 'arrowLP',      # "<" ArrowLeft press               # F0 04 68 48 10
+            '4850': 'arrowLH',      # "<" ArrowLeft hold                # F0 04 68 48 50
+            '4890': 'arrowLR',      # "<" ArrowLeft released            # F0 04 68 48 90
 
-            '4800': 'arrowRP',          # ">" ArrowRight press      # F0 04 68 48 00
-            '4840': 'arrowRH',          # ">" ArrowRight hold       # F0 04 68 48 40
-            '4880': 'arrowRR',          # ">" ArrowRight released   # F0 04 68 48 80
+            '4800': 'arrowRP',      # ">" ArrowRight press              # F0 04 68 48 00
+            '4840': 'arrowRH',      # ">" ArrowRight hold               # F0 04 68 48 40
+            '4880': 'arrowRR',      # ">" ArrowRight released           # F0 04 68 48 80
 
-            '4814': 'arrowP',           # "<>" Arrow press          # F0 04 68 48 14
-            '4854': 'arrowH',           # "<>" Arrow hold           # F0 04 68 48 54
-            '4894': 'arrowR',           # "<>" Arrow released       # F0 04 68 48 94
+            '4814': 'arrowP',       # "<>" Arrow press                  # F0 04 68 48 14
+            '4854': 'arrowH',       # "<>" Arrow hold                   # F0 04 68 48 54
+            '4894': 'arrowR',       # "<>" Arrow released               # F0 04 68 48 94
 
-            '4823': 'modeP',            # MODE press                # F0 04 68 48 23
-            '4863': 'modeH',            # MODE hold                 # F0 04 68 48 63
-            '48A3': 'modeR',            # MODE released             # F0 04 68 48 A3
+            '4823': 'modeP',        # MODE press                        # F0 04 68 48 23
+            '4863': 'modeH',        # MODE hold                         # F0 04 68 48 63
+            '48A3': 'modeR',        # MODE released                     # F0 04 68 48 A3
 
-            '4808': '',                 # TELEPHONE pressed         # F0 04 68 48 08
-            '4848': '',                 # TELEPHONE hold            # F0 04 68 48 48
-            '4888': '',                 # TELEPHONE released        # F0 04 68 48 88
+            '4808': '',             # TELEPHONE pressed                 # F0 04 68 48 08
+            '4848': '',             # TELEPHONE hold                    # F0 04 68 48 48
+            '4888': '',             # TELEPHONE released                # F0 04 68 48 88
 
-            '4901': '',                 # right nob Right turn 1 step      # F0 04 3B 49 01
-            '4902': '',                 # right nob Right turn 2 steps     # F0 04 3B 49 02
-            '4903': '',                 # right nob Right turn 3 steps     # F0 04 3B 49 03
-            '4905': '',                 # right nob Left turn 5 steps      # F0 04 3B 49 05
+            '4901': '',             # right nob Right turn 1 step       # F0 04 3B 49 01
+            '4902': '',             # right nob Right turn 2 steps      # F0 04 3B 49 02
+            '4903': '',             # right nob Right turn 3 steps      # F0 04 3B 49 03
+            '4905': '',             # right nob Left turn 5 steps       # F0 04 3B 49 05
 
-            '4981': '',                 # right nob Left turn 1 step       # F0 04 3B 49 81
-            '4982': '',                 # right nob Left turn 2 steps      # F0 04 3B 49 82
-            '4983': '',                 # right nob Left turn 3 steps      # F0 04 3B 49 83
-            '4985': '',                 # right nob Left turn 5 steps      # F0 04 3B 49 85
+            '4981': '',             # right nob Left turn 1 step        # F0 04 3B 49 81
+            '4982': '',             # right nob Left turn 2 steps       # F0 04 3B 49 82
+            '4983': '',             # right nob Left turn 3 steps       # F0 04 3B 49 83
+            '4985': '',             # right nob Left turn 5 steps       # F0 04 3B 49 85
 
-            '4805': '',                 # right nob push                   # F0 04 3B 48 05
-            '4845': '',                 # right nob hold                   # F0 04 3B 48 45
-            '4885': ''                  # right nob released                # F0 04 3B 48 85
+            '4805': '',             # right nob push                    # F0 04 3B 48 05
+            '4845': '',             # right nob hold                    # F0 04 3B 48 45
+            '4885': ''              # right nob released                # F0 04 3B 48 85
         }
     },
 
-    '3B': {                              # Index fields
+    '3B': {                             # BMBT Index fields
         '68': {
-            '31600000': 'indexF0P',      # Index fields 0 press      # 3B 06 68 31 60 00 00
-            '31600020': 'indexF0H',      # Index fields 0 hold       # 3B 06 68 31 60 00 20
-            '31600040': 'indexF0R',      # Index fields 0 released   # 3B 06 68 31 60 00 40
+            '31600000': 'indexF0P',     # Index fields 0 press          # 3B 06 68 31 60 00 00
+            '31600020': 'indexF0H',     # Index fields 0 hold           # 3B 06 68 31 60 00 20
+            '31600040': 'indexF0R',     # Index fields 0 released       # 3B 06 68 31 60 00 40
 
-            '31600001': 'indexF1P',      # Index fields 1 press      # 3B 06 68 31 60 00 01
-            '31600021': 'indexF1H',      # Index fields 1 hold       # 3B 06 68 31 60 00 21
-            '31600041': 'indexF1R',      # Index fields 1 released   # 3B 06 68 31 60 00 41
+            '31600001': 'indexF1P',     # Index fields 1 press          # 3B 06 68 31 60 00 01
+            '31600021': 'indexF1H',     # Index fields 1 hold           # 3B 06 68 31 60 00 21
+            '31600041': 'indexF1R',     # Index fields 1 released       # 3B 06 68 31 60 00 41
 
-            '31600002': 'indexF2P',      # Index fields 2 press      # 3B 06 68 31 60 00 02
-            '31600022': 'indexF2H',      # Index fields 2 hold       # 3B 06 68 31 60 00 22
-            '31600042': 'indexF2R',      # Index fields 2 released   # 3B 06 68 31 60 00 42
+            '31600002': 'indexF2P',     # Index fields 2 press          # 3B 06 68 31 60 00 02
+            '31600022': 'indexF2H',     # Index fields 2 hold           # 3B 06 68 31 60 00 22
+            '31600042': 'indexF2R',     # Index fields 2 released       # 3B 06 68 31 60 00 42
 
-            '31600003': 'indexF3P',      # Index fields 3 press      # 3B 06 68 31 60 00 03
-            '31600023': 'indexF3H',      # Index fields 3 hold       # 3B 06 68 31 60 00 23
-            '31600043': 'indexF3R',      # Index fields 3 released   # 3B 06 68 31 60 00 43
+            '31600003': 'indexF3P',     # Index fields 3 press          # 3B 06 68 31 60 00 03
+            '31600023': 'indexF3H',     # Index fields 3 hold           # 3B 06 68 31 60 00 23
+            '31600043': 'indexF3R',     # Index fields 3 released       # 3B 06 68 31 60 00 43
 
-            '31600004': 'indexF4P',      # Index fields 4 press      # 3B 06 68 31 60 00 04
-            '31600024': 'indexF4H',      # Index fields 4 hold       # 3B 06 68 31 60 00 24
-            '31600044': 'indexF4R',      # Index fields 4 released   # 3B 06 68 31 60 00 44
+            '31600004': 'indexF4P',     # Index fields 4 press          # 3B 06 68 31 60 00 04
+            '31600024': 'indexF4H',     # Index fields 4 hold           # 3B 06 68 31 60 00 24
+            '31600044': 'indexF4R',     # Index fields 4 released       # 3B 06 68 31 60 00 44
 
-            '31600005': 'indexF5P',      # Index fields 5 press      # 3B 06 68 31 60 00 05
-            '31600025': 'indexF5H',      # Index fields 5 hold       # 3B 06 68 31 60 00 25
-            '31600045': 'indexF5R',      # Index fields 5 released   # 3B 06 68 31 60 00 45
+            '31600005': 'indexF5P',     # Index fields 5 press          # 3B 06 68 31 60 00 05
+            '31600025': 'indexF5H',     # Index fields 5 hold           # 3B 06 68 31 60 00 25
+            '31600045': 'indexF5R',     # Index fields 5 released       # 3B 06 68 31 60 00 45
 
-            '31600006': 'indexF6P',      # Index fields 6 press      # 3B 06 68 31 60 00 06
-            '31600026': 'indexF6H',      # Index fields 6 hold       # 3B 06 68 31 60 00 26
-            '31600046': 'indexF6R',      # Index fields 6 released   # 3B 06 68 31 60 00 46
+            '31600006': 'indexF6P',     # Index fields 6 press          # 3B 06 68 31 60 00 06
+            '31600026': 'indexF6H',     # Index fields 6 hold           # 3B 06 68 31 60 00 26
+            '31600046': 'indexF6R',     # Index fields 6 released       # 3B 06 68 31 60 00 46
 
-            '31600007': 'indexF7P',      # Index fields 7 press      # 3B 06 68 31 60 00 07
-            '31600027': 'indexF7H',      # Index fields 7 hold       # 3B 06 68 31 60 00 27
-            '31600047': 'indexF7R',      # Index fields 7 released   # 3B 06 68 31 60 00 47
+            '31600007': 'indexF7P',     # Index fields 7 press          # 3B 06 68 31 60 00 07
+            '31600027': 'indexF7H',     # Index fields 7 hold           # 3B 06 68 31 60 00 27
+            '31600047': 'indexF7R',     # Index fields 7 released       # 3B 06 68 31 60 00 47
 
-            '31600008': 'indexF8P',      # Index fields 8 press      # 3B 06 68 31 60 00 08
-            '31600028': 'indexF8H',      # Index fields 8 hold       # 3B 06 68 31 60 00 28
-            '31600048': 'indexF8R',      # Index fields 8 released   # 3B 06 68 31 60 00 48
+            '31600008': 'indexF8P',     # Index fields 8 press          # 3B 06 68 31 60 00 08
+            '31600028': 'indexF8H',     # Index fields 8 hold           # 3B 06 68 31 60 00 28
+            '31600048': 'indexF8R',     # Index fields 8 released       # 3B 06 68 31 60 00 48
 
-            '31600009': 'indexF9P',      # Index fields 9 press      # 3B 06 68 31 60 00 09
-            '31600029': 'indexF9H',      # Index fields 9 hold       # 3B 06 68 31 60 00 29
-            '31600049': 'indexF9R'       # Index fields 9 released   # 3B 06 68 31 60 00 49
+            '31600009': 'indexF9P',     # Index fields 9 press          # 3B 06 68 31 60 00 09
+            '31600029': 'indexF9H',     # Index fields 9 hold           # 3B 06 68 31 60 00 29
+            '31600049': 'indexF9R'      # Index fields 9 released       # 3B 06 68 31 60 00 49
         }
-     },
+    },
 
-    '50': {
-        'C8': {                                 # Multifunction steering wheel phone buttons
-            '01':   'd_cdPollResponse',         # This can happen via RT button or ignition
-            '3B40': 'wheelRT',                  #  R/T              # 50 04 C8 3B 40
+    '50': {                             # Multifunction steering wheel
+        'C8': {                         # wheel phone buttons
+            '01': 'd_cdPollResponse',   # This can happen via RT button or ignition
+            '3B40': 'wheelRT',          # R/T                           # 50 04 C8 3B 40
 
-            '3B80': 'wheelVoiceP',              #  voice press      # 50 04 C8 3B 80 27
-            '3B90': 'wheelVoiceH',              #  voice hold       # 50 04 C8 3B 90 37
-            '3BA0': 'wheelVoiceR'               #  voice release    # 50 04 C8 3B A0 07
+            '3B80': 'wheelVoiceP',      # voice press                   # 50 04 C8 3B 80 27
+            '3B90': 'wheelVoiceH',      # voice hold                    # 50 04 C8 3B 90 37
+            '3BA0': 'wheelVoiceR'       # voice release                 # 50 04 C8 3B A0 07
         },
-        '68': {                                 # Multifunction steering wheel buttons
-            '3211': '',                         # "+" press         # 50 04 68 32 11 1F
-            '3210': '',                         # "-" press         # 50 04 68 32 10 1E
-            '3B01': 'wheelArrowUP',             # ">" press         # 50 04 68 3B 01 06
-            '3B11': 'wheelArrowUH',             # ">" hold          # 50 04 68 3B 11 16
-            '3B21': 'wheelArrowUR',             # ">" release       # 50 04 68 3B 21 26
-            '3B08': 'wheelArrowDP',             # "<" press         # 50 04 68 3B 08 0F
-            '3B18': 'wheelArrowDH',             # "<" hold          # 50 04 68 3B 18 1F
-            '3B28': 'wheelArrowDR'              # "<" release       # 50 04 68 3B 28 2F
+        '68': {                         # wheel buttons
+            '3211': '',                 # "+" press                     # 50 04 68 32 11 1F
+            '3210': '',                 # "-" press                     # 50 04 68 32 10 1E
+            '3B01': 'wheelArrowUP',     # ">" press                     # 50 04 68 3B 01 06
+            '3B11': 'wheelArrowUH',     # ">" hold                      # 50 04 68 3B 11 16
+            '3B21': 'wheelArrowUR',     # ">" release                   # 50 04 68 3B 21 26
+            '3B08': 'wheelArrowDP',     # "<" press                     # 50 04 68 3B 08 0F
+            '3B18': 'wheelArrowDH',     # "<" hold                      # 50 04 68 3B 18 1F
+            '3B28': 'wheelArrowDR'      # "<" release                   # 50 04 68 3B 28 2F
         }
     },
 
     '80': {
         'BF': {
-            'ALL': 'd_custom_IKE'  # Use ALL to send all data to a particular function
-        }
-    },
-
-    '7F': {
-        '80': {
-            'ALL': 'navi_date'
+            'ALL': 'd_custom_IKE'       # Use ALL to send all data to a particular function
         }
     }
+
+#    '7F': {
+#        '80': {
+#            'ALL': 'navi_date'
+#        }
+#    }
 }
 
 ############################################################################
@@ -220,7 +221,8 @@ def init(writer):
     pB_cdc.init(WRITER)
     pB_util.init(WRITER)
 
-    pB_cdc.enableFunc("announce", 10)               # default 30 (not worked)
+    pB_cdc.enableFunc("announce", 10)  # default 30 (not worked)
+
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
 def manage(packet):
@@ -264,7 +266,7 @@ def listen():
         if packet:
             manage(packet)
 
-        time.sleep(TICK)    # sleep a bit
+        time.sleep(TICK)  # sleep a bit
 
 
 def shutDown():
@@ -295,27 +297,24 @@ def d_custom_IKE(packet):
         customState = {'extTemp': extTemp, 'oilTemp': oilTemp}
         logging.debug('IKE - (%s)', customState)
 
+
 ############################################################################
 # DATA
 ############################################################################
 
 def navi_date(packet):
     packet_data = packet['dat']
-    # # 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
-    if packet_data[0] == '1F' and packet_data[1] == '40':
-        date_n = {'day': int(packet_data[4]), 'month': int(packet_data[6]), 'year': int(packet_data[7, 8])}
-        time_n = {'hour': int(packet_data[2]), 'minute': int(packet_data[3])}
-        logging.debug('DATE - (%s):(%s) (%s).(%s).(%s)', time_n['hour'], time_n['minute'], date_n['day'], date_n['month'], date_n['year'])
+    # 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
+    pass
 
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
 ############################################################################
-
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    pB_cdc.disableFunc('announce')                          # stop announcing
+    pB_cdc.disableFunc('announce')  # stop announcing
     pB_cdc.disableFunc('pollResponse')
-    pB_cdc.enableFunc('pollResponse', 10)               # default 30 (not worked)
+    pB_cdc.enableFunc('pollResponse', 10)  # default 30 (not worked)
     WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 
@@ -323,19 +322,19 @@ def d_cdStatusPlaying(packet):
     pB_cdc.play('01', '01')
 
 
-#def d_cdStop(packet):
+# def d_cdStop(packet):
 #    pB_cdc.stop('01', '01')
 
 
-#def d_cdPlay(packet):
+# def d_cdPlay(packet):
 #    pB_cdc.play('01', '01')
 
 
-#def d_cdNext(packet):
+# def d_cdNext(packet):
 #    pB_cdc.scanFWD('01', '01')
 
 
-#def d_cdPrev(packet):
+# def d_cdPrev(packet):
 #    pB_cdc.scanBWD('01', '01')
 
 
@@ -662,6 +661,5 @@ def wheelArrowDR(packet):
 def wheelArrowDR(packet):
     logging.debug('Multifunction steering wheel - "<" release (%s)', packet)
     buttonIO.wheelArrowDR()
-
 
 ############################################################################
