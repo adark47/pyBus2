@@ -29,13 +29,13 @@ leadTime = None
 # Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 def init(writer):
     global WRITER
-    logging.info('Initializing the iBus interface for TEL')
+    logging.info('Initializing: the iBus TEL')
     WRITER = writer
 
 
 def shutDown():
     global WRITER
-    logging.info('Dereferencing iBus interface')
+    logging.info('End: iBus TEL')
     WRITER = None
 
 
@@ -130,37 +130,37 @@ def announce():
     logging.debug('TEL sent the status: Start')
 
 def ledAllOff():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '00'])  # Telephone LED All_off         # C8 E7 2B 00
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '00'])         # Telephone LED All_off         # C8 E7 2B 00
     logging.debug('TEL sent the status: LED all off')
 
 def ledRedSolid():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '01'])  # Telephone LED red, solid      # C8 E7 2B 01
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '01'])         # Telephone LED red, solid      # C8 E7 2B 01
     logging.debug('TEL sent the status: LED red, solid')
 
 def ledRedFlash ():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '02'])  # Telephone LED red, flash      # C8 E7 2B 02
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '02'])         # Telephone LED red, flash      # C8 E7 2B 02
     logging.debug('TEL sent the status: LED red, flash')
 
 def ledYellowSolid():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '04'])  # Telephone LED yellow, solid   # C8 E7 2B 04
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '04'])         # Telephone LED yellow, solid   # C8 E7 2B 04
     logging.debug('TEL sent the status: LED yellow, solid')
 
 def ledYellowFlash():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '08'])  # Telephone LED yellow, flash   # C8 E7 2B 08
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '08'])         # Telephone LED yellow, flash   # C8 E7 2B 08
     logging.debug('TEL sent the status: LED yellow, flash')
 
 def ledGreenSolid():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '10'])  # Telephone LED green, solid    # C8 E7 2B 10
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '10'])         # Telephone LED green, solid    # C8 E7 2B 10
     logging.debug('TEL sent the status: LED green, solid')
 
 def ledGreenFlash():
-    WRITER.writeBusPacket('C8', 'E7', ['2B', '20'])  # Telephone LED green, flash    # C8 E7 2B 20
+    WRITER.writeBusPacket('C8', 'E7', ['2B', '20'])         # Telephone LED green, flash    # C8 E7 2B 20
     logging.debug('TEL sent the status: LED green, flash')
 
 ############################################################################
 
 def handsfree():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '01'])  # Handsfree                     # C8 E7 2C 01
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '01'])         # Handsfree                     # C8 E7 2C 01
     logging.debug('TEL sent the status: Handsfree')
 
 def activeCall():
@@ -168,23 +168,23 @@ def activeCall():
     logging.debug('TEL sent the status: Active call (false = phone menu displayed)')
 
 def incomingCall():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '04'])  # Incoming call                 # C8 E7 2C 04
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '04'])         # Incoming call                 # C8 E7 2C 04
     logging.debug('TEL sent the status: Incoming call')
 
 def screenDisabled():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '08'])  # Phone screen disabled         # C8 E7 2C 08
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '08'])         # Phone screen disabled         # C8 E7 2C 08
     logging.debug('TEL sent the status: Phone screen disabled')
 
 def phoneOn():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '10'])  # Phone on                      # C8 E7 2C 10
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '10'])         # Phone on                      # C8 E7 2C 10
     logging.debug('TEL sent the status: Phone on ')
 
 def phoneActive():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '20'])  # Phone active                  # C8 E7 2C 20
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '20'])         # Phone active                  # C8 E7 2C 20
     logging.debug('TEL sent the status: Phone active')
 
 def phonedInstalled ():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '40'])  # Phone adapter installed       # C8 E7 2C 40
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '40'])         # Phone adapter installed       # C8 E7 2C 40
     logging.debug('TEL sent the status: Phone adapter installed ')
 
 ############################################################################

@@ -15,7 +15,7 @@ from subprocess import Popen, PIPE
 sys.path.append('/root/pyBus/lib/')
 
 # Imports for the project
-import pyBus_util as pB_util
+import pyBus_dia as pB_dia
 import pyBus_cdc as pB_cdc
 import pyBus_io as pB_io
 
@@ -219,7 +219,7 @@ def init(writer):
     pB_io.init(WRITER)
     buttonIO = pB_io.ButtonIO()
     pB_cdc.init(WRITER)
-    pB_util.init(WRITER)
+    pB_dia.init(WRITER)
 
     pB_cdc.enableFunc("announce", 10)  # default 30 (not worked)
 
@@ -274,8 +274,8 @@ def shutDown():
     pB_io.end()
     logging.debug('Killing CDC')
     pB_cdc.shutDown()
-    logging.debug('Killing Util')
-    pB_util.shutDown()
+    logging.debug('Killing DIA')
+    pB_dia.shutDown()
 
 
 ############################################################################

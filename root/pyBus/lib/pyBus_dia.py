@@ -23,13 +23,13 @@ FUNC_STACK = {}
 # Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 def init(writer):
     global WRITER
-    logging.info('Initializing: the iBus util')
+    logging.info('Initializing: the iBus DIA')
     WRITER = writer
 
 
 def shutDown():
     global WRITER
-    logging.info('End: iBus util')
+    logging.info('End: iBus DIA')
     WRITER = None
 
 
@@ -96,12 +96,12 @@ def revive(funcName):
 
 def lockDoors():
     WRITER.writeBusPacket('3F', '00', ['0C', '34', '01'])
-    logging.debug('Utilities: Lock doors')
+    logging.debug('DIA: Lock doors')
 
 
 def openTrunk():
     WRITER.writeBusPacket('3F', '00', ['0C', '02', '01'])
-    logging.debug('Utilities: Open trunk doors')
+    logging.debug('DIA: Open trunk doors')
 
 
 def windClose():
@@ -111,7 +111,7 @@ def windClose():
 
     WRITER.writeBusPacket('3F', '00', ['0C', '42', '01'])           # 3F 05 00 0C 42 01 - Close window 3 - DR
     WRITER.writeBusPacket('3F', '00', ['0C', '43', '01'])           # 3F 05 00 0C 43 01 - Close window 4 - PR
-    logging.debug('Utilities: Close window')
+    logging.debug('DIA: Close window')
 
 
 def windOpen():
@@ -121,32 +121,32 @@ def windOpen():
 
 #    WRITER.writeBusPacket('3F', '00', ['0C', '41', '01'])          # 3F 05 00 0C 41 01 - Open window 1 - DR
 #    WRITER.writeBusPacket('3F', '00', ['0C', '44', '01'])          # 3F 05 00 0C 44 01 - Open window 2 - PR
-    logging.debug('Utilities: Open window')
+    logging.debug('DIA: Open window')
 
 
 def sunRoofClose():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '7F', '01'])           # 3F 05 00 0C 7F 01 - Sun Roof Close
-    logging.debug('Utilities: Sun Roof Close')
+    logging.debug('DIA: Sun Roof Close')
 
 
 def sunRoofOpen():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '7E', '01'])           # 3F 05 00 0C 7E 01 - Sun Roof Open
-    logging.debug('Utilities: Sun Roof Open')
+    logging.debug('DIA: Sun Roof Open')
 
 
 def mirrorsFold():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '01', '31', '01'])     # 3F 06 00 0C 01 31 01 - Mirror Fold - D
     WRITER.writeBusPacket('3F', '00', ['0C', '02', '31', '01'])     # 3F 06 00 0C 02 31 01 - Mirror Fold - P
-    logging.debug('Utilities: Mirror Fold')
+    logging.debug('DIA: Mirror Fold')
 
 
 def mirrorsOut():
     global SESSION_DATA
     WRITER.writeBusPacket('3F', '00', ['0C', '01', '30', '01'])     # 3F 06 00 0C 01 30 01 - Mirror Out - D
     WRITER.writeBusPacket('3F', '00', ['0C', '02', '30', '01'])     # 3F 06 00 0C 02 30 01 - Mirror Out - P
-    logging.debug('Utilities: Mirror Out')
+    logging.debug('DIA: Mirror Out')
 
 ############################################################################

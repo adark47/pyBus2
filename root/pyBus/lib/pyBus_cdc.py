@@ -27,13 +27,13 @@ leadTime = None
 # Set the WRITER object (the iBus interface class) to an instance passed in from the CORE module
 def init(writer):
     global WRITER
-    logging.info('Initializing the iBus interface for CDChanger')
+    logging.info('Initializing: the iBus CDC')
     WRITER = writer
 
 
 def shutDown():
     global WRITER
-    logging.info('Dereferencing iBus interface')
+    logging.info('End: iBus CDC')
     WRITER = None
 
 
