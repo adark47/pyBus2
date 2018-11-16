@@ -305,8 +305,9 @@ def d_custom_IKE(packet):
 #def navi_date(packet):
 #    packet_data = packet['dat']
 #    if packet_data[0] == '1F' and packet_data[1] == '40':
-
-
+#        logging.debug('DATE - %s.%s.%s%s)', int(packet_data[4]), int(packet_data[6]),
+#                      int(packet_data[7]), int(packet_data[8]))
+#        logging.debug('TIME - %s:%s)', int(packet_data[2]), int(packet_data[3]))
 
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
@@ -442,7 +443,7 @@ def button6R(packet):
 
 # "<" Arrow Left ###########################################################
 def arrowLP(packet):
-    logging.debug('BMBT - "<" ArrowLeft press (%s)' % (packet,))
+    logging.debug('BMBT - "<" ArrowLeft press (%s)', packet)
     buttonIO.arrowLP()
 
 def arrowLH(packet):
