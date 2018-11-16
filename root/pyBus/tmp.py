@@ -47,6 +47,7 @@ IBUS.writeBusPacket('68', '3B', ['46', '02'])
 # tail -f /root/pyBus.log | grep READ | grep "'41', '55', '58'"
 # tail -f /root/pyBus.log | grep READ | grep "'3B', '06', '68'"
 
+
 # bit_0 = 0x01;
 # bit_1 = 0x02;
 # bit_2 = 0x04;

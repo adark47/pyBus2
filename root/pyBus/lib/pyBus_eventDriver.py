@@ -301,20 +301,21 @@ def d_custom_IKE(packet):
 ############################################################################
 # DATA
 ############################################################################
+# 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
+#def navi_date(packet):
+#    packet_data = packet['dat']
+#    if packet_data[0] == '1F' and packet_data[1] == '40':
 
-def navi_date(packet):
-    packet_data = packet['dat']
-    # 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
-    pass
+
 
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
 ############################################################################
 # Respond to the Poll for changer alive
 def d_cdPollResponse(packet):
-    pB_cdc.disableFunc('announce')  # stop announcing
+    pB_cdc.disableFunc('announce')          # stop announcing
     pB_cdc.disableFunc('pollResponse')
-    pB_cdc.enableFunc('pollResponse', 10)  # default 30 (not worked)
+    pB_cdc.enableFunc('pollResponse', 10)   # default 30 (not worked)
     WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 
