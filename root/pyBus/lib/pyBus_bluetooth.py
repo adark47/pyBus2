@@ -121,7 +121,7 @@ def btReadMac():
 def btWriteMac(mac):
     btMac = open(btMacAddr, 'r+')
     btMac.write(mac)
-    logging.debug('Write the bluetooth address of the last connected device to a temporary file', mac)
+    logging.debug('Write the Bluetooth address of the last connected device to a temporary file', mac)
     btMac.close()
 
 
@@ -141,7 +141,7 @@ def scanDevices():
 
 def removeMac(mac):
     btCtl.remove(mac)
-    logging.debug('Removed bluetooth device: %s', mac)
+    logging.debug('Removed Bluetooth device: %s', mac)
 
 ############################################################################
 # FUNCTIONS PLAYER

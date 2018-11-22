@@ -31,22 +31,22 @@ DIRECTIVES = {
 
     '68': {                                 # RADIO
         '18': {
-            '01': 'd_cdPollResponse',       # "I'm alive" message
-            '380000': 'd_cdStatusPlaying',  # CD status Req         # 68 05 18 38 00 00
-            '380100': '',                   # Stop press            # 68 05 18 38 01 00
-            '380300': '',                   # Play press            # 68 05 18 38 03 00
-            '380A00': '',                   # Skip forward          # 68 05 18 38 0A 00
-            '380A01': '',                   # Skip Backward         # 68 05 18 38 0A 01
-            '380700': '',                   # Scan Off press        # 68 05 18 38 07 00
-            '380701': '',                   # Scan On press         # 68 05 18 38 07 01
-            '380601': '',                   # CD Button 1 press     # 68 05 18 38 06 01
-            '380602': '',                   # CD Button 2 press     # 68 05 18 38 06 02
-            '380603': '',                   # CD Button 3 press     # 68 05 18 38 06 03
-            '380604': '',                   # CD Button 4 press     # 68 05 18 38 06 04
-            '380605': '',                   # CD Button 5 press     # 68 05 18 38 06 05
-            '380606': '',                   # CD Button 6 press     # 68 05 18 38 06 06
-            '380400': '',                   # Fast Rwd press        # 68 05 18 38 04 00
-            '380401': '',                   # Fast Fwd press        # 68 05 18 38 04 01
+            '01': 'radPollResponse',        # "I'm alive" message
+            '380000': 'radStatusPlaying',   # CD status Req         # 68 05 18 38 00 00
+            '380100': 'radStopP',           # Stop press            # 68 05 18 38 01 00
+            '380300': 'radPlayP',           # Play press            # 68 05 18 38 03 00
+            '380A00': 'radSkipFwd',         # Skip forward          # 68 05 18 38 0A 00
+            '380A01': 'radSkipBwd',         # Skip Backward         # 68 05 18 38 0A 01
+            '380700': 'radScanOff',         # Scan Off press        # 68 05 18 38 07 00
+            '380701': 'radScanOn',          # Scan On press         # 68 05 18 38 07 01
+            '380601': 'radButton1P',        # CD Button 1 press     # 68 05 18 38 06 01
+            '380602': 'radButton2P',        # CD Button 2 press     # 68 05 18 38 06 02
+            '380603': 'radButton3P',        # CD Button 3 press     # 68 05 18 38 06 03
+            '380604': 'radButton4P',        # CD Button 4 press     # 68 05 18 38 06 04
+            '380605': 'radButton5P',        # CD Button 5 press     # 68 05 18 38 06 05
+            '380606': 'radButton6P',        # CD Button 6 press     # 68 05 18 38 06 06
+            '380400': 'radFastRwd',         # Fast Rwd press        # 68 05 18 38 04 00
+            '380401': 'radFastFwd',         # Fast Fwd press        # 68 05 18 38 04 01
             '380800': 'd_cdRandom',         # Random Off press      # 68 05 18 38 08 00
             '380801': 'd_cdRandom'          # Random On press       # 68 05 18 38 08 01
         }
@@ -98,23 +98,23 @@ DIRECTIVES = {
             '4863': 'modeH',        # MODE hold                         # F0 04 68 48 63
             '48A3': 'modeR',        # MODE released                     # F0 04 68 48 A3
 
-            '4808': '',             # TELEPHONE pressed                 # F0 04 68 48 08
-            '4848': '',             # TELEPHONE hold                    # F0 04 68 48 48
-            '4888': '',             # TELEPHONE released                # F0 04 68 48 88
+            '4808': 'telP',         # TELEPHONE pressed                 # F0 04 68 48 08
+            '4848': 'telH',         # TELEPHONE hold                    # F0 04 68 48 48
+            '4888': 'telR',         # TELEPHONE released                # F0 04 68 48 88
 
-            '4901': '',             # right nob Right turn 1 step       # F0 04 3B 49 01
-            '4902': '',             # right nob Right turn 2 steps      # F0 04 3B 49 02
-            '4903': '',             # right nob Right turn 3 steps      # F0 04 3B 49 03
-            '4905': '',             # right nob Left turn 5 steps       # F0 04 3B 49 05
+            '4901': 'nobR1',        # right nob Right turn 1 step       # F0 04 3B 49 01
+            '4902': 'nobR2',        # right nob Right turn 2 steps      # F0 04 3B 49 02
+            '4903': 'nobR3',        # right nob Right turn 3 steps      # F0 04 3B 49 03
+            '4905': 'nobR5',        # right nob Left turn 5 steps       # F0 04 3B 49 05
 
-            '4981': '',             # right nob Left turn 1 step        # F0 04 3B 49 81
-            '4982': '',             # right nob Left turn 2 steps       # F0 04 3B 49 82
-            '4983': '',             # right nob Left turn 3 steps       # F0 04 3B 49 83
-            '4985': '',             # right nob Left turn 5 steps       # F0 04 3B 49 85
+            '4981': 'nobL1',        # right nob Left turn 1 step        # F0 04 3B 49 81
+            '4982': 'nobL2',        # right nob Left turn 2 steps       # F0 04 3B 49 82
+            '4983': 'nobL3',        # right nob Left turn 3 steps       # F0 04 3B 49 83
+            '4985': 'nobL5',        # right nob Left turn 5 steps       # F0 04 3B 49 85
 
-            '4805': '',             # right nob push                    # F0 04 3B 48 05
-            '4845': '',             # right nob hold                    # F0 04 3B 48 45
-            '4885': ''              # right nob released                # F0 04 3B 48 85
+            '4805': 'nobP',         # right nob push                    # F0 04 3B 48 05
+            '4845': 'nobH',         # right nob hold                    # F0 04 3B 48 45
+            '4885': 'nobR'          # right nob released                # F0 04 3B 48 85
         }
     },
 
@@ -164,7 +164,7 @@ DIRECTIVES = {
 
     '50': {                             # Multifunction steering wheel
         'C8': {                         # wheel phone buttons
-            '01': 'd_cdPollResponse',   # This can happen via RT button or ignition
+            '01': 'radPollResponse',    # This can happen via RT button or ignition
             '3B40': 'wheelRT',          # R/T                           # 50 04 C8 3B 40
 
             '3B80': 'wheelVoiceP',      # voice press                   # 50 04 C8 3B 80 27
@@ -221,7 +221,7 @@ def init(writer):
     pB_cdc.init(WRITER)
     pB_dia.init(WRITER)
 
-    pB_cdc.enableFunc("announce", 10)  # default 30 (not worked)
+    pB_cdc.enableFunc("announce", 5)  # default 30 (not worked)
 
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
@@ -313,30 +313,36 @@ def d_custom_IKE(packet):
 # DIRECTIVE CDC FUNCTIONS
 ############################################################################
 # Respond to the Poll for changer alive
-def d_cdPollResponse(packet):
+def radPollResponse(packet):
+    logging.debug('RAD - CDC poll response (%s)', packet)
     pB_cdc.disableFunc('announce')          # stop announcing
     pB_cdc.disableFunc('pollResponse')
     pB_cdc.enableFunc('pollResponse', 10)   # default 30 (not worked)
     WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 
-def d_cdStatusPlaying(packet):
+def radStatusPlaying(packet):
+    logging.debug('RAD - CDC status playing (%s)', packet)
     pB_cdc.play('01', '01')
 
 
 # def d_cdStop(packet):
+#    logging.debug('RAD - CDC status stop (%s)', packet)
 #    pB_cdc.stop('01', '01')
 
 
 # def d_cdPlay(packet):
+#    logging.debug('RAD - CDC status play (%s)', packet)
 #    pB_cdc.play('01', '01')
 
 
 # def d_cdNext(packet):
+#    logging.debug('RAD - CDC status next (%s)', packet)
 #    pB_cdc.scanFWD('01', '01')
 
 
 # def d_cdPrev(packet):
+#    logging.debug('RAD - CDC status prev (%s)', packet)
 #    pB_cdc.scanBWD('01', '01')
 
 
@@ -500,7 +506,7 @@ def modeR(packet):
 # IndexF0 ##################################################################
 def indexF0P(packet):
     logging.debug('BMBT - Index fields 0 (%s)', packet)
-    buttonIO.slctIndexF0()
+    buttonIO.indexF0P()
 
 def indexF0H(packet):
     logging.debug('BMBT - Index fields 0 hold (%s)', packet)

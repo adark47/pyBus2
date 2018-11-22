@@ -21,32 +21,50 @@ IBUS.waitClearBus()
 ############################################################################
 # TEST #####################################################################
 ############################################################################
-IBUS.writeBusPacket('18', 'FF', ['02', '01'])
 
-#clearScreen
-IBUS.writeBusPacket('68', '3B', ['46', '0C'])
+IBUS.writeBusPacket('68', '3B', ['46', '0C'])               #clearScreen
 
-#refreshIndex
-IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00'])
+IBUS.writeBusPacket('68', '3B', ['A5', '60', '01', '00'])   #refreshIndex
 
-#updateScreen
-IBUS.writeBusPacket('68', '3B', ['A5', '62', '01'])
+IBUS.writeBusPacket('68', '3B', ['A5', '62', '01'])         #updateScreen
 
-#radioMenuDisable
-IBUS.writeBusPacket('3B', '68', ['45', '02'])
+IBUS.writeBusPacket('3B', '68', ['45', '02'])               #radioMenuDisable
 
-#radioMenuEnable
-IBUS.writeBusPacket('3B', '68', ['45', '00'])
+IBUS.writeBusPacket('3B', '68', ['45', '00'])               #radioMenuEnable
 
-#screenSwitchedNav
-IBUS.writeBusPacket('68', '3B', ['46', '01'])
+IBUS.writeBusPacket('68', '3B', ['46', '01'])               #screenSwitchedNav
 
-#screenSwitchedRadio
-IBUS.writeBusPacket('68', '3B', ['46', '02'])
+IBUS.writeBusPacket('68', '3B', ['46', '02'])               #screenSwitchedRadio
 
-# tail -f /root/pyBus.log | grep READ | grep "'41', '55', '58'"
-# tail -f /root/pyBus.log | grep READ | grep "'3B', '06', '68'"
+############################################################################
 
+IBUS.writeBusPacket('C8', 'E7', ['2B', '00'])               # Telephone LED All_off         # C8 E7 2B 00
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '01'])               # Telephone LED red, solid      # C8 E7 2B 01
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '02'])               # Telephone LED red, flash      # C8 E7 2B 02
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '04'])               # Telephone LED yellow, solid   # C8 E7 2B 04
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '08'])               # Telephone LED yellow, flash   # C8 E7 2B 08
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '10'])               # Telephone LED green, solid    # C8 E7 2B 10
+
+IBUS.writeBusPacket('C8', 'E7', ['2B', '20'])               # Telephone LED green, flash    # C8 E7 2B 20
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '01'])               # Handsfree                     # C8 E7 2C 01
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '02'])  # Active call (false = phone menu displayed) #  C8 E7 2C 02
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '04'])               # Incoming call                 # C8 E7 2C 04
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '08'])               # Phone screen disabled         # C8 E7 2C 08
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '10'])               # Phone on                      # C8 E7 2C 10
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '20'])               # Phone active                  # C8 E7 2C 20
+
+IBUS.writeBusPacket('C8', 'E7', ['2С', '40'])               # Phone adapter installed       # C8 E7 2C 40
 
 # bit_0 = 0x01;
 # bit_1 = 0x02;

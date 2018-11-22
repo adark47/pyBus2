@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pprint
 import os
 import sys
 import time
@@ -68,33 +67,42 @@ def setClient(client):
     global CLIENT
 
     if CLIENT == 'bluetooth':
-        bt.Stop()
         bt.disconnect()
         time.sleep(1)
         CLIENT = client
         logging.debug('Control the player assigned: s%', CLIENT)
+        return True
 
-    elif client == 'vlm':
+    elif CLIENT == 'vlm':
         vlm.Stop()
         time.sleep(1)
         CLIENT = client
         logging.debug('Control the player assigned: s%', CLIENT)
+        return True
 
-    elif client == 'airplay':
+    elif CLIENT == 'airplay':
         ap.Stop()
         time.sleep(1)
         CLIENT = client
         logging.debug('Control the player assigned: s%', CLIENT)
+        return True
 
-    elif client == 'mpd':
+    elif CLIENT == 'mpd':
         mpd.Stop()
         time.sleep(1)
         CLIENT = client
         logging.debug('Control the player assigned: s%', CLIENT)
+        return True
+
+    elif CLIENT == 'None':
+        CLIENT = client
+        logging.debug('Control the player assigned: s%', CLIENT)
+        return True
 
     else:
-        CLIENT = None
         logging.error('Control the player is not assigned')
+        return False
+
 
 ############################################################################
 # CONTROL

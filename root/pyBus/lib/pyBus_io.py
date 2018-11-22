@@ -17,8 +17,9 @@ sys.path.append('/root/pyBus/lib/')
 # Imports for the project
 import pyBus_module_display as pB_display
 import pyBus_module_audio as pB_audio
-import pyBus_util as pB_util
-import pyBus_cdc as pB_cdc
+#import pyBus_dia as pB_dia
+#import pyBus_cdc as pB_cdc
+#import pyBus_tel as pB_tel
 import pyBus_bluetooth as bt
 
 ############################################################################
@@ -221,8 +222,29 @@ class DisplayIO(threading.Thread):
                     titleT6='Bluetooth',
 
                     indexF0='<-- Back --',
-                    indexF1='Select device',
-                    indexF2='Add a new device',
+                    indexF1='Сonnect to the last device',
+                    indexF2='Disconnect the connected device',
+                    indexF3='Choose from the list of devices',
+                    indexF4='Add a new device',
+                    indexF5='Bluetooth service',
+                    indexF6='',
+                    indexF7='',
+                    indexF8='',
+                    indexF9='',
+                    )
+
+            elif menuLevel == 'btConnectLastDeviceTrue':            # Bluetooth -> Сonnect to the last device - True
+                displayF(
+                    titleT0=('Сonnect to the last device'),
+                    titleT1='',
+                    titleT3=versionPB,
+                    titleT4='',
+                    titleT5='',
+                    titleT6='Bluetooth',
+
+                    indexF0='CONNECTED',
+                    indexF1='',
+                    indexF2='',
                     indexF3='',
                     indexF4='',
                     indexF5='',
@@ -232,11 +254,26 @@ class DisplayIO(threading.Thread):
                     indexF9='',
                     )
 
-            elif menuLevel == 'btSelectDevice':         # Bluetooth -> Select device
-                pass
+            elif menuLevel == 'btConnectLastDeviceFalse':           # Bluetooth -> Сonnect to the last device - False
+                displayF(
+                    titleT0=('Сonnect to the last device'),
+                    titleT1='',
+                    titleT3=versionPB,
+                    titleT4='',
+                    titleT5='',
+                    titleT6='Bluetooth',
 
-            elif menuLevel == 'btSelectedDevice':       # Bluetooth -> Select device -> selected device
-                pass
+                    indexF0='NOT CONNECTED',
+                    indexF1='',
+                    indexF2='',
+                    indexF3='',
+                    indexF4='',
+                    indexF5='',
+                    indexF6='',
+                    indexF7='',
+                    indexF8='',
+                    indexF9='',
+                    )
 
             elif menuLevel == 'btNewDevice':            # Bluetooth -> Add a new device
                 pass
@@ -401,14 +438,6 @@ class ButtonIO:
                 id = 04
                 error(id)
                 logging.error('ERROR: %s', id)
-        elif menuLevel == 'btSelectDevice':                     # <-- Back --
-            display.clearScreen()
-            menuLevel = 'btMain'                                # Select device -> Bluetooth Main
-            logging.debug('Set menu level: %s', menuLevel)
-        elif menuLevel == 'btNewDevice':                        # <-- Back --
-            display.clearScreen()
-            menuLevel = 'btSelectDevice'                        # Add a new device -> Select device
-            logging.debug('Set menu level: %s', menuLevel)
 
     def indexF0H(self):
         pass
@@ -422,19 +451,24 @@ class ButtonIO:
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
             display.clearScreen()
-            if pB_audio.setClient('bt') is True:                # Set client Bluetooth
+            if pB_audio.setClient('bluetooth') is True:         # Set client Bluetooth
                 menuLevel = 'btMain'
                 logging.debug('Set menu level: %s', menuLevel)
             else:
                 id = 02
                 error(id)
                 logging.error('ERROR: %s', id)
-        elif menuLevel == 'btSelectDevice':
+        elif menuLevel == 'btMain':
             display.clearScreen()
-            menuLevel = 'btSelectDevice'                        # Bluetooth -> Select device
-            logging.debug('Set menu level: %s', menuLevel)
-        elif menuLevel == 'btSelectDevice':
-            display.clearScreen()
+            if bt.connect() is True:
+                menuLevel == 'btConnectLastDeviceTrue'          # Bluetooth -> Сonnect to the last device - True
+                logging.debug('Set menu level: %s', menuLevel)
+            else:
+                menuLevel == 'btConnectLastDeviceFalse'         # Bluetooth -> Сonnect to the last device - False
+                logging.debug('Set menu level: %s', menuLevel)
+            time.sleep(5)
+            menuLevel = 'btMain'                                # Сonnect to the last device -> Bluetooth Main
+
 
     def indexF1H(self):
         pass
@@ -449,7 +483,7 @@ class ButtonIO:
         global menuLevel
         if menuLevel == 'homeMain':                             # Home
             display.clearScreen()
-            if pB_audio.setClient('ap') is True:                # Set client AirPlay
+            if pB_audio.setClient('airplay') is True:           # Set client AirPlay
                 menuLevel = 'apMain'                            # Home -> AirPlay Main
                 logging.debug('Set menu level: %s', menuLevel)
             else:
@@ -458,9 +492,9 @@ class ButtonIO:
                 logging.error('ERROR: %s', id)
         elif menuLevel == 'btMain':
             display.clearScreen()
-            menuLevel = 'btNewDevice'                           # Bluetooth Main -> Add a new device
+            menuLevel = 'btDisconnectDevice'                    # Bluetooth Main -> Disconnect the connected device
             logging.debug('Set menu level: %s', menuLevel)
-        elif menuLevel == 'btNewDevice':
+        elif menuLevel == 'btDisconnectDevice':
             display.clearScreen()
 
     def indexF2H(self):
@@ -551,7 +585,12 @@ class ButtonIO:
 
 # Wheel R/T ################################################################
     def wheelRT(self):
-        bt.connect()
+        if bt.connect() is True:
+            pass
+        else:
+            time.sleep(5)
+            bt.connect()
+
 
 
 # Wheel voice ##############################################################
