@@ -20,10 +20,13 @@ except ImportError:
     import gobject as GObject
 
 
-BLUETOOTH = False   # systemctl disable bluetooth-agent
+BLUETOOTH = False       # systemctl disable bluetooth-agent
 btMp = None
 btMo = None
 btMacLast = None
+listDevices = None      # def scanDevices()
+# print listDevices[1].get('name')
+# print listDevices[1].get('mac_address')
 
 # Temp file for mac addr
 btMacAddr = '/root/pyBus/lib/bt_mac'
@@ -134,9 +137,11 @@ def connectedDevices():
 
 
 def scanDevices():
+    global listDevices
+    listDevices = []
     btCtl.scan()
     #btCtl.start_scanning(30)
-    return btCtl.get_available_devices()
+    listDevices = btCtl.get_available_devices()[:]
 
 
 def removeMac(mac):

@@ -45,9 +45,17 @@ def end():
 def getTrackInfo():
     pass
     # https://github.com/luckydonald/shairport-decoder
+    #with open(pipe_cmd, "r") as pipecmd:
+    #    while True:
+    #        try:
+    #            line = pipecmd.readline()
+    #        except:
+    #            print "Could not read cmd pipe"
+    #
+    #        if line != "":
+    #            print line
 
-
-############################################################################
+            ############################################################################
 # CONTROL
 ############################################################################
 

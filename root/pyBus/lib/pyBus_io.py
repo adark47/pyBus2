@@ -187,32 +187,32 @@ class DisplayIO(threading.Thread):
         global versionPB
         global display
         logging.info('Display thread initialized')
-        display.clearScreen()
+#        display.clearScreen()
         display.radioMenuDisable()
 
         while True:
-            if menuLevel == 'homeMain':             # HOME
+            if menuLevel == 'homeMain':                             # HOME
                 displayF(
                     titleT0='BMW-MULTIMEDIA',
                     titleT1='',
                     titleT3=versionPB,
                     titleT4='',
                     titleT5='Status:',
-                    titleT6='          ',
+                    titleT6='',
 
                     indexF0='Volumio',
                     indexF1='Bluetooth',
                     indexF2='AirPlay',
-                    indexF3='',
-                    indexF4='',
+                    indexF3='_test_',
+                    indexF4='_test_',
                     indexF5='Reboot',
                     indexF6='Shutdown',
-                    indexF7='',
-                    indexF8='',
-                    indexF9='',
+                    indexF7='_test_',
+                    indexF8='_test_',
+                    indexF9='_test_',
                     )
 
-            elif menuLevel == 'btMain':                 # Bluetooth Main
+            elif menuLevel == 'btMain':                             # Bluetooth Main
                 displayF(
                     titleT0=('%s - %s', pB_audio.getTrackInfo().get('artist'), pB_audio.getTrackInfo().get('title')),
                     titleT1='',
@@ -221,7 +221,7 @@ class DisplayIO(threading.Thread):
                     titleT5=('%s', pB_audio.getTrackInfo().get('status')),
                     titleT6='Bluetooth',
 
-                    indexF0='<-- Back --',
+                    indexF0='<< Back',
                     indexF1='Сonnect to the last device',
                     indexF2='Disconnect the connected device',
                     indexF3='Choose from the list of devices',
@@ -242,8 +242,8 @@ class DisplayIO(threading.Thread):
                     titleT5='',
                     titleT6='Bluetooth',
 
-                    indexF0='CONNECTED',
-                    indexF1='',
+                    indexF0='Mac addr',
+                    indexF1='CONNECTED',
                     indexF2='',
                     indexF3='',
                     indexF4='',
@@ -263,8 +263,29 @@ class DisplayIO(threading.Thread):
                     titleT5='',
                     titleT6='Bluetooth',
 
-                    indexF0='NOT CONNECTED',
-                    indexF1='',
+                    indexF0='Mac addr',
+                    indexF1='NOT CONNECTED',
+                    indexF2='',
+                    indexF3='',
+                    indexF4='',
+                    indexF5='',
+                    indexF6='',
+                    indexF7='',
+                    indexF8='',
+                    indexF9='',
+                    )
+
+            elif menuLevel == 'btDisconnectDevice':            #  Bluetooth Main -> Disconnect the connected device
+                displayF(
+                    titleT0=('Disconnect the connected device'),
+                    titleT1='',
+                    titleT3=versionPB,
+                    titleT4='',
+                    titleT5='',
+                    titleT6='Bluetooth',
+
+                    indexF0='Mac addr',
+                    indexF1='DISCONNECTED',
                     indexF2='',
                     indexF3='',
                     indexF4='',
@@ -296,333 +317,634 @@ class DisplayIO(threading.Thread):
 ############################################################################
 
 class ButtonIO:
-# Info #####################################################################
-    def infoP(self):
-        pass
 
-    def infoH(self):
-        pass
-
-    def infoR(self):
-        pass
-
-
-# Button 1 #################################################################
-    def button1P(self):
-        pass
-
-    def button1H(self):
-        pass
-
-    def button1R(self):
-        pass
-
-
-# Button 2 #################################################################
-    def button2P(self):
-        pass
-
-    def button2H(self):
-        pass
-
-    def button2R(self):
-        pass
-
-
-# Button 3 #################################################################
-    def button3P(self):
-        pass
-
-    def button3H(self):
-        pass
-
-    def button3R(self):
-        pass
-
-
-# Button 4 #################################################################
-    def button4P(self):
-        pass
-
-    def button4H(self):
-        pass
-
-    def button4R(self):
-        pass
-
-
-# Button 5 #################################################################
-    def button5P(self):
-        pass
-
-    def button5H(self):
-        pass
-
-    def button5R(self):
-        pass
-
-
-# Button 6 #################################################################
-    def button6P(self):
-        pass
-
-    def button6H(self):
-        pass
-
-    def button6R(self):
-        pass
-
-
-# "<" Arrow Left ###########################################################
-    def arrowLP(self):
-        pass
-
-    def arrowLH(self):
-        pass
-
-    def arrowLR(self):
-        pass
-
-
-# ">" Arrow Left ###########################################################
-    def arrowRP(self):
-        pass
-
-    def arrowRH(self):
-        pass
-
-    def arrowRR(self):
-        pass
-
-
-# "<>" Arrow Left ##########################################################
-    def arrowP(self):
-        pass
-
-    def arrowH(self):
-        pass
-
-    def arrowR(self):
-        pass
-
-
-# MODE #####################################################################
-    def modeP(self):
-        pass
-
-    def modeH(self):
-        pass
-
-    def modeR(self):
-        pass
-
-
-# IndexF0 ##################################################################
-    def indexF0P(self):
+    def selectButton(self, button):
         global menuLevel
-        if menuLevel == 'homeMain':                             # Home
-            display.clearScreen()
-            if pB_audio.setClient('vlm') is True:               # Set client Volumio
-                menuLevel = 'vlmMain'                           # Home -> Volumio Main
-                logging.debug('Set menu level: %s', menuLevel)
-            else:
-                id = 01
-                error(id)
-                logging.error('ERROR: %s', id)
-        elif menuLevel == 'btMain':                             # <-- Back --
-            display.clearScreen()
-            if pB_audio.setClient('vlm') is True:               # Set client Volumio
-                menuLevel = 'homeMain'                          # Bluetooth Main -> Home
-                logging.debug('Set menu level: %s', menuLevel)
-            else:
-                id = 04
-                error(id)
-                logging.error('ERROR: %s', id)
+        global ERROR
 
-    def indexF0H(self):
-        pass
+        # Info #####################################################################
+        if button == 'infoP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF0R(self):
-        pass
+        elif button == 'infoH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'infoR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF1 ##################################################################
-    def indexF1P(self):
-        global menuLevel
-        if menuLevel == 'homeMain':                             # Home
-            display.clearScreen()
-            if pB_audio.setClient('bluetooth') is True:         # Set client Bluetooth
-                menuLevel = 'btMain'
-                logging.debug('Set menu level: %s', menuLevel)
-            else:
-                id = 02
-                error(id)
-                logging.error('ERROR: %s', id)
-        elif menuLevel == 'btMain':
-            display.clearScreen()
-            if bt.connect() is True:
-                menuLevel == 'btConnectLastDeviceTrue'          # Bluetooth -> Сonnect to the last device - True
-                logging.debug('Set menu level: %s', menuLevel)
-            else:
-                menuLevel == 'btConnectLastDeviceFalse'         # Bluetooth -> Сonnect to the last device - False
-                logging.debug('Set menu level: %s', menuLevel)
-            time.sleep(5)
-            menuLevel = 'btMain'                                # Сonnect to the last device -> Bluetooth Main
+        # Button 1 #################################################################
+        elif button == 'button1P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'button1H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF1H(self):
-        pass
+        elif button == 'button1R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF1R(self):
-        pass
+        # Button 2 #################################################################
+        elif button == 'button2P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'button2H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF2 ##################################################################
-    def indexF2P(self):
-        global updateIndex
-        global menuLevel
-        if menuLevel == 'homeMain':                             # Home
-            display.clearScreen()
-            if pB_audio.setClient('airplay') is True:           # Set client AirPlay
-                menuLevel = 'apMain'                            # Home -> AirPlay Main
-                logging.debug('Set menu level: %s', menuLevel)
-            else:
-                id = 03
-                error(id)
-                logging.error('ERROR: %s', id)
-        elif menuLevel == 'btMain':
-            display.clearScreen()
-            menuLevel = 'btDisconnectDevice'                    # Bluetooth Main -> Disconnect the connected device
-            logging.debug('Set menu level: %s', menuLevel)
-        elif menuLevel == 'btDisconnectDevice':
-            display.clearScreen()
+        elif button == 'button2R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF2H(self):
-        pass
+        # Button 3 #################################################################
+        elif button == 'button3P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF2R(self):
-        pass
+        elif button == 'button3H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'button3R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF3 ##################################################################
-    def indexF3P(self):
-        pass
+        # Button 4 #################################################################
+        elif button == 'button4P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF3H(self):
-        pass
+        elif button == 'button4H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF3R(self):
-        pass
+        elif button == 'button4R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        # Button 5 #################################################################
+        elif button == 'button5P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF4 ##################################################################
-    def indexF4P(self):
-        pass
+        elif button == 'button5H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF4H(self):
-        pass
+        elif button == 'button5R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF4R(self):
-        pass
+        # Button 6 #################################################################
+        elif button == 'button6P':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'button6H':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF5 ##################################################################
-    def indexF5P(self):
-        if menuLevel == 'homeMain':
-            pB_audio.Reboot()
+        elif button == 'button6R':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF5H(self):
-        pass
+        # "<" Arrow Left ###########################################################
+        elif button == 'arrowLP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF5R(self):
-        pass
+        elif button == 'arrowLH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'arrowLR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF6 ##################################################################
-    def indexF6P(self):
-        if menuLevel == 'homeMain':
-            pB_audio.Shutdown()
+        # ">" Arrow Left ###########################################################
+        elif button == 'arrowRP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF6H(self):
-        pass
+        elif button == 'arrowRH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF6R(self):
-        pass
+        elif button == 'arrowRR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        # "<>" Arrow Left ##########################################################
+        elif button == 'arrowP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF7 ##################################################################
-    def indexF7P(self):
-        pass
+        elif button == 'arrowH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF7H(self):
-        pass
+        elif button == 'arrowR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF7R(self):
-        pass
+        # MODE #####################################################################
+        elif button == 'modeP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
+        elif button == 'modeH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-# IndexF8 ##################################################################
-    def indexF8P(self):
-        pass
+        elif button == 'modeR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def indexF8H(self):
-        pass
-
-    def indexF8R(self):
-        pass
-
-
-# IndexF9 ##################################################################
-    def indexF9P(self):
-        pass
-
-    def indexF9H(self):
-        pass
-
-    def indexF9R(self):
-        pass
-
-
-# Wheel R/T ################################################################
-    def wheelRT(self):
-        if bt.connect() is True:
-            pass
+        ############################################################################
         else:
-            time.sleep(5)
-            bt.connect()
+            logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
 
 
+    def selectWheelButton(self, button):
+        global menuLevel
+        global ERROR
 
-# Wheel voice ##############################################################
-    def wheelVoiceP(self):
-        pass
+        # Wheel R/T ################################################################
+        if button == 'wheelRT':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+            if bt.connect() is True:
+                pass
+            else:
+                time.sleep(5)
+                bt.connect()
 
-    def wheelVoiceH(self):
-        pass
+        # Wheel voice ##############################################################
+        elif button == 'wheelVoiceP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def wheelVoiceR(self):
-        pass
+        elif button == 'wheelVoiceH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        elif button == 'wheelVoiceR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        # Wheel ">" ################################################################
+        elif button == 'wheelArrowUP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        elif button == 'wheelArrowUH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        elif button == 'wheelArrowUR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        # Wheel "<" ################################################################
+        elif button == 'wheelArrowDP':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        elif button == 'wheelArrowDH':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        elif button == 'wheelArrowDR':
+            logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+        ############################################################################
+        else:
+            logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
 
 
-# Wheel ">" ################################################################
-    def wheelArrowUP(self):
-        pass
+    def selectIndex(self, button):
+        global menuLevel
+        global ERROR
 
-    def wheelArrowUH(self):
-        pass
+        if menuLevel == 'homeMain':     # Home
+            # IndexF0 ##################################################################
+            if button == 'indexF0P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('vlm') is True:       # Set client Volumio
+                    menuLevel = 'vlmMain'                   # Home -> Volumio Main
+                    logging.debug('Set menu level: %s', menuLevel)
 
-    def wheelArrowUR(self):
-        pass
+            elif button == 'indexF0H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF0R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF1 ##################################################################
+            elif button == 'indexF1P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('bluetooth') is True:     # Set client Bluetooth
+                    menuLevel = 'btMain'
+                    logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF1H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF2 ##################################################################
+            elif button == 'indexF2P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF3 ##################################################################
+            elif button == 'indexF3P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('airplay') is True:       # Set client AirPlay
+                    menuLevel = 'apMain'                        # Home -> AirPlay Main
+                    logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF3H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF4 ##################################################################
+            elif button == 'indexF4P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF5 ##################################################################
+            elif button == 'indexF5P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                pB_audio.Reboot()
+
+            elif button == 'indexF5H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF6 ##################################################################
+            elif button == 'indexF6P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                pB_audio.Shutdown()
+
+            elif button == 'indexF6H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF7 ##################################################################
+            elif button == 'indexF7P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF8 ##################################################################
+            elif button == 'indexF8P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF9 ##################################################################
+            elif button == 'indexF9P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            ############################################################################
+            else:
+                logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
 
 
-# Wheel "<" ################################################################
-    def wheelArrowDP(self):
-        pass
+        elif menuLevel == 'vlmMain':     # Home
+            # IndexF0 ##################################################################
+            if button == 'indexF0P':                                 # << Back
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('vlm') is True:               # Set client Volumio
+                    menuLevel = 'homeMain'                          # Volumio Main -> Home
+                    logging.debug('Set menu level: %s', menuLevel)
 
-    def wheelArrowDH(self):
-        pass
+            elif button == 'indexF0H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
 
-    def wheelArrowDR(self):
-        pass
+            elif button == 'indexF0R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF1 ##################################################################
+            elif button == 'indexF1P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF2 ##################################################################
+            elif button == 'indexF2P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF3 ##################################################################
+            elif button == 'indexF3P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF4 ##################################################################
+            elif button == 'indexF4P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF5 ##################################################################
+            elif button == 'indexF5P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF6 ##################################################################
+            elif button == 'indexF6P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF7 ##################################################################
+            elif button == 'indexF7P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF8 ##################################################################
+            elif button == 'indexF8P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF9 ##################################################################
+            elif button == 'indexF9P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            ############################################################################
+            else:
+                logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
+
+
+        elif menuLevel == 'btMain':     # Home
+            # IndexF0 ##################################################################
+            if button == 'indexF0P':                                # << Back
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('vlm') is True:               # Set client Volumio
+                    menuLevel = 'homeMain'                          # Bluetooth Main -> Home
+                    logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF0H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF0R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF1 ##################################################################
+            elif button == 'indexF1P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if bt.connect() is True:
+                    menuLevel == 'btConnectLastDeviceTrue'          # Bluetooth -> Сonnect to the last device - True
+                    logging.debug('Set menu level: %s', menuLevel)
+                else:
+                    menuLevel == 'btConnectLastDeviceFalse'         # Bluetooth -> Сonnect to the last device - False
+                    logging.debug('Set menu level: %s', menuLevel)
+                time.sleep(5)
+                menuLevel = 'btMain'                                # Сonnect to the last device -> Bluetooth Main
+                logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF1H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF2 ##################################################################
+            elif button == 'indexF2P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                bt.disconnect()
+                menuLevel = 'btDisconnectDevice'                    # Bluetooth Main -> Disconnect the connected device
+                logging.debug('Set menu level: %s', menuLevel)
+                time.sleep(5)
+                menuLevel = 'btMain'                                # Сonnect to the last device -> Bluetooth Main
+                logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF2H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF3 ##################################################################
+            elif button == 'indexF3P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF4 ##################################################################
+            elif button == 'indexF4P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF5 ##################################################################
+            elif button == 'indexF5P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF6 ##################################################################
+            elif button == 'indexF6P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF7 ##################################################################
+            elif button == 'indexF7P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF8 ##################################################################
+            elif button == 'indexF8P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF9 ##################################################################
+            elif button == 'indexF9P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            ############################################################################
+            else:
+                logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
+
+
+        elif menuLevel == 'apMain':     # Home
+            # IndexF0 ##################################################################
+            if button == 'indexF0P':                                # << Back
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+                if pB_audio.setClient('vlm') is True:               # Set client Volumio
+                    menuLevel = 'homeMain'                          # AirPlay Main -> Home
+                    logging.debug('Set menu level: %s', menuLevel)
+
+            elif button == 'indexF0H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF0R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF1 ##################################################################
+            elif button == 'indexF1P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF1R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF2 ##################################################################
+            elif button == 'indexF2P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF2R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF3 ##################################################################
+            elif button == 'indexF3P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF3R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF4 ##################################################################
+            elif button == 'indexF4P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF4R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF5 ##################################################################
+            elif button == 'indexF5P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF5R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF6 ##################################################################
+            elif button == 'indexF6P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF6R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF7 ##################################################################
+            elif button == 'indexF7P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF7R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF8 ##################################################################
+            elif button == 'indexF8P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF8R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            # IndexF9 ##################################################################
+            elif button == 'indexF9P':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9H':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            elif button == 'indexF9R':
+                logging.debug('BMBT - Select button: %s, menu level: %s', button, menuLevel)
+
+            ############################################################################
+            else:
+                logging.error('BMBT - Unknown button: %s, menu level: %s', button, menuLevel)
 
 ############################################################################

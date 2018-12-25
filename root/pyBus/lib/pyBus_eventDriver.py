@@ -221,7 +221,7 @@ def init(writer):
     pB_cdc.init(WRITER)
     pB_dia.init(WRITER)
 
-    pB_cdc.enableFunc("announce", 5)  # default 30 (not worked)
+    pB_cdc.enableFunc("announce", 10)  # default 30 (not worked)
 
 
 # Manage the packet, meaning traverse the JSON 'DIRECTIVES' object and attempt to determine a suitable function to pass the packet to.
@@ -279,7 +279,7 @@ def shutDown():
 
 
 ############################################################################
-# IKE
+# IKE - speed, revs, extTemp, oilTemp
 ############################################################################
 
 def d_custom_IKE(packet):
@@ -302,12 +302,14 @@ def d_custom_IKE(packet):
 # DATA
 ############################################################################
 # 7F 80 1F 40 14 59 07 00 07 20 11,NAV --> IKE : Time & date: UTC 14:59 07 Juli 2011
-#def navi_date(packet):
-#    packet_data = packet['dat']
-#    if packet_data[0] == '1F' and packet_data[1] == '40':
-#        logging.debug('DATE - %s.%s.%s%s)', int(packet_data[4]), int(packet_data[6]),
-#                      int(packet_data[7]), int(packet_data[8]))
-#        logging.debug('TIME - %s:%s)', int(packet_data[2]), int(packet_data[3]))
+def navi_date(packet):
+    packet_data = packet['dat']
+    if packet_data[0] == '1F' and packet_data[1] == '40':
+        nDate = '%s.%s.%s%s' % (int(packet_data[4]), int(packet_data[6]), int(packet_data[7]), int(packet_data[8]))
+        nTime = '%s:%s' % (int(packet_data[2]), int(packet_data[3]))
+        customState = {'data': nDate, 'time': nTime}
+        logging.debug('System Data, Time - %s', customState)
+
 
 ############################################################################
 # DIRECTIVE CDC FUNCTIONS
@@ -318,7 +320,7 @@ def radPollResponse(packet):
     pB_cdc.disableFunc('announce')          # stop announcing
     pB_cdc.disableFunc('pollResponse')
     pB_cdc.enableFunc('pollResponse', 10)   # default 30 (not worked)
-    WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
+    #WRITER.writeBusPacket('68', 'c0', ['21', '40', '00', '09', '05', '05', '4D', '50', '53'])
 
 
 def radStatusPlaying(packet):
@@ -352,322 +354,343 @@ def radStatusPlaying(packet):
 # Info #####################################################################
 def infoP(packet):
     logging.debug('BMBT - Info press (%s)', packet)
-    buttonIO.infoP()
+    buttonIO.selectButton('infoP')
 
 def infoH(packet):
     logging.debug('BMBT - Info hold (%s)', packet)
-    buttonIO.infoH()
+    buttonIO.selectButton('infoH')
 
 def infoR(packet):
     logging.debug('BMBT - Info released (%s)', packet)
-    buttonIO.infoR()
+    buttonIO.selectButton('infoR')
 
 
 # Button 1 #################################################################
 def button1P(packet):
     logging.debug('BMBT - Button 1 press (%s)', packet)
-    buttonIO.button1P()
+    buttonIO.selectButton('button1P')
 
 def button1H(packet):
     logging.debug('BMBT - Button 1 hold (%s)', packet)
-    buttonIO.button1H()
+    buttonIO.selectButton('button1H')
 
 def button1R(packet):
     logging.debug('BMBT - Button 1 released (%s)', packet)
-    buttonIO.button1R()
+    buttonIO.selectButton('button1R')
 
 
 # Button 2 #################################################################
 def button2P(packet):
     logging.debug('BMBT - Button 2 press (%s)', packet)
-    buttonIO.button2P()
+    buttonIO.selectButton('button2P')
 
 def button2H(packet):
     logging.debug('BMBT - Button 2 hold (%s)', packet)
-    buttonIO.button2H()
+    buttonIO.selectButton('button2H')
 
 def button2R(packet):
     logging.debug('BMBT - Button 2 released (%s)', packet)
-    buttonIO.button2R()
+    buttonIO.selectButton('button2R')
 
 
 # Button 3 #################################################################
 def button3P(packet):
     logging.debug('BMBT - Button 3 press (%s)', packet)
-    buttonIO.button3P()
+    buttonIO.selectButton('button3P')
 
 def button3H(packet):
     logging.debug('BMBT - Button 3 hold (%s)', packet)
-    buttonIO.button3H()
+    buttonIO.selectButton('button3H')
 
 def button3R(packet):
     logging.debug('BMBT - Button 3 released (%s)', packet)
-    buttonIO.button3R()
+    buttonIO.selectButton('button3R')
 
 
 # Button 4 #################################################################
 def button4P(packet):
     logging.debug('BMBT - Button 4 press (%s)', packet)
-    buttonIO.button4P()
+    buttonIO.selectButton('button4P')
 
 def button4H(packet):
     logging.debug('BMBT - Button 4 hold (%s)', packet)
-    buttonIO.button4H()
+    buttonIO.selectButton('button4H')
 
 def button4R(packet):
     logging.debug('BMBT - Button 4 released (%s)', packet)
-    buttonIO.button4R()
+    buttonIO.selectButton('button4R')
 
 
 # Button 5 #################################################################
 def button5P(packet):
     logging.debug('BMBT - Button 5 press (%s)', packet)
-    buttonIO.button5P()
+    buttonIO.selectButton('button5P')
 
 def button5H(packet):
     logging.debug('BMBT - Button 5 hold (%s)', packet)
-    buttonIO.button5H()
+    buttonIO.selectButton('button5H')
 
 def button5R(packet):
     logging.debug('BMBT - Button 5 released (%s)', packet)
-    buttonIO.button5R()
+    buttonIO.selectButton('button5R')
 
 
 # Button 6 #################################################################
 def button6P(packet):
     logging.debug('BMBT - Button 6 press (%s)', packet)
-    buttonIO.button6P()
+    buttonIO.selectButton('button6P')
 
 def button6H(packet):
     logging.debug('BMBT - Button 6 hold (%s)', packet)
-    buttonIO.button6H()
+    buttonIO.selectButton('button6H')
 
 def button6R(packet):
     logging.debug('BMBT - Button 6 released (%s)', packet)
-    buttonIO.button6R()
+    buttonIO.selectButton('button6R')
 
 
 # "<" Arrow Left ###########################################################
 def arrowLP(packet):
     logging.debug('BMBT - "<" ArrowLeft press (%s)', packet)
-    buttonIO.arrowLP()
+    buttonIO.selectButton('arrowLP')
 
 def arrowLH(packet):
     logging.debug('BMBT - "<" ArrowLeft hold (%s)', packet)
-    buttonIO.arrowLH()
+    buttonIO.selectButton('arrowLH')
 
 def arrowLR(packet):
     logging.debug('BMBT - "<" ArrowLeft released (%s)', packet)
-    buttonIO.arrowLR()
+    buttonIO.selectButton('arrowLR')
 
 
 # ">" Arrow Left ###########################################################
 def arrowRP(packet):
     logging.debug('BMBT - ">" ArrowRight press (%s)', packet)
-    buttonIO.arrowRP()
+    buttonIO.selectButton('arrowRP')
 
 def arrowRH(packet):
     logging.debug('BMBT - ">" ArrowRight hold (%s)', packet)
-    buttonIO.arrowRH()
+    buttonIO.selectButton('arrowRH')
 
 def arrowRR(packet):
     logging.debug('BMBT - ">" ArrowRight released (%s)', packet)
-    buttonIO.arrowRR()
+    buttonIO.selectButton('arrowRR')
 
 
 # "<>" Arrow Left ##########################################################
 def arrowP(packet):
     logging.debug('BMBT - "<>" Arrow press (%s)', packet)
-    buttonIO.arrowP()
+    buttonIO.selectButton('arrowP')
 
 def arrowH(packet):
     logging.debug('BMBT - "<>" Arrow hold (%s)', packet)
-    buttonIO.arrowH()
+    buttonIO.selectButton('arrowH')
 
 def arrowR(packet):
     logging.debug('BMBT - "<>" Arrow released (%s)', packet)
-    buttonIO.arrowR()
+    buttonIO.selectButton('arrowR')
 
 
 # MODE #####################################################################
 def modeP(packet):
     logging.debug('BMBT - MODE press (%s)', packet)
-    buttonIO.modeP()
+    buttonIO.selectButton('modeP')
 
 def modeH(packet):
     logging.debug('BMBT - MODE hold (%s)', packet)
-    buttonIO.modeH()
+    buttonIO.selectButton('modeH')
 
 def modeR(packet):
     logging.debug('BMBT - MODE released (%s)', packet)
-    buttonIO.modeR()
+    buttonIO.selectButton('modeR')
 
 
 # IndexF0 ##################################################################
 def indexF0P(packet):
     logging.debug('BMBT - Index fields 0 (%s)', packet)
-    buttonIO.indexF0P()
+    buttonIO.selectIndex('indexF0P')
 
 def indexF0H(packet):
     logging.debug('BMBT - Index fields 0 hold (%s)', packet)
+    buttonIO.selectIndex('indexF0H')
 
 def indexF0R(packet):
     logging.debug('BMBT - Index fields 0 released (%s)', packet)
+    buttonIO.selectIndex('indexF0R')
 
 
 # IndexF1 ##################################################################
 def indexF1P(packet):
     logging.debug('BMBT - Index fields 1 press (%s)', packet)
-    buttonIO.indexF1P()
+    buttonIO.selectIndex('indexF1P')
 
 def indexF1H(packet):
     logging.debug('BMBT - Index fields 1 hold (%s)', packet)
+    buttonIO.selectIndex('indexF1H')
 
 def indexF1R(packet):
     logging.debug('BMBT - Index fields 1 released (%s)', packet)
+    buttonIO.selectIndex('indexF1R')
 
 
 # IndexF2 ##################################################################
 def indexF2P(packet):
     logging.debug('BMBT - Index fields 2 press (%s)', packet)
-    buttonIO.indexF2P()
+    buttonIO.selectIndex('indexF2P')
 
 def indexF2H(packet):
     logging.debug('BMBT - Index fields 2 hold (%s)', packet)
+    buttonIO.selectIndex('indexF2H')
 
 def indexF2R(packet):
     logging.debug('BMBT - Index fields 2 released (%s)', packet)
+    buttonIO.selectIndex('indexF2R')
 
 
 # IndexF3 ##################################################################
 def indexF3P(packet):
     logging.debug('BMBT - Index fields 3 press (%s)', packet)
-    buttonIO.indexF3P()
+    buttonIO.selectIndex('indexF3P')
 
 def indexF3H(packet):
     logging.debug('BMBT - Index fields 3 hold (%s)', packet)
+    buttonIO.selectIndex('indexF3H')
 
 def indexF3R(packet):
     logging.debug('BMBT - Index fields 3 released (%s)', packet)
+    buttonIO.selectIndex('indexF3R')
 
 
 # IndexF4 ##################################################################
 def indexF4P(packet):
     logging.debug('BMBT - Index fields 4 press (%s)', packet)
-    buttonIO.indexF4P()
+    buttonIO.selectIndex('indexF4P')
 
 def indexF4H(packet):
     logging.debug('BMBT - Index fields 4 hold (%s)', packet)
+    buttonIO.selectIndex('indexF4H')
 
 def indexF4R(packet):
     logging.debug('BMBT - Index fields 4 released (%s)', packet)
+    buttonIO.selectIndex('indexF4R')
 
 
 # IndexF5 ##################################################################
 def indexF5P(packet):
     logging.debug('BMBT - Index fields 5 press (%s)', packet)
-    buttonIO.indexF5P()
+    buttonIO.selectIndex('indexF5P')
 
 def indexF5H(packet):
     logging.debug('BMBT - Index fields 5 hold (%s)', packet)
+    buttonIO.selectIndex('indexF5H')
 
 def indexF5R(packet):
     logging.debug('BMBT - Index fields 5 released (%s)', packet)
+    buttonIO.selectIndex('indexF5R')
 
 
 # IndexF6 ##################################################################
 def indexF6P(packet):
     logging.debug('BMBT - Index fields 6 press (%s)', packet)
-    buttonIO.indexF6P()
+    buttonIO.selectIndex('indexF6P')
 
 def indexF6H(packet):
     logging.debug('BMBT - Index fields 6 hold (%s)', packet)
+    buttonIO.selectIndex('indexF6H')
 
 def indexF6R(packet):
     logging.debug('BMBT - Index fields 6 released (%s)', packet)
+    buttonIO.selectIndex('indexF6R')
 
 
 # IndexF7 ##################################################################
 def indexF7P(packet):
     logging.debug('BMBT - Index fields 7 press (%s)', packet)
-    buttonIO.indexF7P()
+    buttonIO.selectIndex('indexF7P')
 
 def indexF7H(packet):
     logging.debug('BMBT - Index fields 7 hold (%s)', packet)
+    buttonIO.selectIndex('indexF7H')
 
 def indexF7R(packet):
     logging.debug('BMBT - Index fields 7 released (%s)', packet)
+    buttonIO.selectIndex('indexF7R')
 
 
 # IndexF8 ##################################################################
 def indexF8P(packet):
     logging.debug('BMBT - Index fields 8 press (%s)', packet)
-    buttonIO.indexF8P()
+    buttonIO.selectIndex('indexF8P')
 
 def indexF8H(packet):
     logging.debug('BMBT - Index fields 8 hold (%s)', packet)
+    buttonIO.selectIndex('indexF8H')
 
 def indexF8R(packet):
     logging.debug('BMBT - Index fields 8 released (%s)', packet)
+    buttonIO.selectIndex('indexF8R')
 
 
 # IndexF9 ##################################################################
 def indexF9P(packet):
     logging.debug('BMBT - Index fields 9 press (%s)', packet)
-    buttonIO.indexF9P()
+    buttonIO.selectIndex('indexF9P')
 
 def indexF9H(packet):
     logging.debug('BMBT - Index fields 9 hold (%s)', packet)
+    buttonIO.selectIndex('indexF9H')
 
 def indexF9R(packet):
     logging.debug('BMBT - Index fields 9 released (%s)', packet)
+    buttonIO.selectIndex('indexF9R')
 
 
 # Wheel R/T ################################################################
 def wheelRT(packet):
     logging.debug('Multifunction steering wheel - R/T (%s)', packet)
-    buttonIO.wheelRT()
+    buttonIO.selectWheelButton('wheelRT')
 
 
 # Wheel voice ##############################################################
 def wheelVoiceP(packet):
     logging.debug('Multifunction steering wheel - voice press (%s)', packet)
-    buttonIO.wheelVoiceP()
+    buttonIO.selectWheelButton('wheelVoiceP')
 
 def wheelVoiceH(packet):
     logging.debug('Multifunction steering wheel - voice hold (%s)', packet)
-    buttonIO.wheelVoiceH()
+    buttonIO.selectWheelButton('wheelVoiceH')
 
 def wheelVoiceR(packet):
     logging.debug('Multifunction steering wheel - voice release (%s)', packet)
-    buttonIO.wheelVoiceR()
+    buttonIO.selectWheelButton('wheelVoiceR')
 
 
 # Wheel ">" ################################################################
 def wheelArrowUP(packet):
     logging.debug('Multifunction steering wheel - ">" press (%s)', packet)
-    buttonIO.wheelArrowUP()
+    buttonIO.selectWheelButton('wheelArrowUP')
 
 def wheelArrowUH(packet):
     logging.debug('Multifunction steering wheel - ">" hold (%s)', packet)
-    buttonIO.wheelArrowUH()
+    buttonIO.selectWheelButton('wheelArrowUH')
 
 def wheelArrowUR(packet):
     logging.debug('Multifunction steering wheel - ">" release (%s)', packet)
-    buttonIO.wheelArrowUR()
+    buttonIO.selectWheelButton('wheelArrowUR')
 
 
 # Wheel "<" ################################################################
 def wheelArrowDP(packet):
     logging.debug('Multifunction steering wheel - "<" press (%s)', packet)
-    buttonIO.wheelArrowDP()
+    buttonIO.selectWheelButton('wheelArrowDP')
 
 def wheelArrowDR(packet):
     logging.debug('Multifunction steering wheel - "<" hold (%s)', packet)
-    buttonIO.wheelArrowDR()
+    buttonIO.selectWheelButton('wheelArrowDR')
 
 def wheelArrowDR(packet):
     logging.debug('Multifunction steering wheel - "<" release (%s)', packet)
-    buttonIO.wheelArrowDR()
+    buttonIO.selectWheelButton('wheelArrowDR')
+
 
 ############################################################################

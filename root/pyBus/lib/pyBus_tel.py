@@ -164,7 +164,7 @@ def handsfree():
     logging.debug('TEL sent the status: Handsfree')
 
 def activeCall():
-    WRITER.writeBusPacket('C8', 'E7', ['2С', '02'])  # Active call (false = phone menu displayed) #  C8 E7 2C 02
+    WRITER.writeBusPacket('C8', 'E7', ['2С', '02'])  # Active call (false = phone menu displayed) # C8 E7 2C 02
     logging.debug('TEL sent the status: Active call (false = phone menu displayed)')
 
 def incomingCall():
