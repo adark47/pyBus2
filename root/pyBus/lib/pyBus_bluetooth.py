@@ -13,6 +13,7 @@ import bluezutils
 import bluetool
 import logging
 import time
+import threading
 
 try:
     from gi.repository import GObject
@@ -20,6 +21,7 @@ except ImportError:
     import gobject as GObject
 
 
+dictTrack = {}
 BLUETOOTH = False       # systemctl disable bluetooth-agent
 btMp = None
 btMo = None
@@ -60,6 +62,11 @@ def init():
     logging.info('Initialized: Bluetooth')
 
 
+def end():
+    logging.info('End: Bluetooth')
+    btCtl.disconnect()
+
+
 def connect():
     global btMp
     global btMo
@@ -80,9 +87,14 @@ def connect():
         logging.error('Connection to the Bluetooth device: Unknown error')
 
 
-def end():
-    logging.info('End: Bluetooth')
-    btCtl.disconnect()
+def updateDictTrack():
+    enableFunc('trackInfo', 10)
+    logging.info('Update via Bluetooth track information: Running')
+
+
+def stopUpdateDictTrack():
+    disableFunc('trackInfo')
+    logging.info('Update via Bluetooth track information: Stopped')
 
 
 def disconnect():
@@ -155,11 +167,13 @@ def removeMac(mac):
 def Play():
     btMp.Play()
     logging.debug('Bluetooth sent status: Play')
+    trackInfo()
 
 
 def Pause():
     btMp.Pause()
     logging.debug('Bluetooth sent status: Pause')
+    trackInfo()
 
 
 def Stop():
@@ -170,11 +184,13 @@ def Stop():
 def Next():
     btMp.Next()
     logging.debug('Bluetooth sent status: Next')
+    trackInfo()
 
 
 def Prev():
     btMp.Previous()
     logging.debug('Bluetooth sent status: Prev')
+    trackInfo()
 
 
 def RewindPrev():
@@ -187,8 +203,8 @@ def RewindNext():
     logging.debug('Bluetooth sent status: Rewind Next')
 
 
-def getTrackInfo():
-    dictTrack = {}
+def trackInfo():
+    global dictTrack
     for path, ifaces in btMo.iteritems():
         if MEDIA_PLAYER_INTERFACE not in ifaces:
             continue
@@ -199,6 +215,11 @@ def getTrackInfo():
                     dictTrack[k] = v
             else:
                 dictTrack[key] = value
+    logging.info('Update via Bluetooth track information: Get')
+
+
+def getTrackInfo():
+    global dictTrack
 
     dictTrack.setdefault('status').append(str(bt.getTrackInfo().get('Status')))
     dictTrack.setdefault('album', []).append(str(bt.getTrackInfo().get('Album')))
@@ -210,7 +231,7 @@ def getTrackInfo():
     dictTrack.setdefault('uri', []).append(str(bt.getTrackInfo().get('Device')))
     dictTrack.setdefault('numberOfTracks', []).append(str(bt.getTrackInfo().get('NumberOfTracks')))
     dictTrack.setdefault('position', []).append(str(bt.getTrackInfo().get('TrackNumber')))
-
+    logging.debug('Bluetooth: Track information conversion')
     return dictTrack
 
 ############################################################################
@@ -263,3 +284,60 @@ def serviceBluetooth():
         return False
 
 ############################################################################
+# FUNCTIONS THREADING
+############################################################################
+
+def enableFunc(funcName, interval, count=0):
+    global FUNC_STACK
+
+    # Cancel Thread if it already exists.
+    if FUNC_STACK.get(funcName) and FUNC_STACK.get(funcName).get('THREAD'):
+        FUNC_STACK[funcName]['THREAD'].cancel()
+
+    # Dont worry about checking if a function is already enabled, as the thread would have died. Rather than updating the spec, just run a new thread.
+    if getattr(sys.modules[__name__], funcName):
+        FUNC_STACK[funcName] = {
+            'COUNT': count,
+            'INTERVAL': interval,
+            'THREAD': threading.Timer(
+                interval,
+                revive, [funcName]
+            )
+        }
+        logging.debug('Enabling New Thread: %s %s', funcName, FUNC_STACK[funcName])
+        worker_func = getattr(sys.modules[__name__], funcName)
+        worker_func()
+        FUNC_STACK[funcName]['THREAD'].start()
+    else:
+        logging.warning('No function found (%s)', funcName)
+
+
+def disableFunc(funcName):
+    global FUNC_STACK
+    if funcName in FUNC_STACK.keys():
+        thread = FUNC_STACK[funcName].get('THREAD')
+        if thread: thread.cancel()
+        del FUNC_STACK[funcName]
+
+
+def disableAllFunc():
+    global FUNC_STACK
+    for funcName in FUNC_STACK:
+        thread = FUNC_STACK[funcName].get('THREAD')
+        if thread: thread.cancel()
+    FUNC_STACK = {}
+
+############################################################################
+# THREAD FOR TICKING AND CHECKING EVENTS
+# Calls itself again
+############################################################################
+
+def revive(funcName):
+    global FUNC_STACK
+    funcSpec = FUNC_STACK.get(funcName, None)
+    if funcSpec:
+        count = funcSpec['COUNT']
+        if count != 1:
+            FUNC_STACK[funcName]['COUNT'] = count - 1
+            funcSpec['THREAD'].cancel()  # Kill off this thread just in case..
+            enableFunc(funcName, funcSpec['INTERVAL'])  # REVIVE!
