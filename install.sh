@@ -30,7 +30,7 @@ apt -y install python python-setuptools mpc ncmpc python-pip python-dev mpd
 apt -y install bash-completion build-essential git xmltoman gawk dh-autoreconf
 apt -y install autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev libssl-dev libmbedtls-dev
 apt -y install libasound2-dev libpulse-dev libssl-dev avahi-daemon libavahi-client-dev libsoxr-dev libsoxr*
-apt -y install  libortp-dev pi-bluetooth libasound2-dev python-dbus python-gobject
+apt -y install libortp-dev pi-bluetooth libasound2-dev python-dbus python-gobject
 apt -y install libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev
 
 cd ./distr/
@@ -118,7 +118,7 @@ cd ..
 
 git clone https://github.com/adark47/pyBus2.git
 pip install python-mpd2 tinytag termcolor web.py python-mpd pyserial tornado argparse requests
-pip install socketIO-client websocket-client pexpect pybluez bluetool
+pip install socketIO-client websocket-client pexpect pybluez bluetool json
 
 systemctl enable pyBus.service
 
@@ -142,3 +142,6 @@ reboot
 
 # bluealsa --disable-hfp
 # bluealsa-aplay C0:D0:12:AA:2F:97
+
+
+# dd if=/dev/mmcblk0 | gzip > bmw-multimedia_v1.2.img.gz

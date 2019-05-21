@@ -119,6 +119,9 @@ DIRECTIVES = {
     },
 
     '3B': {                             # BMBT Index fields
+        'F0': {
+            '01': 'radPollResponse'    # "I'm alive" message
+        },
         '68': {
             '31600000': 'indexF0P',     # Index fields 0 press          # 3B 06 68 31 60 00 00
             '31600020': 'indexF0H',     # Index fields 0 hold           # 3B 06 68 31 60 00 20

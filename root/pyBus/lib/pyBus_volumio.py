@@ -7,6 +7,7 @@ import sys
 import time
 import signal
 import logging
+import json
 from socket import error as SocketError
 sys.path.append('/root/pyBus/lib/')
 from socketIO_client import SocketIO, LoggingNamespace

@@ -22,7 +22,7 @@ except ImportError:
 
 
 dictTrack = {}
-BLUETOOTH = False       # systemctl disable bluetooth-agent
+BLUETOOTH = False       # DEFAULT: systemctl disable bluetooth-agent
 btMp = None
 btMo = None
 btMacLast = None
